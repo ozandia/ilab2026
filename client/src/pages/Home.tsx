@@ -75,8 +75,8 @@ export default function Home() {
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-primary/70 z-10"></div>
             <img
-              src="https://images.unsplash.com/photo-1590483736622-39da8af75bba?auto=format&fit=crop&q=80&w=2000"
-              alt="Brasília Architecture"
+              src="/cicb.jpeg"
+              alt="CICB - Brasília"
               className="w-full h-full object-cover"
             />
           </div>
