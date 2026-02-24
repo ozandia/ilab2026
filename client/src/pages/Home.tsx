@@ -18,10 +18,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header/Navigation */}
-      <header className="sticky top-0 z-50 bg-white shadow-md">
+      <header className="sticky top-0 z-50 bg-white shadow-md border-b-4 border-accent">
         <div className="container py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="accent-line h-8"></div>
+            <div className="accent-line h-10"></div>
             <h1 className="text-2xl font-bold text-primary">ComprasSusp 2026</h1>
           </div>
           <nav className="hidden md:flex gap-8">
@@ -41,36 +41,49 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="space-y-16 py-12">
+      <main className="space-y-16 py-12 bg-white">
         {/* Hero Section */}
-        <section className="container">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-6">
-              <h1 className="text-5xl font-bold text-primary leading-tight">
-                Encontro Nacional ComprasSusp 2026
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Inovação em contratações e aquisições do SUSP
-              </p>
-              <div className="flex items-center gap-2 text-lg">
-                <MapPin className="w-6 h-6 text-accent" />
-                <span className="font-semibold">CICB - Brasília/DF</span>
+        <section 
+          className="py-20 md:py-32 relative overflow-hidden"
+          style={{
+            backgroundImage: 'url(https://files.manuscdn.com/user_upload_by_module/session_file/310519663204611455/PWSsQlMGFKELVypj.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed'
+          }}
+        >
+          {/* Overlay para melhor legibilidade */}
+          <div className="absolute inset-0 bg-black/40"></div>
+          
+          <div className="container relative z-10">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-6">
+                <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight drop-shadow-lg">
+                  Encontro Nacional ComprasSusp 2026
+                </h1>
+                <p className="text-xl text-white/90 drop-shadow-md">
+                  Inovação em contratações e aquisições do SUSP
+                </p>
+                <div className="flex items-center gap-2 text-lg text-white/95 drop-shadow-md">
+                  <MapPin className="w-6 h-6 text-accent" />
+                  <span className="font-semibold">CICB - Brasília/DF</span>
+                </div>
+                <div className="flex gap-4 pt-4">
+                  <Button className="btn-institutional">
+                    <Download className="w-4 h-4 mr-2" />
+                    Baixar Relatório
+                  </Button>
+                  <Button className="btn-institutional-secondary">
+                    <MapPinIcon className="w-4 h-4 mr-2" />
+                    Localização no Maps
+                  </Button>
+                </div>
               </div>
-              <div className="flex gap-4">
-                <Button className="btn-institutional">
-                  <Download className="w-4 h-4 mr-2" />
-                  Baixar Relatório
-                </Button>
-                <Button className="btn-institutional-secondary">
-                  <MapPinIcon className="w-4 h-4 mr-2" />
-                  Localização no Maps
-                </Button>
-              </div>
-            </div>
-            <div className="bg-muted rounded-lg p-8 flex items-center justify-center h-80">
-              <div className="text-center">
-                <div className="text-6xl font-bold text-accent mb-4">03-06</div>
-                <p className="text-xl text-muted-foreground">Março 2026</p>
+              <div className="flex items-center justify-center h-80">
+                <div className="text-center bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
+                  <div className="text-6xl font-bold text-accent mb-4 drop-shadow-lg">03-06</div>
+                  <p className="text-xl text-white font-semibold drop-shadow-md">Março 2026</p>
+                </div>
               </div>
             </div>
           </div>
@@ -467,12 +480,12 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-muted text-muted-foreground py-8 mt-16">
+      <footer className="bg-primary text-white py-8 mt-16">
         <div className="container text-center">
-          <p className="text-sm">
+          <p className="text-sm text-white/90">
             © 2026 Encontro Nacional ComprasSusp. Todos os direitos reservados.
           </p>
-          <p className="text-xs mt-2">
+          <p className="text-xs mt-2 text-white/75">
             Ministério da Justiça e Segurança Pública
           </p>
         </div>
