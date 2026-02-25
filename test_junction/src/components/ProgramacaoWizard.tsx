@@ -355,15 +355,49 @@ export function ProgramacaoWizard() {
 
     return (
         <div className="br-wizard" data-vertical="vertical" data-step={currentStep}>
-            <div className="wizard-header">
-                <div className="wizard-progress" role="tablist">
+
+            {/* Mobile: elegant step indicator — numbered circles + dynamic label */}
+            <div className="wizard-mobile-steps md:hidden" aria-label="Grupos de trabalho">
+                <div className="wizard-steps-row" role="tablist">
+                    {gtiSteps.map((step) => (
+                        <button
+                            key={step.id}
+                            type="button"
+                            role="tab"
+                            aria-selected={currentStep === step.id}
+                            aria-controls={`panel-step-${step.id}`}
+                            aria-label={`${step.label} — passo ${step.id} de ${gtiSteps.length}`}
+                            onClick={() => setCurrentStep(step.id)}
+                            className={`wizard-step-dot ${currentStep === step.id ? "active" : ""}`}
+                        >
+                            {step.id}
+                        </button>
+                    ))}
+                </div>
+                <div className="wizard-step-label" aria-live="polite">
+                    <span className="wizard-step-title">
+                        {gtiSteps.find((s) => s.id === currentStep)?.label}
+                    </span>
+                </div>
+            </div>
+
+            {/* Desktop: vertical sidebar tabs */}
+            <div className="wizard-header hidden md:block">
+                <div
+                    className="wizard-progress"
+                    role="tablist"
+                    aria-label="Grupos de trabalho"
+                >
                     {gtiSteps.map((step) => (
                         <button
                             key={step.id}
                             className="wizard-progress-btn"
                             type="button"
+                            role="tab"
                             data-step={step.id}
                             aria-selected={currentStep === step.id}
+                            aria-controls={`panel-step-${step.id}`}
+                            id={`tab-step-${step.id}`}
                             onClick={() => setCurrentStep(step.id)}
                         >
                             <span className="info">{step.label}</span>
@@ -371,20 +405,25 @@ export function ProgramacaoWizard() {
                     ))}
                 </div>
             </div>
+
+            {/* Content panels */}
             <div className="wizard-form">
                 {gtiSteps.map((step) => (
                     <div
                         key={step.id}
+                        id={`panel-step-${step.id}`}
+                        role="tabpanel"
+                        aria-labelledby={`tab-step-${step.id}`}
                         className={`wizard-panel ${currentStep === step.id ? "active" : ""}`}
                         style={{ display: currentStep === step.id ? "block" : "none" }}
                     >
                         <div className="wizard-panel-content">
                             {step.content}
                         </div>
-
                     </div>
                 ))}
             </div>
         </div>
     );
 }
+

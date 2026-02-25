@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { SecurityDayPoll } from "@/components/SecurityDayPoll";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -30,6 +32,7 @@ import { ProgramacaoWizard } from "@/components/ProgramacaoWizard";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("consespd");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const progressSteps = [
     { id: 'checkin', label: 'Check-in', status: 'completed' as const },
@@ -44,30 +47,54 @@ export default function Home() {
       <header className="sticky top-0 z-50 header-gradient shadow-lg">
         <div className="container py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-1.5 h-8 bg-accent rounded-full"></div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">ComprasSusp 2026</h1>
+            <div className="w-1.5 h-8 bg-accent rounded-full" aria-hidden="true"></div>
+            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">ComprasSusp 2026</h1>
           </div>
-          <nav className="hidden md:flex gap-8">
-            <a href="#programacao" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
-              Programação
-            </a>
-            <a href="#passagens" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
-              Diárias
-            </a>
-            <a href="#contas" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
-              Prestação
-            </a>
-            <a href="#roteiro" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
-              Roteiro
-            </a>
-            <a href="#regras" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
-              Regras
-            </a>
-            <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
-              Contato
-            </a>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-8" aria-label="Navegação principal">
+            <a href="#programacao" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Programação</a>
+            <a href="#passagens" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Diárias</a>
+            <a href="#contas" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Prestação</a>
+            <a href="#roteiro" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Roteiro</a>
+            <a href="#regras" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Regras</a>
+            <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Contato</a>
           </nav>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-all"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+          </button>
         </div>
+
+        {/* Mobile Nav Dropdown */}
+        {mobileMenuOpen && (
+          <nav id="mobile-nav" className="md:hidden border-t border-white/10 px-4 pb-4" aria-label="Navegação mobile">
+            {[
+              { href: "#programacao", label: "Programação" },
+              { href: "#passagens", label: "Diárias" },
+              { href: "#contas", label: "Prestação de Contas" },
+              { href: "#roteiro", label: "Roteiro" },
+              { href: "#regras", label: "Regras" },
+              { href: "#contato", label: "Contato" },
+            ].map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-3 text-white/80 hover:text-accent font-medium border-b border-white/5 transition-all"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        )}
       </header>
 
       <main className="pb-24">
@@ -91,36 +118,38 @@ export default function Home() {
                 <span className="inline-block px-4 py-1.5 bg-accent/20 text-accent font-bold rounded-full text-sm tracking-widest uppercase">
                   Brasília • 03-06 Março
                 </span>
-                <h1 className="text-6xl font-bold text-white leading-tight">
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
                   Encontro Nacional <br />
                   <span className="text-accent underline decoration-white/20 underline-offset-8">ComprasSusp 2026</span>
                 </h1>
-                <p className="text-xl text-white/80 leading-relaxed font-light">
-                  A excelência na gestão de contratações e aquisições <br />
-                  fortalecendo a segurança pública em todo o Brasil.
+                <p className="text-base sm:text-xl text-white/80 leading-relaxed font-light">
+                  A excelência na gestão de contratações e aquisições
+                  <span className="hidden sm:inline"><br /></span>
+                  {" "}fortalecendo a segurança pública em todo o Brasil.
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-6">
-                <div className="flex items-center gap-3 text-white">
-                  <MapPin className="w-6 h-6 text-accent" />
-                  <span className="font-semibold text-lg">CICB - Brasília/DF</span>
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center gap-2 text-white">
+                  <MapPin className="w-5 h-5 text-accent" aria-hidden="true" />
+                  <span className="font-semibold text-base sm:text-lg">CICB - Brasília/DF</span>
                 </div>
-                <div className="h-8 w-px bg-white/20 hidden md:block"></div>
-                <div className="flex items-center gap-3 text-white">
-                  <Calendar className="w-6 h-6 text-accent" />
-                  <span className="font-semibold text-lg">Março 2026</span>
+                <div className="h-6 w-px bg-white/20 hidden md:block" aria-hidden="true"></div>
+                <div className="flex items-center gap-2 text-white">
+                  <Calendar className="w-5 h-5 text-accent" aria-hidden="true" />
+                  <span className="font-semibold text-base sm:text-lg">Março 2026</span>
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Button asChild className="btn-gold h-14 px-10 text-lg shadow-xl shadow-accent/20">
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Button asChild className="btn-gold h-11 sm:h-14 px-6 sm:px-10 text-base sm:text-lg shadow-xl shadow-accent/20">
                   <a
                     href="https://www.google.com/maps/place/Centro+Internacional+de+Conven%C3%A7%C3%B5es+do+Brasil/@-15.812877,-47.832388,12z/data=!4m8!3m7!1s0x935a235b9cbb04f5:0x891cb2fcc1ef260!8m2!3d-15.8156846!4d-47.8447472!9m1!1b1!16s%2Fg%2F1q5gppnwh?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Ver localização do CICB no Google Maps (abre em nova janela)"
                   >
-                    <MapPinIcon className="w-5 h-5 mr-3" />
+                    <MapPinIcon className="w-5 h-5 mr-2" aria-hidden="true" />
                     Localização CICB
                   </a>
                 </Button>
@@ -135,7 +164,7 @@ export default function Home() {
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
               <h2 className="text-4xl font-bold text-primary">Programação</h2>
-              <p className="text-gray-500 font-medium">Cronograma detalhado por grupo de trabalho</p>
+              <p className="text-primary/60 font-medium">Cronograma detalhado por grupo de trabalho</p>
             </div>
           </div>
 
@@ -150,7 +179,7 @@ export default function Home() {
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
               <h2 className="text-4xl font-bold text-primary">Passagens e Diárias</h2>
-              <p className="text-gray-500 font-medium">Informações essenciais para sua viagem</p>
+              <p className="text-primary/60 font-medium">Informações essenciais para sua viagem</p>
             </div>
           </div>
 
@@ -159,7 +188,7 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
                   <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Valor da Diária</p>
-                  <p className="text-3xl font-bold text-primary">R$ 425,00 (4,5)</p>
+                  <p className="text-3xl font-bold text-primary">R$ 425,00</p>
                 </div>
                 <div className="p-6 bg-accent/10 rounded-xl border border-accent/20">
                   <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Adicional Embarque</p>
@@ -178,32 +207,32 @@ export default function Home() {
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
               <h2 className="text-4xl font-bold text-primary">Prestação de Contas</h2>
-              <p className="text-gray-500 font-medium">Informações obrigatórias pós-evento</p>
+              <p className="text-primary/60 font-medium">Informações obrigatórias pós-evento</p>
             </div>
           </div>
 
           <Card className="card-premium border-accent/30 bg-accent/5">
-            <CardContent className="p-12 space-y-8">
-              <p className="text-gray-600 text-lg leading-relaxed text-center max-w-3xl mx-auto">
+            <CardContent className="p-6 sm:p-12 space-y-8">
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed text-center max-w-3xl mx-auto">
                 A entrega da documentação é <span className="font-bold text-primary underline decoration-accent/30 decoration-4">imprescindível</span> para a regularização da sua viagem no sistema.
               </p>
 
-              <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div className="flex items-center gap-6 p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto">
+                <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all" aria-hidden="true">
                     1
                   </div>
                   <div>
-                    <span className="text-xl font-bold text-gray-800 block">Relatório de Viagem</span>
+                    <span className="text-base sm:text-xl font-bold text-gray-800 block">Relatório de Viagem</span>
                     <span className="text-sm text-gray-500">Documento base detalhado</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-6 p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all">
+                <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all" aria-hidden="true">
                     2
                   </div>
                   <div>
-                    <span className="text-xl font-bold text-gray-800 block">Canhotos de Embarque</span>
+                    <span className="text-base sm:text-xl font-bold text-gray-800 block">Canhotos de Embarque</span>
                     <span className="text-sm text-gray-500">Comprovantes originais</span>
                   </div>
                 </div>
@@ -211,10 +240,10 @@ export default function Home() {
 
               <div className="flex flex-col items-center gap-2 pt-8 border-t border-accent/10">
                 <div className="flex items-center gap-2 text-accent font-bold">
-                  <Clock className="w-5 h-5" />
+                  <Clock className="w-5 h-5" aria-hidden="true" />
                   PRAZO DE ENTREGA
                 </div>
-                <p className="text-2xl font-black text-primary">
+                <p className="text-xl sm:text-2xl font-black text-primary">
                   Até 5 dias após o término do evento
                 </p>
               </div>
@@ -228,38 +257,54 @@ export default function Home() {
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
               <h2 className="text-4xl font-bold text-primary">Regras Importantes</h2>
-              <p className="text-gray-500 font-medium">Normas e procedimentos do evento</p>
+              <p className="text-primary/60 font-medium">Normas e procedimentos do evento</p>
             </div>
           </div>
 
           <Card className="card-premium">
-            <CardContent className="p-12">
-              <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    <CheckCircle2 className="w-6 h-6" />
+            <CardContent className="p-6 sm:p-12">
+              <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
+                    <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <span className="font-semibold text-primary">Afastamento SCDP obrigatório</span>
+                  <span className="font-semibold text-primary text-sm sm:text-base">Afastamento SCDP obrigatório</span>
                 </li>
-                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    <Plane className="w-6 h-6" />
+                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
+                    <Plane className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <span className="font-semibold text-primary">Bilhetes emitidos pela agência MJ</span>
+                  <span className="font-semibold text-primary text-sm sm:text-base">Bilhetes emitidos pela agência MJ</span>
                 </li>
-                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    <UserSquare2 className="w-6 h-6" />
+                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
+                    <UserSquare2 className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <span className="font-semibold text-primary">Traje formal institucional</span>
+                  <span className="font-semibold text-primary text-sm sm:text-base">Traje formal institucional</span>
                 </li>
-                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    <Clock className="w-6 h-6" />
+                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
+                    <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <span className="font-semibold text-primary">Check-in antecipado no hotel</span>
+                  <span className="font-semibold text-primary text-sm sm:text-base">Check-in antecipado no hotel</span>
                 </li>
               </ul>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Security Day Poll Section */}
+        <section id="security-day" className="container pt-24">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="w-2 h-10 bg-accent rounded-full"></div>
+            <div>
+              <h2 className="text-4xl font-bold text-primary">Security Day</h2>
+              <p className="text-primary/60 font-medium">Clique em 8 empresas de seu interesse</p>
+            </div>
+          </div>
+          <Card className="card-premium">
+            <CardContent className="p-6 sm:p-10">
+              <SecurityDayPoll />
             </CardContent>
           </Card>
         </section>
@@ -340,31 +385,31 @@ export default function Home() {
         <section id="contato" className="container pt-24">
           <Card className="bg-primary overflow-hidden border-none shadow-2xl">
             <div>
-              <div className="p-12 lg:p-16 space-y-8">
+              <div className="p-6 sm:p-12 lg:p-16 space-y-8">
                 <div className="space-y-4">
-                  <h2 className="text-4xl font-bold text-white">Precisa de Suporte?</h2>
-                  <p className="text-white/70 text-lg">
+                  <h2 className="text-2xl sm:text-4xl font-bold text-white">Precisa de Suporte?</h2>
+                  <p className="text-white/70 text-base sm:text-lg">
                     Estamos à disposição para ajudar com qualquer dúvida sobre o evento ou programação.
                   </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-8">
+                <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 text-accent font-bold">
-                      <Mail className="w-5 h-5" />
+                      <Mail className="w-5 h-5" aria-hidden="true" />
                       E-MAIL
                     </div>
-                    <a href="mailto:comprassusp@mj.gov.br" className="text-xl text-white font-medium hover:text-accent transition-all">
+                    <a href="mailto:comprassusp@mj.gov.br" className="text-base sm:text-xl text-white font-medium hover:text-accent transition-all break-all">
                       comprassusp@mj.gov.br
                     </a>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 text-accent font-bold">
-                      <Phone className="w-5 h-5" />
+                      <Phone className="w-5 h-5" aria-hidden="true" />
                       TELEFONE
                     </div>
                     <div className="space-y-4">
-                      <div className="space-y-1 text-xl text-white font-medium">
+                      <div className="space-y-1 text-base sm:text-xl text-white font-medium">
                         <p>(61) 2025-3008</p>
                         <p>(61) 2025-9796</p>
                       </div>
@@ -373,7 +418,7 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 py-2 px-4 bg-[#25D366]/10 border border-[#25D366]/20 rounded-lg group hover:bg-[#25D366]/20 transition-all w-fit"
-                        title="WhatsApp Suporte"
+                        aria-label="WhatsApp Suporte: (61) 98177-3636 (abre em nova janela)"
                       >
                         <div className="w-8 h-8 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                           <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
@@ -424,9 +469,9 @@ export default function Home() {
               © 2026 Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-xs text-gray-500 font-medium">
-              <a href="#" className="hover:text-primary">Privacidade</a>
-              <a href="#" className="hover:text-primary">Termos de Uso</a>
-              <a href="#" className="hover:text-primary">Acessibilidade</a>
+              <span className="hover:text-primary cursor-default">Privacidade</span>
+              <span className="hover:text-primary cursor-default">Termos de Uso</span>
+              <span className="hover:text-primary cursor-default">Acessibilidade</span>
             </div>
           </div>
         </div>
