@@ -15,7 +15,9 @@ import {
   Briefcase,
   UtensilsCrossed,
   Plane,
-  AlertCircle
+  AlertCircle,
+  CheckCircle2,
+  UserSquare2
 } from "lucide-react";
 import { TravelProgressBar } from "@/components/TravelProgressBar";
 import { ProgramacaoWizard } from "@/components/ProgramacaoWizard";
@@ -49,11 +51,17 @@ export default function Home() {
             <a href="#programacao" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
               Programação
             </a>
-            <a href="#logistica" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
-              Logística
+            <a href="#passagens" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
+              Diárias
+            </a>
+            <a href="#contas" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
+              Prestação
             </a>
             <a href="#roteiro" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
               Roteiro
+            </a>
+            <a href="#regras" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
+              Regras
             </a>
             <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">
               Contato
@@ -63,12 +71,7 @@ export default function Home() {
       </header>
 
       <main className="pb-24">
-        {/* Progress Bar Section */}
-        <section className="bg-gray-50/50 border-b border-gray-100">
-          <div className="container overflow-x-auto">
-            <TravelProgressBar steps={progressSteps} />
-          </div>
-        </section>
+
 
         {/* Hero Section */}
         <section className="relative h-[500px] flex items-center overflow-hidden">
@@ -111,13 +114,15 @@ export default function Home() {
               </div>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <Button className="btn-navy h-14 px-10 text-lg shadow-xl shadow-primary/20">
-                  <Download className="w-5 h-5 mr-3" />
-                  Guia do Participante
-                </Button>
-                <Button className="btn-gold h-14 px-10 text-lg shadow-xl shadow-accent/20">
-                  <MapPinIcon className="w-5 h-5 mr-3" />
-                  Localização CICB
+                <Button asChild className="btn-gold h-14 px-10 text-lg shadow-xl shadow-accent/20">
+                  <a
+                    href="https://www.google.com/maps/place/Centro+Internacional+de+Conven%C3%A7%C3%B5es+do+Brasil/@-15.812877,-47.832388,12z/data=!4m8!3m7!1s0x935a235b9cbb04f5:0x891cb2fcc1ef260!8m2!3d-15.8156846!4d-47.8447472!9m1!1b1!16s%2Fg%2F1q5gppnwh?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <MapPinIcon className="w-5 h-5 mr-3" />
+                    Localização CICB
+                  </a>
                 </Button>
               </div>
             </div>
@@ -139,103 +144,124 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Logística e Diárias Section */}
-        <section id="logistica" className="container pt-24">
+        {/* Passagens e Diárias Section */}
+        <section id="passagens" className="container pt-24">
           <div className="flex items-center gap-4 mb-12">
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
-              <h2 className="text-4xl font-bold text-primary">Logística e Diárias</h2>
+              <h2 className="text-4xl font-bold text-primary">Passagens e Diárias</h2>
               <p className="text-gray-500 font-medium">Informações essenciais para sua viagem</p>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            <Card className="card-premium lg:col-span-2">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-primary">
-                  <Plane className="w-6 h-6" />
-                  Passagens e Diárias
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
-                    <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Valor da Diária</p>
-                    <p className="text-3xl font-bold text-primary">R$ 425,00</p>
-                    <p className="text-xs text-primary/60 mt-1">Nível Superior / GSISP</p>
-                  </div>
-                  <div className="p-6 bg-accent/10 rounded-xl border border-accent/20">
-                    <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Adicional Embarque</p>
-                    <p className="text-3xl font-bold text-primary">R$ 95,00</p>
-                    <p className="text-xs text-primary/60 mt-1">Taxa única por trecho</p>
-                  </div>
+          <Card className="card-premium">
+            <CardContent className="p-8 space-y-6">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
+                  <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Valor da Diária</p>
+                  <p className="text-3xl font-bold text-primary">R$ 425,00 (4,5)</p>
                 </div>
-
-                <div className="p-6 bg-gray-50 rounded-xl space-y-4">
-                  <h4 className="font-bold text-primary flex items-center gap-2">
-                    <AlertCircle className="w-5 h-5 text-accent" />
-                    Regras Importantes
-                  </h4>
-                  <ul className="grid sm:grid-cols-2 gap-3 text-sm text-gray-600">
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 bg-accent rounded-full mt-1.5"></div>
-                      Afastamento SCDP obrigatório
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 bg-accent rounded-full mt-1.5"></div>
-                      Bilhetes emitidos via agência MJ
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 bg-accent rounded-full mt-1.5"></div>
-                      Traje conforme normas da instituição
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 bg-accent rounded-full mt-1.5"></div>
-                      Check-in no hotel com antecedência
-                    </li>
-                  </ul>
+                <div className="p-6 bg-accent/10 rounded-xl border border-accent/20">
+                  <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Adicional Embarque</p>
+                  <p className="text-3xl font-bold text-primary">R$ 95,00</p>
+                  <p className="text-xs text-primary/60 mt-1">Taxa única por trecho</p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
 
-            <Card className="card-premium border-accent/30 bg-accent/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-primary">
-                  <Briefcase className="w-6 h-6" />
-                  Prestação de Contas
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  A entrega da documentação é <span className="font-bold text-primary">imprescindível</span> para a regularização da sua viagem no sistema.
-                </p>
+        </section>
 
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm border border-gray-100">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                      <span className="text-xs font-bold">1</span>
-                    </div>
-                    <span className="text-sm font-medium text-gray-700">Relatório de Viagem</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm border border-gray-100">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                      <span className="text-xs font-bold">2</span>
-                    </div>
-                    <span className="text-sm font-medium text-gray-700">Canhotos de Embarque</span>
-                  </div>
-                </div>
-
-                <Button className="btn-gold w-full h-12 shadow-lg shadow-accent/20">
-                  <Download className="w-4 h-4 mr-2" />
-                  Modelo de Relatório
-                </Button>
-
-                <p className="text-[10px] text-center text-gray-400">
-                  Prazo: Até 5 dias após o término do evento.
-                </p>
-              </CardContent>
-            </Card>
+        {/* Prestação de Contas Section */}
+        <section id="contas" className="container pt-24">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="w-2 h-10 bg-accent rounded-full"></div>
+            <div>
+              <h2 className="text-4xl font-bold text-primary">Prestação de Contas</h2>
+              <p className="text-gray-500 font-medium">Informações obrigatórias pós-evento</p>
+            </div>
           </div>
+
+          <Card className="card-premium border-accent/30 bg-accent/5">
+            <CardContent className="p-12 space-y-8">
+              <p className="text-gray-600 text-lg leading-relaxed text-center max-w-3xl mx-auto">
+                A entrega da documentação é <span className="font-bold text-primary underline decoration-accent/30 decoration-4">imprescindível</span> para a regularização da sua viagem no sistema.
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div className="flex items-center gap-6 p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
+                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all">
+                    1
+                  </div>
+                  <div>
+                    <span className="text-xl font-bold text-gray-800 block">Relatório de Viagem</span>
+                    <span className="text-sm text-gray-500">Documento base detalhado</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-6 p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
+                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all">
+                    2
+                  </div>
+                  <div>
+                    <span className="text-xl font-bold text-gray-800 block">Canhotos de Embarque</span>
+                    <span className="text-sm text-gray-500">Comprovantes originais</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 pt-8 border-t border-accent/10">
+                <div className="flex items-center gap-2 text-accent font-bold">
+                  <Clock className="w-5 h-5" />
+                  PRAZO DE ENTREGA
+                </div>
+                <p className="text-2xl font-black text-primary">
+                  Até 5 dias após o término do evento
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Regras Section */}
+        <section id="regras" className="container pt-24">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="w-2 h-10 bg-accent rounded-full"></div>
+            <div>
+              <h2 className="text-4xl font-bold text-primary">Regras Importantes</h2>
+              <p className="text-gray-500 font-medium">Normas e procedimentos do evento</p>
+            </div>
+          </div>
+
+          <Card className="card-premium">
+            <CardContent className="p-12">
+              <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <span className="font-semibold text-primary">Afastamento SCDP obrigatório</span>
+                </li>
+                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <Plane className="w-6 h-6" />
+                  </div>
+                  <span className="font-semibold text-primary">Bilhetes emitidos pela agência MJ</span>
+                </li>
+                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <UserSquare2 className="w-6 h-6" />
+                  </div>
+                  <span className="font-semibold text-primary">Traje formal institucional</span>
+                </li>
+                <li className="flex flex-col items-center text-center gap-4 p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <Clock className="w-6 h-6" />
+                  </div>
+                  <span className="font-semibold text-primary">Check-in antecipado no hotel</span>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
         </section>
 
         {/* Roteiro Cultural Section */}
@@ -313,12 +339,12 @@ export default function Home() {
         {/* Contato Section */}
         <section id="contato" className="container pt-24">
           <Card className="bg-primary overflow-hidden border-none shadow-2xl">
-            <div className="grid lg:grid-cols-5 h-full">
-              <div className="lg:col-span-3 p-12 lg:p-16 space-y-8">
+            <div>
+              <div className="p-12 lg:p-16 space-y-8">
                 <div className="space-y-4">
                   <h2 className="text-4xl font-bold text-white">Precisa de Suporte?</h2>
                   <p className="text-white/70 text-lg">
-                    Estamos à disposição para ajudar com qualquer dúvida sobre o evento, logística ou programação.
+                    Estamos à disposição para ajudar com qualquer dúvida sobre o evento ou programação.
                   </p>
                 </div>
 
@@ -337,30 +363,36 @@ export default function Home() {
                       <Phone className="w-5 h-5" />
                       TELEFONE
                     </div>
-                    <div className="space-y-1 text-xl text-white font-medium">
-                      <p>(61) 2025-3008</p>
-                      <p>(61) 2025-9796</p>
+                    <div className="space-y-4">
+                      <div className="space-y-1 text-xl text-white font-medium">
+                        <p>(61) 2025-3008</p>
+                        <p>(61) 2025-9796</p>
+                      </div>
+                      <a
+                        href="https://wa.me/5561981773636"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 py-2 px-4 bg-[#25D366]/10 border border-[#25D366]/20 rounded-lg group hover:bg-[#25D366]/20 transition-all w-fit"
+                        title="WhatsApp Suporte"
+                      >
+                        <div className="w-8 h-8 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.03c0 2.123.554 4.197 1.607 6.037L0 24l6.105-1.602a11.834 11.834 0 005.937 1.583h.005c6.635 0 12.03-5.394 12.033-12.031 0-3.212-1.25-6.231-3.518-8.498"></path>
+                          </svg>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[#25D366] font-bold text-lg leading-tight">(61) 98177-3636</span>
+                          <span className="text-white/50 text-[10px] uppercase tracking-wider font-bold">WhatsApp Suporte</span>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-6">
-                  <Button className="btn-gold h-14 px-10 text-lg">
-                    <ExternalLink className="w-5 h-5 mr-3" />
-                    Abrir Chamado Suporte
-                  </Button>
-                </div>
+
               </div>
 
-              <div className="lg:col-span-2 bg-white/5 flex flex-col items-center justify-center p-12 text-center space-y-6">
-                <AlertCircle className="w-16 h-16 text-accent animate-pulse" />
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Emergência</h3>
-                  <p className="text-white/60 text-sm">
-                    Para situações urgentes fora do horário comercial, entre em contato via canal de segurança do CICB.
-                  </p>
-                </div>
-              </div>
+
             </div>
           </Card>
         </section>
