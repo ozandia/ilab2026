@@ -489,22 +489,25 @@
   font-weight: 500;
 }
 
-/* List / Grid 3-col */
+/* List / Grid — responsive */
 .poll-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.375rem;
 }
 
-@media (max-width: 768px) {
+/* Tablet: 2 colunas */
+@media (max-width: 900px) {
   .poll-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile: 1 coluna para evitar overflow */
+@media (max-width: 640px) {
   .poll-list {
     grid-template-columns: 1fr;
+    gap: 0.3rem;
   }
 }
 
@@ -522,6 +525,8 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
+  min-height: 44px;
+  /* touch target mínimo iOS/Android */
   background: #ffffff;
   border: 2px solid #e8ecf5;
   border-radius: 10px;
@@ -530,6 +535,9 @@
   text-align: left;
   box-shadow: 0 1px 3px rgba(0, 55, 94, 0.06);
   width: 100%;
+  /* Prevent card itself from overflowing its grid cell */
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* List-specific card */
@@ -552,16 +560,35 @@
   color: #94a3b8;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  /* Allow wrapping on narrow mobile columns */
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .poll-card-razao {
   font-size: 0.7rem;
   color: #64748b;
   font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Wrap in 3-col; truncate only in full desktop */
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Desktop: restore ellipsis on 3-col */
+@media (min-width: 901px) {
+  .poll-card-cnpj {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .poll-card-razao {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .poll-card:hover:not(:disabled) {
