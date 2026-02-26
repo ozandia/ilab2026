@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import {
-    CheckCircle2, Trophy, TrendingUp, Building2, Loader2,
+    CheckCircle2, Trophy, TrendingUp, Loader2,
     Users, ChevronRight, Clock, Lock
 } from "lucide-react";
 
@@ -20,6 +20,41 @@ const GROUPS = {
 interface CompanyData { name: string; votes: number; disabled: boolean; }
 type Phase = "group-select" | "loading" | "voting" | "submitting" | "done" | "closed-loading" | "closed";
 type Group = 1 | 2;
+
+// ── Static company info (CNPJ + Razão Social) ─────────────────────────────────
+const COMPANY_INFO: Record<string, { cnpj: string; razao: string }> = {
+    "Actatec": { cnpj: "34.032.252/0001-14", razao: "Actatec Indústria e Comércio de Peças e Acessórios para Veículos Ltda" },
+    "ADTech": { cnpj: "01.866.443/0001-22", razao: "Adtech Informática Ltda - EPP" },
+    "Aeromot": { cnpj: "92.833.110/0001-52", razao: "Aeromot Aeronaves e Motores S/A" },
+    "Airbus": { cnpj: "08.373.694/0001-14", razao: "Airbus Brasil Negócios Aeroespaciais Ltda" },
+    "Axon": { cnpj: "26.230.158/0001-34", razao: "Axon Enterprise Brasil Ltda" },
+    "Berkana": { cnpj: "07.241.050/0001-10", razao: "Berkana Tecnologia em Segurança Ltda" },
+    "BGS": { cnpj: "03.968.100/0001-19", razao: "BGS Sistemas de Segurança Ltda" },
+    "Byrna": { cnpj: "39.467.433/0001-08", razao: "Byrna Brasil Comércio de Equipamentos e Produtos de Segurança Ltda" },
+    "Clarian": { cnpj: "07.351.488/0001-63", razao: "Clarian Tecnologia Ltda" },
+    "Condor": { cnpj: "33.652.332/0001-08", razao: "Condor S/A Indústria Química" },
+    "Digitro": { cnpj: "83.473.066/0001-41", razao: "Dígitro Tecnologia S/A" },
+    "Flash": { cnpj: "02.839.274/0001-67", razao: "Flash Engenharia e Equipamentos Ltda" },
+    "Ford": { cnpj: "03.470.724/0001-13", razao: "Ford Motor Company Brasil Ltda" },
+    "Funcional": { cnpj: "04.145.411/0001-18", razao: "Funcional Consultoria e Tecnologia Ltda" },
+    "Glagio": { cnpj: "05.805.957/0001-53", razao: "Glagio do Brasil Ltda" },
+    "Helper": { cnpj: "21.055.056/0001-09", razao: "Helper Tecnologia de Segurança S/A" },
+    "Hex360": { cnpj: "22.955.938/0001-54", razao: "Hex 360 Soluções Tecnológicas Ltda" },
+    "Inspect": { cnpj: "15.656.744/0001-97", razao: "Inspect Tecnologia e Consultoria Ltda" },
+    "Iron Fence": { cnpj: "30.124.965/0001-46", razao: "Iron Fence Segurança Ltda" },
+    "Magnet": { cnpj: "00.320.106/0001-44", razao: "Magnet Engenharia e Sistemas Ltda" },
+    "Montreal": { cnpj: "33.025.299/0001-41", razao: "Montreal Informática S/A" },
+    "Motorola": { cnpj: "01.011.664/0001-00", razao: "Motorola Solutions Ltda" },
+    "Protecta": { cnpj: "04.995.839/0001-20", razao: "Protecta Defesa e Proteção Ltda" },
+    "Raytec": { cnpj: "08.854.417/0001-54", razao: "Raytec Brasil Sistemas de Segurança Ltda" },
+    "Revo": { cnpj: "41.520.150/0001-45", razao: "Revo Tecnologia e Serviços Ltda" },
+    "Smart Power": { cnpj: "13.568.109/0001-13", razao: "Smart Power Tecnologia Ltda" },
+    "Techbiz": { cnpj: "05.651.983/0001-83", razao: "Techbiz Forensics S/A" },
+    "Teltronic": { cnpj: "05.340.542/0001-00", razao: "Teltronic Brasil Ltda" },
+    "Ulbrichts": { cnpj: "23.364.577/0001-93", razao: "Ulbrichts Brasil Indústria e Comércio de Equipamentos de Proteção Ltda" },
+    "Valid": { cnpj: "33.113.111/0001-20", razao: "Valid Soluções S/A" },
+    "VMI": { cnpj: "21.056.289/0001-40", razao: "VMI Sistemas de Segurança Ltda" },
+};
 
 // ── Deadline helpers ──────────────────────────────────────────────────────────
 function isClosed() { return Date.now() >= DEADLINE.getTime(); }
@@ -80,15 +115,23 @@ interface CompanyCardProps {
 const CompanyCard = memo(function CompanyCard({ company, selected, blocked, onToggle }: CompanyCardProps) {
     const isDisabled = company.disabled || (blocked && !selected);
     const handleClick = useCallback(() => { if (!isDisabled) onToggle(company.name); }, [isDisabled, onToggle, company.name]);
+    const info = COMPANY_INFO[company.name];
 
     return (
         <button type="button" onClick={handleClick} disabled={isDisabled} aria-pressed={selected}
             aria-label={`${company.name}${company.disabled ? " — vagas esgotadas" : ""}`}
-            className={`poll-card${selected ? " poll-card--selected" : ""}${isDisabled ? " poll-card--disabled" : ""}`}>
-            <Building2 className="poll-card-icon" aria-hidden="true" />
-            <span className="poll-card-name">{company.name}</span>
+            className={`poll-card poll-card--list${selected ? " poll-card--selected" : ""}${isDisabled ? " poll-card--disabled" : ""}`}>
+            <div className="poll-card-list-body">
+                <span className="poll-card-name">{company.name}</span>
+                {info && (
+                    <>
+                        <span className="poll-card-cnpj">CNPJ: {info.cnpj}</span>
+                        <span className="poll-card-razao">{info.razao}</span>
+                    </>
+                )}
+                {company.disabled && <span className="poll-card-full-badge">Esgotado</span>}
+            </div>
             {selected && <CheckCircle2 className="poll-card-check" aria-hidden="true" />}
-            {company.disabled && <span className="poll-card-full-badge">Esgotado</span>}
         </button>
     );
 });
@@ -387,7 +430,7 @@ export function SecurityDayPoll() {
 
             {error && <div className="poll-error" role="alert" aria-live="assertive">{error}</div>}
 
-            <div className="poll-grid" role="group" aria-label={`Selecione ${MAX_SELECTIONS} empresas para o Security Day`}>
+            <div className="poll-list" role="group" aria-label={`Selecione ${MAX_SELECTIONS} empresas para o Security Day`}>
                 {companies.map((company) => (
                     <CompanyCard key={company.name} company={company}
                         selected={selected.includes(company.name)}
