@@ -142,50 +142,55 @@ async function startServer() {
     return res.json({ ok: true, ...result });
   });
 
-  // ── Mode & Path Resolution (v2.4 - Ultra Resilient) ─────────────────────
+  // ── Mode & Path Resolution (v2.5 - DevOps Audit) ────────────────────────
   const isProduction = process.env.NODE_ENV === "production";
   const rootDir = process.cwd();
 
-  // Potential paths for static files in production
   const candidatePaths = [
-    path.resolve(rootDir, "dist", "public"), // Standard root-relative
-    path.resolve(__dirname, "public"),         // Relative to server script
-    path.resolve(rootDir, "public"),           // Legacy/Fallback
+    path.resolve(rootDir, "dist", "public"),
+    path.resolve(__dirname, "public"),
+    path.resolve(rootDir, "public"),
   ];
 
   let staticPath = isProduction ? candidatePaths[0] : path.resolve(rootDir, "client");
 
-  console.log(`[Server] v2.4 Startup Diagnostics:`);
-  console.log(`  - rootDir (CWD): ${rootDir}`);
-  console.log(`  - __dirname: ${__dirname}`);
+  console.log(`[Server] v2.5 DevOps Audit:`);
+  console.log(`  - CWD: ${rootDir}`);
+  console.log(`  - Environment: ${process.env.NODE_ENV}`);
 
   if (isProduction) {
-    // Audit available paths to find the first one that exists
     for (const p of candidatePaths) {
-      const exists = fs.existsSync(p);
-      console.log(`  - Checking path: ${p} -> ${exists ? "FOUND" : "NOT FOUND"}`);
-      if (exists && isProduction) {
+      if (fs.existsSync(p)) {
         staticPath = p;
+        console.log(`  - FOUND staticPath: ${p}`);
         break;
       }
     }
 
-    // Deep Audit: List files in root and dist to solve path mystery
-    const listDir = (dir: string, label: string) => {
-      try {
-        if (fs.existsSync(dir)) {
-          console.log(`  - [Tree] ${label} (${dir}):`, fs.readdirSync(dir).join(", "));
-        }
-      } catch (e) { /* ignore */ }
-    };
-    listDir(rootDir, "ROOT");
-    listDir(path.resolve(rootDir, "dist"), "DIST");
-    listDir(staticPath, "STATIC");
+    // List interfaces for network debug
+    import("os").then((os) => {
+      const interfaces = os.networkInterfaces();
+      console.log(`  - Network Interfaces:`, Object.keys(interfaces).map(k => `${k}: ${interfaces[k]?.map(i => i.address).join(", ")}`));
+    }).catch(() => { });
   }
 
   app.use((req, _res, next) => {
-    console.log(`[Request] ${new Date().toISOString()} - ${req.method} ${req.url} | IP: ${req.ip}`);
+    console.log(`[Request] ${new Date().toISOString()} - ${req.method} ${req.url} | IP: ${req.ip} | Host: ${req.headers.host}`);
     next();
+  });
+
+  // Diagnostic Endpoint
+  app.get("/api/debug/system", (req, res) => {
+    res.json({
+      version: "2.5",
+      env: process.env.NODE_ENV,
+      cwd: process.cwd(),
+      time: new Date(),
+      staticPath,
+      staticFiles: fs.existsSync(staticPath) ? fs.readdirSync(staticPath) : "NOT_FOUND",
+      rootDirFiles: fs.readdirSync(rootDir),
+      headers: req.headers,
+    });
   });
 
   if (!isProduction) {
@@ -213,7 +218,7 @@ async function startServer() {
 
     app.get("/health", (_req, res) => res.json({
       status: "ok",
-      version: "2.4",
+      version: "2.5",
       staticPath,
       exists: fs.existsSync(staticPath)
     }));
@@ -223,21 +228,21 @@ async function startServer() {
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        console.error(`[CRITICAL 404] No index.html found at ${indexPath}`);
-        res.status(404).send(`System error: Frontend files not found. Server is looking in ${staticPath}.`);
+        console.error(`[FATAL] index.html missing at ${indexPath}`);
+        res.status(404).send(`Application Error (v2.5): Build files not found. Contact support with code DEPLOY_404.`);
       }
     });
   }
 
   server.on("error", (e: any) => {
     if (e.code === "EADDRINUSE") {
-      console.error(`[Server] Port ${PORT} is already in use.`);
+      console.error(`[FATAL] Port ${PORT} occupied.`);
       process.exit(1);
     }
   });
 
   server.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Server] v2.4 - Listening on http://0.0.0.0:${PORT}`);
+    console.log(`[Server] v2.5 - Listening on http://0.0.0.0:${PORT}`);
   });
 }
 
