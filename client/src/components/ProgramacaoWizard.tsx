@@ -16,11 +16,11 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                03 de marÃ§o - Abertura
+                                03 de março - Abertura
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <p className="font-semibold">HorÃ¡rio: 19h</p>
+                            <p className="font-semibold">Horário: 19h</p>
                             <p className="text-sm text-muted-foreground">Local: CICB</p>
                         </CardContent>
                     </Card>
@@ -29,16 +29,16 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                04 de marÃ§o
+                                04 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div>
-                                <p className="font-semibold">PlenÃ¡ria</p>
+                                <p className="font-semibold">Plenária</p>
                                 <p className="text-sm text-muted-foreground">9h - 12h | CICB</p>
                             </div>
                             <div>
-                                <p className="font-semibold">ReuniÃ£o TÃ©cnica</p>
+                                <p className="font-semibold">Reunião Técnica</p>
                                 <p className="text-sm text-muted-foreground">14h - 17h | Sala GTI</p>
                             </div>
                         </CardContent>
@@ -48,7 +48,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                05 de marÃ§o
+                                05 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -66,7 +66,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                06 de marÃ§o - Palestras SENASP
+                                06 de março - Palestras SENASP
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -85,11 +85,11 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                03 de marÃ§o - Abertura
+                                03 de março - Abertura
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <p className="font-semibold">HorÃ¡rio: 19h</p>
+                            <p className="font-semibold">Horário: 19h</p>
                             <p className="text-sm text-muted-foreground">Local: CICB</p>
                         </CardContent>
                     </Card>
@@ -98,16 +98,16 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                04 de marÃ§o
+                                04 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div>
-                                <p className="font-semibold">PlenÃ¡ria</p>
+                                <p className="font-semibold">Plenária</p>
                                 <p className="text-sm text-muted-foreground">9h - 12h | CICB</p>
                             </div>
                             <div>
-                                <p className="font-semibold">ReuniÃ£o TÃ©cnica</p>
+                                <p className="font-semibold">Reunião Técnica</p>
                                 <p className="text-sm text-muted-foreground">14h - 17h | Sala GTI</p>
                             </div>
                         </CardContent>
@@ -117,7 +117,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                05 de marÃ§o
+                                05 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -135,7 +135,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                06 de marÃ§o - Palestras SENASP
+                                06 de março - Palestras SENASP
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -154,11 +154,11 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                03 de marÃ§o - Abertura
+                                03 de março - Abertura
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <p className="font-semibold">HorÃ¡rio: 19h</p>
+                            <p className="font-semibold">Horário: 19h</p>
                         </CardContent>
                     </Card>
 
@@ -166,16 +166,16 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                04 de marÃ§o
+                                04 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div>
-                                <p className="font-semibold">PlenÃ¡ria</p>
+                                <p className="font-semibold">Plenária</p>
                                 <p className="text-sm text-muted-foreground">9h - 12h</p>
                             </div>
                             <div>
-                                <p className="font-semibold">ReuniÃ£o TÃ©cnica</p>
+                                <p className="font-semibold">Reunião Técnica</p>
                                 <p className="text-sm text-muted-foreground">14h - 17h</p>
                             </div>
                         </CardContent>
@@ -185,12 +185,12 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                05 de marÃ§o
+                                05 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div>
-                                <p className="font-semibold">Visita TÃ©cnica Canil CBMDF</p>
+                                <p className="font-semibold">Visita Técnica Canil CBMDF</p>
                                 <p className="text-sm text-muted-foreground">9h - 12h | Academia CBMDF</p>
 
                                 {/* Transport notice */}
@@ -201,7 +201,7 @@ export function ProgramacaoWizard() {
                                     <div className="space-y-0.5">
                                         <p className="text-xs font-semibold text-accent uppercase tracking-wide">Translado</p>
                                         <p className="text-xs text-muted-foreground leading-relaxed">
-                                            SaÃ­da Ã s <span className="font-semibold text-foreground">9h</span> da Sede do MJSP
+                                            Saída às <span className="font-semibold text-foreground">9h</span> da Sede do MJSP
                                             Â· Retorno ao CICB previsto para as <span className="font-semibold text-foreground">13h</span>
                                         </p>
                                     </div>
@@ -218,7 +218,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                06 de marÃ§o - Palestras SENASP
+                                06 de março - Palestras SENASP
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -237,11 +237,11 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                03 de marÃ§o - Abertura
+                                03 de março - Abertura
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <p className="font-semibold">HorÃ¡rio: 19h</p>
+                            <p className="font-semibold">Horário: 19h</p>
                         </CardContent>
                     </Card>
 
@@ -249,12 +249,12 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                04 de marÃ§o
+                                04 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div>
-                                <p className="font-semibold">PlenÃ¡ria</p>
+                                <p className="font-semibold">Plenária</p>
                                 <p className="text-sm text-muted-foreground">9h - 12h</p>
                             </div>
                             <div>
@@ -267,7 +267,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                05 de marÃ§o
+                                05 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -276,7 +276,7 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">9h - 12h</p>
                             </div>
                             <div>
-                                <p className="font-semibold">ReuniÃ£o TÃ©cnica</p>
+                                <p className="font-semibold">Reunião Técnica</p>
                                 <p className="text-sm text-muted-foreground">14h - 17h</p>
                             </div>
                         </CardContent>
@@ -286,7 +286,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                06 de marÃ§o - Palestras SENASP
+                                06 de março - Palestras SENASP
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -305,11 +305,11 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                03 de marÃ§o - Abertura
+                                03 de março - Abertura
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <p className="font-semibold">HorÃ¡rio: 19h</p>
+                            <p className="font-semibold">Horário: 19h</p>
                         </CardContent>
                     </Card>
 
@@ -317,12 +317,12 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                04 de marÃ§o
+                                04 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div>
-                                <p className="font-semibold">Visita ao Instituto Nacional de CriminalÃ­stica - INC</p>
+                                <p className="font-semibold">Visita ao Instituto Nacional de Criminalística - INC</p>
                                 <p className="text-sm text-muted-foreground">8h - 12h</p>
 
                                 {/* Transport notice */}
@@ -333,7 +333,7 @@ export function ProgramacaoWizard() {
                                     <div className="space-y-0.5">
                                         <p className="text-xs font-semibold text-accent uppercase tracking-wide">Translado</p>
                                         <p className="text-xs text-muted-foreground leading-relaxed">
-                                            SaÃ­da Ã s <span className="font-semibold text-foreground">08h</span> da Sede do MinistÃ©rio da JustiÃ§a e SeguranÃ§a PÃºblica
+                                            Saída às <span className="font-semibold text-foreground">08h</span> da Sede do Ministério da Justiça e Segurança Pública
                                         </p>
                                     </div>
                                 </div>
@@ -348,7 +348,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                05 de marÃ§o
+                                05 de março
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -357,19 +357,19 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">9h - 12h</p>
                             </div>
                             <div>
-                                <p className="font-semibold">ReuniÃ£o TÃ©cnica</p>
+                                <p className="font-semibold">Reunião Técnica</p>
                                 <p className="text-sm text-muted-foreground">14h - 17h</p>
                             </div>
                             <div>
                                 <p className="font-semibold">Mesa Redonda</p>
                                 <p className="text-sm text-muted-foreground">17h30 â€“ Sede da APCF</p>
-                                <p className="text-xs text-primary/70 italic mt-0.5">Protagonismo do ComprasSusp na ModernizaÃ§Ã£o da PCI</p>
+                                <p className="text-xs text-primary/70 italic mt-0.5">Protagonismo do ComprasSusp na Modernização da PCI</p>
                                 <a
-                                    href="https://maps.google.com/?q=APCF+AssociaÃ§Ã£o+dos+Delegados+da+PolÃ­cia+Federal+BrasÃ­lia"
+                                    href="https://maps.google.com/?q=APCF+Associação+dos+Delegados+da+Polícia+Federal+Brasília"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1"
-                                    aria-label="Ver localizaÃ§Ã£o da Sede da APCF no Google Maps (abre em nova janela)"
+                                    aria-label="Ver localização da Sede da APCF no Google Maps (abre em nova janela)"
                                 >
                                     <MapPin className="w-3 h-3" aria-hidden="true" />
                                     Ver no Maps
@@ -383,7 +383,7 @@ export function ProgramacaoWizard() {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-accent" />
-                                06 de marÃ§o - Palestras SENASP
+                                06 de março - Palestras SENASP
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
