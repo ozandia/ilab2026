@@ -169,7 +169,8 @@ async function startServer() {
   const rootDir = process.cwd();
 
   // Port discovery for Cloud Platforms (Heroku, Render, Railay, Vercel)
-  const FINAL_PORT = Number(process.env.PORT) || 8080;
+  // Defaulting to 5000 to match Dockerfile EXPOSE
+  const FINAL_PORT = Number(process.env.PORT) || 5000;
 
   const candidatePaths = [
     path.resolve(rootDir, "dist", "public"),
@@ -181,17 +182,28 @@ async function startServer() {
   let staticPath = isProduction ? candidatePaths[0] : path.resolve(rootDir, "client");
 
   console.log(`\n************************************************`);
-  console.log(`* [BOOT] SERVER v2.7 STARTING UP             *`);
-  console.log(`* Port: ${FINAL_PORT} | Node: ${process.version}          *`);
+  console.log(`* [BOOT] SERVER v3.1 - DIAGNOSTIC MODE       *`);
+  console.log(`* CWD: ${rootDir} | Port: ${FINAL_PORT}          *`);
   console.log(`************************************************\n`);
 
   if (isProduction) {
+    console.log(`[BOOT] Auditing static file locations:`);
     for (const p of candidatePaths) {
-      if (fs.existsSync(p) && fs.existsSync(path.join(p, "index.html"))) {
+      const exists = fs.existsSync(p);
+      const hasIndex = exists && fs.existsSync(path.join(p, "index.html"));
+      console.log(`  - ${p} => Exists: ${exists} | Has index.html: ${hasIndex}`);
+      if (hasIndex) {
         staticPath = p;
-        console.log(`[v2.7] SUCCESS: Found index.html at ${staticPath}`);
         break;
       }
+    }
+
+    try {
+      if (fs.existsSync(staticPath)) {
+        console.log(`[BOOT] Files in staticPath (${staticPath}):`, fs.readdirSync(staticPath).join(", "));
+      }
+    } catch (e) {
+      console.error(`[BOOT] Audit failed:`, e);
     }
   }
 
@@ -204,12 +216,17 @@ async function startServer() {
   // Diagnostic Endpoint
   app.get("/api/debug/system", (_req, res) => {
     res.json({
-      version: "2.7",
+      version: "3.1",
       env: process.env.NODE_ENV,
       port: FINAL_PORT,
+      cwd: process.cwd(),
       staticPath,
       exists: fs.existsSync(staticPath),
-      files: fs.existsSync(staticPath) ? fs.readdirSync(staticPath) : []
+      files: fs.existsSync(staticPath) ? fs.readdirSync(staticPath) : [],
+      envVars: {
+        PORT: process.env.PORT,
+        NODE_ENV: process.env.NODE_ENV,
+      }
     });
   });
 
@@ -255,7 +272,7 @@ async function startServer() {
   });
 
   server.listen(FINAL_PORT, "0.0.0.0", () => {
-    console.log(`\n[v2.7 READY] ==> Access at: http://0.0.0.0:${FINAL_PORT}\n`);
+    console.log(`\n[v3.1 READY] ==> Listening on http://0.0.0.0:${FINAL_PORT}\n`);
   });
 }
 
