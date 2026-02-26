@@ -7,6 +7,10 @@ const MAX_VOTES = Number(process.env.MAX_VOTES) || 27;
 const MAX_SELECTIONS = Number(process.env.MAX_SELECTIONS) || 8;
 const RATE_LIMIT_MS = Number(process.env.RATE_LIMIT_MS) || 60_000;
 
+// Deadline: 2026-02-27 18:00:00 Brasília (UTC-3) = 21:00:00 UTC
+const DEADLINE = new Date("2026-02-27T21:00:00.000Z");
+const isVotingClosed = () => Date.now() >= DEADLINE.getTime();
+
 const VALID_GROUPS = new Set([1, 2]);
 
 const COMPANIES: readonly string[] = [
@@ -89,6 +93,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (req.method === "POST") {
         const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0].trim() ?? "unknown";
+
+        if (isVotingClosed()) {
+            return res.status(403).json({ error: "A votação foi encerrada em 27/02/2026 às 18h00." });
+        }
 
         if (isRateLimited(ip, group)) {
             return res.status(429).json({ error: "Você já votou recentemente neste grupo. Aguarde alguns minutos." });

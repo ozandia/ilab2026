@@ -888,3 +888,128 @@
 .poll-group-badge-change:hover {
   color: #00375e;
 }
+
+/* ── Countdown Timer ─────────────────────────────────────────── */
+.poll-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  background: linear-gradient(135deg, #fff8e7, #fff3cd);
+  border: 1px solid #f0c040;
+  border-radius: 10px;
+  font-size: 0.813rem;
+}
+
+.poll-timer-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #b45309;
+  flex-shrink: 0;
+}
+
+.poll-timer-label {
+  color: #92400e;
+  font-weight: 600;
+  flex: 1;
+}
+
+.poll-timer-digits {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #92400e;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  min-width: 5.5ch;
+  text-align: right;
+}
+
+/* ── Closed / Encerrado ──────────────────────────────────────── */
+.poll-closed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.poll-closed-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.poll-closed-lock {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #64748b, #475569);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(100, 116, 139, 0.35);
+}
+
+.poll-closed-lock-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #ffffff;
+}
+
+.poll-closed-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .poll-closed-groups {
+    grid-template-columns: 1fr;
+  }
+}
+
+.poll-closed-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 2px solid color-mix(in srgb, var(--group-color) 30%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--group-color) 5%, white);
+}
+
+.poll-closed-group-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.poll-closed-group-accent {
+  display: block;
+  width: 4px;
+  border-radius: 99px;
+  background: var(--group-color);
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.poll-closed-group-label {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #00375e;
+}
+
+.poll-closed-trophy {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--group-color);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.poll-closed-empty {
+  font-size: 0.813rem;
+  color: #94a3b8;
+  font-style: italic;
+  padding: 0.5rem 0;
+}

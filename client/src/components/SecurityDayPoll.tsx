@@ -1,37 +1,71 @@
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
-import { CheckCircle2, Trophy, TrendingUp, Building2, Loader2, Users, ChevronRight } from "lucide-react";
-
-// ── Types ─────────────────────────────────────────────────────────────────────
-interface CompanyData {
-    name: string;
-    votes: number;
-    disabled: boolean;
-}
-
-type Phase = "group-select" | "loading" | "voting" | "submitting" | "done";
-type Group = 1 | 2;
+import {
+    CheckCircle2, Trophy, TrendingUp, Building2, Loader2,
+    Users, ChevronRight, Clock, Lock
+} from "lucide-react";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 const MAX_SELECTIONS = 8;
 const API_BASE = "/api/poll";
+
+// Deadline: 2026-02-27 18:00:00 Brasília (UTC-3)
+const DEADLINE = new Date("2026-02-27T21:00:00.000Z");
 
 const GROUPS = {
     1: { label: "Grupo 1", gtis: ["CONSESP", "CNCG"], color: "#e1ad31" },
     2: { label: "Grupo 2", gtis: ["CONCPC", "CONDPCI"], color: "#2b7fff" },
 } as const;
 
+// ── Types ─────────────────────────────────────────────────────────────────────
+interface CompanyData { name: string; votes: number; disabled: boolean; }
+type Phase = "group-select" | "loading" | "voting" | "submitting" | "done" | "closed-loading" | "closed";
+type Group = 1 | 2;
+
+// ── Deadline helpers ──────────────────────────────────────────────────────────
+function isClosed() { return Date.now() >= DEADLINE.getTime(); }
+
+function timeLeft() {
+    const diff = Math.max(0, DEADLINE.getTime() - Date.now());
+    const h = Math.floor(diff / 3_600_000);
+    const m = Math.floor((diff % 3_600_000) / 60_000);
+    const s = Math.floor((diff % 60_000) / 1_000);
+    return { h, m, s, total: diff };
+}
+
+// ── CountdownBadge ────────────────────────────────────────────────────────────
+const CountdownBadge = memo(function CountdownBadge({ onExpire }: { onExpire: () => void }) {
+    const [tl, setTl] = useState(timeLeft);
+
+    useEffect(() => {
+        if (tl.total === 0) { onExpire(); return; }
+        const id = setInterval(() => {
+            const next = timeLeft();
+            setTl(next);
+            if (next.total === 0) { clearInterval(id); onExpire(); }
+        }, 1_000);
+        return () => clearInterval(id);
+    }, []); // eslint-disable-line
+
+    const pad = (n: number) => String(n).padStart(2, "0");
+
+    return (
+        <div className="poll-timer">
+            <Clock className="poll-timer-icon" aria-hidden="true" />
+            <span className="poll-timer-label">Votação encerra em</span>
+            <span className="poll-timer-digits" aria-live="off" aria-atomic="true">
+                {pad(tl.h)}:{pad(tl.m)}:{pad(tl.s)}
+            </span>
+        </div>
+    );
+});
+
 // ── ProgressBar ───────────────────────────────────────────────────────────────
 const ProgressBar = memo(function ProgressBar({ value, max }: { value: number; max: number }) {
     const pct = Math.round((value / max) * 100);
     return (
-        <div
-            className="poll-progress-track"
-            role="progressbar"
-            aria-valuenow={value}
-            aria-valuemin={0}
-            aria-valuemax={max}
-            aria-label={`${value} de ${max} empresas selecionadas`}
-        >
+        <div className="poll-progress-track" role="progressbar"
+            aria-valuenow={value} aria-valuemin={0} aria-valuemax={max}
+            aria-label={`${value} de ${max} empresas selecionadas`}>
             <div className="poll-progress-fill" style={{ width: `${pct}%` }} />
         </div>
     );
@@ -39,28 +73,18 @@ const ProgressBar = memo(function ProgressBar({ value, max }: { value: number; m
 
 // ── CompanyCard ───────────────────────────────────────────────────────────────
 interface CompanyCardProps {
-    company: CompanyData;
-    selected: boolean;
-    blocked: boolean;
+    company: CompanyData; selected: boolean; blocked: boolean;
     onToggle: (name: string) => void;
 }
 
 const CompanyCard = memo(function CompanyCard({ company, selected, blocked, onToggle }: CompanyCardProps) {
     const isDisabled = company.disabled || (blocked && !selected);
-
-    const handleClick = useCallback(() => {
-        if (!isDisabled) onToggle(company.name);
-    }, [isDisabled, onToggle, company.name]);
+    const handleClick = useCallback(() => { if (!isDisabled) onToggle(company.name); }, [isDisabled, onToggle, company.name]);
 
     return (
-        <button
-            type="button"
-            onClick={handleClick}
-            disabled={isDisabled}
-            aria-pressed={selected}
+        <button type="button" onClick={handleClick} disabled={isDisabled} aria-pressed={selected}
             aria-label={`${company.name}${company.disabled ? " — vagas esgotadas" : ""}`}
-            className={`poll-card${selected ? " poll-card--selected" : ""}${isDisabled ? " poll-card--disabled" : ""}`}
-        >
+            className={`poll-card${selected ? " poll-card--selected" : ""}${isDisabled ? " poll-card--disabled" : ""}`}>
             <Building2 className="poll-card-icon" aria-hidden="true" />
             <span className="poll-card-name">{company.name}</span>
             {selected && <CheckCircle2 className="poll-card-check" aria-hidden="true" />}
@@ -70,16 +94,9 @@ const CompanyCard = memo(function CompanyCard({ company, selected, blocked, onTo
 });
 
 // ── RankingBar ────────────────────────────────────────────────────────────────
-interface RankingBarProps {
-    company: CompanyData;
-    rank: number;
-    maxVotes: number;
-}
-
-const RankingBar = memo(function RankingBar({ company, rank, maxVotes }: RankingBarProps) {
+const RankingBar = memo(function RankingBar({ company, rank, maxVotes }: { company: CompanyData; rank: number; maxVotes: number }) {
     const pct = maxVotes > 0 ? Math.round((company.votes / maxVotes) * 100) : 0;
     const medals = ["🥇", "🥈", "🥉"];
-
     return (
         <div className="poll-rank-row">
             <span className="poll-rank-num" aria-hidden="true">{medals[rank] ?? `#${rank + 1}`}</span>
@@ -89,10 +106,7 @@ const RankingBar = memo(function RankingBar({ company, rank, maxVotes }: Ranking
                     <span className="poll-rank-votes">{company.votes} votos</span>
                 </div>
                 <div className="poll-rank-track">
-                    <div
-                        className="poll-rank-fill"
-                        style={{ width: `${pct}%`, animationDelay: `${rank * 80}ms` }}
-                    />
+                    <div className="poll-rank-fill" style={{ width: `${pct}%`, animationDelay: `${rank * 80}ms` }} />
                 </div>
             </div>
         </div>
@@ -100,11 +114,7 @@ const RankingBar = memo(function RankingBar({ company, rank, maxVotes }: Ranking
 });
 
 // ── GroupSelector ─────────────────────────────────────────────────────────────
-interface GroupSelectorProps {
-    onSelect: (group: Group) => void;
-}
-
-const GroupSelector = memo(function GroupSelector({ onSelect }: GroupSelectorProps) {
+const GroupSelector = memo(function GroupSelector({ onSelect }: { onSelect: (g: Group) => void }) {
     return (
         <div className="poll-group-selector">
             <div className="poll-group-header">
@@ -119,21 +129,15 @@ const GroupSelector = memo(function GroupSelector({ onSelect }: GroupSelectorPro
                 {([1, 2] as Group[]).map((g) => {
                     const group = GROUPS[g];
                     return (
-                        <button
-                            key={g}
-                            type="button"
-                            onClick={() => onSelect(g)}
+                        <button key={g} type="button" onClick={() => onSelect(g)}
                             className="poll-group-card"
                             aria-label={`Selecionar ${group.label}: ${group.gtis.join(" e ")}`}
-                            style={{ "--group-color": group.color } as React.CSSProperties}
-                        >
+                            style={{ "--group-color": group.color } as React.CSSProperties}>
                             <div className="poll-group-card-accent" />
                             <div className="poll-group-card-body">
                                 <div className="poll-group-card-label">{group.label}</div>
                                 <div className="poll-group-card-gtis">
-                                    {group.gtis.map((gti) => (
-                                        <span key={gti} className="poll-group-tag">{gti}</span>
-                                    ))}
+                                    {group.gtis.map((gti) => <span key={gti} className="poll-group-tag">{gti}</span>)}
                                 </div>
                             </div>
                             <ChevronRight className="poll-group-chevron" aria-hidden="true" />
@@ -145,34 +149,106 @@ const GroupSelector = memo(function GroupSelector({ onSelect }: GroupSelectorPro
     );
 });
 
+// ── ClosedResults ─────────────────────────────────────────────────────────────
+function ClosedResults({ results }: { results: Record<Group, CompanyData[]> }) {
+    return (
+        <div className="poll-closed">
+            <div className="poll-closed-header">
+                <div className="poll-closed-lock" aria-hidden="true">
+                    <Lock className="poll-closed-lock-icon" />
+                </div>
+                <div>
+                    <h3 className="poll-dashboard-title">Votação Encerrada</h3>
+                    <p className="poll-dashboard-subtitle">Empresas selecionadas para o Security Day</p>
+                </div>
+            </div>
+
+            <div className="poll-closed-groups">
+                {([1, 2] as Group[]).map((g) => {
+                    const group = GROUPS[g];
+                    const top = results[g].slice(0, MAX_SELECTIONS);
+                    const maxVotes = top[0]?.votes ?? 0;
+                    return (
+                        <div key={g} className="poll-closed-group" style={{ "--group-color": group.color } as React.CSSProperties}>
+                            <div className="poll-closed-group-header">
+                                <span className="poll-closed-group-accent" />
+                                <div>
+                                    <div className="poll-closed-group-label">{group.label}</div>
+                                    <div className="poll-group-card-gtis" style={{ marginTop: "0.25rem" }}>
+                                        {group.gtis.map((gti) => <span key={gti} className="poll-group-tag">{gti}</span>)}
+                                    </div>
+                                </div>
+                                <Trophy className="poll-closed-trophy" aria-hidden="true" />
+                            </div>
+                            <ol className="poll-ranking" aria-label={`Ranking ${group.label}`}>
+                                {top.map((company, i) => (
+                                    <li key={company.name}>
+                                        <RankingBar company={company} rank={i} maxVotes={maxVotes} />
+                                    </li>
+                                ))}
+                                {top.length === 0 && (
+                                    <li className="poll-closed-empty">Nenhum voto registrado.</li>
+                                )}
+                            </ol>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <div className="poll-dashboard-note">
+                <TrendingUp className="poll-note-icon" aria-hidden="true" />
+                <span>Resultado final — votação encerrada em 27/02/2026 às 18h00</span>
+            </div>
+        </div>
+    );
+}
+
 // ── SecurityDayPoll ───────────────────────────────────────────────────────────
 export function SecurityDayPoll() {
     const [group, setGroup] = useState<Group | null>(null);
     const [companies, setCompanies] = useState<CompanyData[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
-    const [phase, setPhase] = useState<Phase>("group-select");
+    const [phase, setPhase] = useState<Phase>(() => isClosed() ? "closed-loading" : "group-select");
     const [error, setError] = useState<string | null>(null);
     const [topEight, setTopEight] = useState<CompanyData[]>([]);
+    const [closedResults, setClosedResults] = useState<Record<Group, CompanyData[]>>({ 1: [], 2: [] });
 
     const apiUrl = useCallback((g: Group) => `${API_BASE}?group=${g}`, []);
 
-    // Load companies after group is selected
-    useEffect(() => {
-        if (!group) return;
-        setPhase("loading");
-        fetch(apiUrl(group))
-            .then((r) => {
-                if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                return r.json();
-            })
-            .then((data: { companies: CompanyData[] }) => {
-                setCompanies(data.companies);
-                setPhase("voting");
+    // Fetch closed results for both groups
+    const loadClosedResults = useCallback(() => {
+        setPhase("closed-loading");
+        Promise.all([
+            fetch(apiUrl(1)).then((r) => r.json()),
+            fetch(apiUrl(2)).then((r) => r.json()),
+        ])
+            .then(([d1, d2]) => {
+                const sort = (arr: CompanyData[]) => [...arr].sort((a, b) => b.votes - a.votes);
+                setClosedResults({
+                    1: sort((d1 as { companies: CompanyData[] }).companies ?? []),
+                    2: sort((d2 as { companies: CompanyData[] }).companies ?? []),
+                });
+                setPhase("closed");
             })
             .catch(() => {
-                setError("Não foi possível carregar a enquete. Tente recarregar a página.");
-                setPhase("voting");
+                setClosedResults({ 1: [], 2: [] });
+                setPhase("closed");
             });
+    }, [apiUrl]);
+
+    // On mount: if already past deadline, load closed results
+    useEffect(() => {
+        if (isClosed()) loadClosedResults();
+    }, [loadClosedResults]);
+
+    // Load companies after group selected (only if not closed)
+    useEffect(() => {
+        if (!group || isClosed()) return;
+        setPhase("loading");
+        fetch(apiUrl(group))
+            .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
+            .then((data: { companies: CompanyData[] }) => { setCompanies(data.companies); setPhase("voting"); })
+            .catch(() => { setError("Não foi possível carregar a enquete. Tente recarregar."); setPhase("voting"); });
     }, [group, apiUrl]);
 
     const isMaxReached = useMemo(() => selected.length >= MAX_SELECTIONS, [selected.length]);
@@ -189,6 +265,7 @@ export function SecurityDayPoll() {
     // Auto-submit when 8 selected
     useEffect(() => {
         if (selected.length !== MAX_SELECTIONS || phase !== "voting" || !group) return;
+        if (isClosed()) { loadClosedResults(); return; }
 
         setPhase("submitting");
         setError(null);
@@ -200,28 +277,29 @@ export function SecurityDayPoll() {
         })
             .then((r) => r.json())
             .then((data: { error?: string; companies?: CompanyData[] }) => {
-                if (data.error) {
-                    setError(data.error);
-                    setPhase("voting");
-                    setSelected([]);
-                    return;
-                }
+                if (data.error) { setError(data.error); setPhase("voting"); setSelected([]); return; }
                 const all = data.companies ?? [];
                 setCompanies(all);
                 const sorted = [...all].sort((a, b) => b.votes - a.votes).slice(0, MAX_SELECTIONS);
                 setTopEight(sorted);
                 setPhase("done");
             })
-            .catch(() => {
-                setError("Erro ao enviar votos. Verifique sua conexão e tente novamente.");
-                setPhase("voting");
-                setSelected([]);
-            });
-    }, [selected, phase, group, apiUrl]);
+            .catch(() => { setError("Erro ao enviar votos. Tente novamente."); setPhase("voting"); setSelected([]); });
+    }, [selected, phase, group, apiUrl, loadClosedResults]);
 
-    // ── Group select ──────────────────────────────────────────────────────────
-    if (phase === "group-select") {
-        return <GroupSelector onSelect={(g) => { setGroup(g); }} />;
+    // ── Closed loading ────────────────────────────────────────────────────────
+    if (phase === "closed-loading") {
+        return (
+            <div className="poll-loading">
+                <Loader2 className="poll-loading-icon" aria-hidden="true" />
+                <span>Carregando resultados finais…</span>
+            </div>
+        );
+    }
+
+    // ── Closed ────────────────────────────────────────────────────────────────
+    if (phase === "closed") {
+        return <ClosedResults results={closedResults} />;
     }
 
     // ── Loading ───────────────────────────────────────────────────────────────
@@ -234,7 +312,7 @@ export function SecurityDayPoll() {
         );
     }
 
-    // ── Dashboard ─────────────────────────────────────────────────────────────
+    // ── Dashboard (after vote) ────────────────────────────────────────────────
     if (phase === "done") {
         const groupInfo = GROUPS[group!];
         return (
@@ -250,19 +328,25 @@ export function SecurityDayPoll() {
                         </p>
                     </div>
                 </div>
-
                 <ol className="poll-ranking" aria-label="Ranking das empresas">
                     {topEight.map((company, i) => (
-                        <li key={company.name}>
-                            <RankingBar company={company} rank={i} maxVotes={maxVotes} />
-                        </li>
+                        <li key={company.name}><RankingBar company={company} rank={i} maxVotes={maxVotes} /></li>
                     ))}
                 </ol>
-
                 <div className="poll-dashboard-note">
                     <TrendingUp className="poll-note-icon" aria-hidden="true" />
                     <span>Ranking atualizado em tempo real com os votos de todos os participantes</span>
                 </div>
+            </div>
+        );
+    }
+
+    // ── Group select ──────────────────────────────────────────────────────────
+    if (phase === "group-select") {
+        return (
+            <div className="poll-container">
+                <CountdownBadge onExpire={loadClosedResults} />
+                <GroupSelector onSelect={(g) => setGroup(g)} />
             </div>
         );
     }
@@ -273,17 +357,13 @@ export function SecurityDayPoll() {
 
     return (
         <div className="poll-container" aria-busy={isSubmitting}>
-            {/* Group badge */}
+            <CountdownBadge onExpire={loadClosedResults} />
+
             <div className="poll-group-badge" style={{ "--group-color": groupInfo.color } as React.CSSProperties}>
                 <span className="poll-group-badge-label">{groupInfo.label}</span>
-                {groupInfo.gtis.map((gti) => (
-                    <span key={gti} className="poll-group-tag poll-group-tag--sm">{gti}</span>
-                ))}
-                <button
-                    type="button"
-                    className="poll-group-badge-change"
-                    onClick={() => { setGroup(null); setSelected([]); setCompanies([]); setPhase("group-select"); }}
-                >
+                {groupInfo.gtis.map((gti) => <span key={gti} className="poll-group-tag poll-group-tag--sm">{gti}</span>)}
+                <button type="button" className="poll-group-badge-change"
+                    onClick={() => { setGroup(null); setSelected([]); setCompanies([]); setPhase("group-select"); }}>
                     Trocar grupo
                 </button>
             </div>
@@ -305,25 +385,14 @@ export function SecurityDayPoll() {
 
             <ProgressBar value={selected.length} max={MAX_SELECTIONS} />
 
-            {error && (
-                <div className="poll-error" role="alert" aria-live="assertive">
-                    {error}
-                </div>
-            )}
+            {error && <div className="poll-error" role="alert" aria-live="assertive">{error}</div>}
 
-            <div
-                className="poll-grid"
-                role="group"
-                aria-label={`Selecione ${MAX_SELECTIONS} empresas para o Security Day`}
-            >
+            <div className="poll-grid" role="group" aria-label={`Selecione ${MAX_SELECTIONS} empresas para o Security Day`}>
                 {companies.map((company) => (
-                    <CompanyCard
-                        key={company.name}
-                        company={company}
+                    <CompanyCard key={company.name} company={company}
                         selected={selected.includes(company.name)}
                         blocked={isMaxReached || isSubmitting}
-                        onToggle={toggle}
-                    />
+                        onToggle={toggle} />
                 ))}
             </div>
 
