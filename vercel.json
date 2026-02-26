@@ -1,11 +1,10 @@
 {
-    "framework": null,
-    "buildCommand": "npm run build",
+    "buildCommand": "npm run build:client",
     "outputDirectory": "dist/public",
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "/api/index.ts"
+            "destination": "/api"
         },
         {
             "source": "/(.*)",
