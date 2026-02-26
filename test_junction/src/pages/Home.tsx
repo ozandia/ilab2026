@@ -235,12 +235,12 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col items-center gap-2 pt-8 border-t border-accent/10">
-                <div className="flex items-center gap-2 text-accent font-bold">
+                <div className="flex items-center gap-2 text-primary font-bold">
                   <Clock className="w-5 h-5" aria-hidden="true" />
                   PRAZO DE ENTREGA
                 </div>
-                <p className="text-xl sm:text-2xl font-black text-black">
-                  Até 5 dias após o término do evento
+                <p className="text-base sm:text-lg font-semibold text-black text-center">
+                  Os Cartões de Embarque (Ida e volta) e Relatório de Viagem (Assinados) devem ser entregues até a data de retorno.
                 </p>
               </div>
             </CardContent>
