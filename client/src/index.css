@@ -728,3 +728,163 @@
   height: 14px;
   flex-shrink: 0;
 }
+
+/* ── Group Selector ──────────────────────────────────────────── */
+.poll-group-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.poll-group-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.poll-group-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #00375e;
+  flex-shrink: 0;
+}
+
+.poll-group-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #00375e;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.poll-group-subtitle {
+  font-size: 0.813rem;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0;
+}
+
+.poll-group-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.poll-group-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1rem;
+  background: #ffffff;
+  border: 2px solid #e8ecf5;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: left;
+  box-shadow: 0 1px 4px rgba(0, 55, 94, 0.07);
+  overflow: hidden;
+}
+
+.poll-group-card:hover {
+  border-color: var(--group-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--group-color) 25%, transparent);
+}
+
+.poll-group-card-accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--group-color);
+  border-radius: 14px 0 0 14px;
+}
+
+.poll-group-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.poll-group-card-label {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #00375e;
+  margin-bottom: 0.4rem;
+}
+
+.poll-group-card-gtis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.poll-group-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: #f0f4ff;
+  color: #00375e;
+  border: 1px solid #d0daf0;
+}
+
+.poll-group-tag--sm {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+}
+
+.poll-group-chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.poll-group-card:hover .poll-group-chevron {
+  transform: translateX(3px);
+  color: var(--group-color);
+}
+
+/* ── Group badge during voting ──────────────────────────────── */
+.poll-group-badge {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  background: color-mix(in srgb, var(--group-color) 8%, white);
+  border: 1px solid color-mix(in srgb, var(--group-color) 30%, transparent);
+  border-radius: 10px;
+}
+
+.poll-group-badge-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--group-color);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.poll-group-badge-change {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.poll-group-badge-change:hover {
+  color: #00375e;
+}

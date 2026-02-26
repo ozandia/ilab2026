@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
-import { CheckCircle2, Trophy, TrendingUp, Building2, Loader2 } from "lucide-react";
+import { CheckCircle2, Trophy, TrendingUp, Building2, Loader2, Users, ChevronRight } from "lucide-react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface CompanyData {
@@ -8,13 +8,19 @@ interface CompanyData {
     disabled: boolean;
 }
 
-type Phase = "loading" | "voting" | "submitting" | "done";
+type Phase = "group-select" | "loading" | "voting" | "submitting" | "done";
+type Group = 1 | 2;
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 const MAX_SELECTIONS = 8;
 const API_BASE = "/api/poll";
 
-// ── ProgressBar ──────────────────────────────────────────────────────────────
+const GROUPS = {
+    1: { label: "Grupo 1", gtis: ["CONSESP", "CNCG"], color: "#e1ad31" },
+    2: { label: "Grupo 2", gtis: ["CONCPC", "CONDPCI"], color: "#2b7fff" },
+} as const;
+
+// ── ProgressBar ───────────────────────────────────────────────────────────────
 const ProgressBar = memo(function ProgressBar({ value, max }: { value: number; max: number }) {
     const pct = Math.round((value / max) * 100);
     return (
@@ -93,17 +99,68 @@ const RankingBar = memo(function RankingBar({ company, rank, maxVotes }: Ranking
     );
 });
 
+// ── GroupSelector ─────────────────────────────────────────────────────────────
+interface GroupSelectorProps {
+    onSelect: (group: Group) => void;
+}
+
+const GroupSelector = memo(function GroupSelector({ onSelect }: GroupSelectorProps) {
+    return (
+        <div className="poll-group-selector">
+            <div className="poll-group-header">
+                <Users className="poll-group-icon" aria-hidden="true" />
+                <div>
+                    <h3 className="poll-group-title">A qual grupo você pertence?</h3>
+                    <p className="poll-group-subtitle">Selecione seu GTI antes de votar</p>
+                </div>
+            </div>
+
+            <div className="poll-group-cards">
+                {([1, 2] as Group[]).map((g) => {
+                    const group = GROUPS[g];
+                    return (
+                        <button
+                            key={g}
+                            type="button"
+                            onClick={() => onSelect(g)}
+                            className="poll-group-card"
+                            aria-label={`Selecionar ${group.label}: ${group.gtis.join(" e ")}`}
+                            style={{ "--group-color": group.color } as React.CSSProperties}
+                        >
+                            <div className="poll-group-card-accent" />
+                            <div className="poll-group-card-body">
+                                <div className="poll-group-card-label">{group.label}</div>
+                                <div className="poll-group-card-gtis">
+                                    {group.gtis.map((gti) => (
+                                        <span key={gti} className="poll-group-tag">{gti}</span>
+                                    ))}
+                                </div>
+                            </div>
+                            <ChevronRight className="poll-group-chevron" aria-hidden="true" />
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+    );
+});
+
 // ── SecurityDayPoll ───────────────────────────────────────────────────────────
 export function SecurityDayPoll() {
+    const [group, setGroup] = useState<Group | null>(null);
     const [companies, setCompanies] = useState<CompanyData[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
-    const [phase, setPhase] = useState<Phase>("loading");
+    const [phase, setPhase] = useState<Phase>("group-select");
     const [error, setError] = useState<string | null>(null);
     const [topEight, setTopEight] = useState<CompanyData[]>([]);
 
-    // Fetch vote state on mount
+    const apiUrl = useCallback((g: Group) => `${API_BASE}?group=${g}`, []);
+
+    // Load companies after group is selected
     useEffect(() => {
-        fetch(API_BASE)
+        if (!group) return;
+        setPhase("loading");
+        fetch(apiUrl(group))
             .then((r) => {
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 return r.json();
@@ -116,28 +173,27 @@ export function SecurityDayPoll() {
                 setError("Não foi possível carregar a enquete. Tente recarregar a página.");
                 setPhase("voting");
             });
-    }, []);
+    }, [group, apiUrl]);
 
-    // Memoized computed values
     const isMaxReached = useMemo(() => selected.length >= MAX_SELECTIONS, [selected.length]);
     const maxVotes = useMemo(() => topEight[0]?.votes ?? 0, [topEight]);
 
     const toggle = useCallback((name: string) => {
         setSelected((prev) => {
             if (prev.includes(name)) return prev.filter((n) => n !== name);
-            if (prev.length >= MAX_SELECTIONS) return prev; // hard front-end guard
+            if (prev.length >= MAX_SELECTIONS) return prev;
             return [...prev, name];
         });
     }, []);
 
-    // Auto-submit exactly when 8 are selected (only once, guarded by phase)
+    // Auto-submit when 8 selected
     useEffect(() => {
-        if (selected.length !== MAX_SELECTIONS || phase !== "voting") return;
+        if (selected.length !== MAX_SELECTIONS || phase !== "voting" || !group) return;
 
         setPhase("submitting");
         setError(null);
 
-        fetch(API_BASE, {
+        fetch(apiUrl(group), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ companies: selected }),
@@ -152,8 +208,6 @@ export function SecurityDayPoll() {
                 }
                 const all = data.companies ?? [];
                 setCompanies(all);
-
-                // O(n log n) sort is fast for 31 items — no further optimization needed
                 const sorted = [...all].sort((a, b) => b.votes - a.votes).slice(0, MAX_SELECTIONS);
                 setTopEight(sorted);
                 setPhase("done");
@@ -163,9 +217,14 @@ export function SecurityDayPoll() {
                 setPhase("voting");
                 setSelected([]);
             });
-    }, [selected, phase]);
+    }, [selected, phase, group, apiUrl]);
 
-    // ── Loading ────────────────────────────────────────────────────────────────
+    // ── Group select ──────────────────────────────────────────────────────────
+    if (phase === "group-select") {
+        return <GroupSelector onSelect={(g) => { setGroup(g); }} />;
+    }
+
+    // ── Loading ───────────────────────────────────────────────────────────────
     if (phase === "loading") {
         return (
             <div className="poll-loading">
@@ -175,8 +234,9 @@ export function SecurityDayPoll() {
         );
     }
 
-    // ── Dashboard ──────────────────────────────────────────────────────────────
+    // ── Dashboard ─────────────────────────────────────────────────────────────
     if (phase === "done") {
+        const groupInfo = GROUPS[group!];
         return (
             <div className="poll-dashboard">
                 <div className="poll-dashboard-header">
@@ -185,7 +245,9 @@ export function SecurityDayPoll() {
                     </div>
                     <div>
                         <h3 className="poll-dashboard-title">Obrigado pelo seu voto!</h3>
-                        <p className="poll-dashboard-subtitle">As 8 empresas mais votadas para o Security Day</p>
+                        <p className="poll-dashboard-subtitle">
+                            As 8 empresas mais votadas — <strong>{groupInfo.label}</strong> ({groupInfo.gtis.join(" · ")})
+                        </p>
                     </div>
                 </div>
 
@@ -205,11 +267,27 @@ export function SecurityDayPoll() {
         );
     }
 
-    // ── Voting ─────────────────────────────────────────────────────────────────
+    // ── Voting ────────────────────────────────────────────────────────────────
     const isSubmitting = phase === "submitting";
+    const groupInfo = GROUPS[group!];
 
     return (
         <div className="poll-container" aria-busy={isSubmitting}>
+            {/* Group badge */}
+            <div className="poll-group-badge" style={{ "--group-color": groupInfo.color } as React.CSSProperties}>
+                <span className="poll-group-badge-label">{groupInfo.label}</span>
+                {groupInfo.gtis.map((gti) => (
+                    <span key={gti} className="poll-group-tag poll-group-tag--sm">{gti}</span>
+                ))}
+                <button
+                    type="button"
+                    className="poll-group-badge-change"
+                    onClick={() => { setGroup(null); setSelected([]); setCompanies([]); setPhase("group-select"); }}
+                >
+                    Trocar grupo
+                </button>
+            </div>
+
             <div className="poll-counter-bar">
                 <div className="poll-counter-text" aria-atomic="true">
                     <span className="poll-counter-num">{selected.length}</span>

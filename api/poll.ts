@@ -1,12 +1,13 @@
 // api/poll.ts — Vercel Serverless Function for /api/poll
+// Supports two independent groups via ?group=1 or ?group=2
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import fs from "fs";
-import path from "path";
 
 const MAX_VOTES = Number(process.env.MAX_VOTES) || 27;
 const MAX_SELECTIONS = Number(process.env.MAX_SELECTIONS) || 8;
 const RATE_LIMIT_MS = Number(process.env.RATE_LIMIT_MS) || 60_000;
-const VOTE_FILE = "/tmp/votes.json";
+
+const VALID_GROUPS = new Set([1, 2]);
 
 const COMPANIES: readonly string[] = [
     "Techbiz", "Teltronic", "Valid", "Flash", "Funcional", "Aeromot", "Axon",
@@ -19,10 +20,15 @@ const COMPANY_SET = new Set(COMPANIES);
 
 type VoteStore = Record<string, number>;
 
-function loadVotes(): VoteStore {
+function voteFile(group: number): string {
+    return `/tmp/votes-group${group}.json`;
+}
+
+function loadVotes(group: number): VoteStore {
     try {
-        if (fs.existsSync(VOTE_FILE)) {
-            return JSON.parse(fs.readFileSync(VOTE_FILE, "utf-8")) as VoteStore;
+        const file = voteFile(group);
+        if (fs.existsSync(file)) {
+            return JSON.parse(fs.readFileSync(file, "utf-8")) as VoteStore;
         }
     } catch { /* corrupted — reset */ }
     const initial: VoteStore = {};
@@ -30,8 +36,8 @@ function loadVotes(): VoteStore {
     return initial;
 }
 
-function saveVotes(votes: VoteStore) {
-    try { fs.writeFileSync(VOTE_FILE, JSON.stringify(votes, null, 2)); }
+function saveVotes(votes: VoteStore, group: number) {
+    try { fs.writeFileSync(voteFile(group), JSON.stringify(votes, null, 2)); }
     catch { /* /tmp not writable — non-fatal */ }
 }
 
@@ -43,20 +49,23 @@ function buildCompanyList(store: VoteStore) {
     }));
 }
 
+// Rate limiting per group
 const rateLimitMap = new Map<string, number>();
-function isRateLimited(ip: string): boolean {
-    const last = rateLimitMap.get(ip) ?? 0;
+function isRateLimited(ip: string, group: number): boolean {
+    const key = `${ip}:${group}`;
+    const last = rateLimitMap.get(key) ?? 0;
     if (Date.now() - last < RATE_LIMIT_MS) return true;
-    rateLimitMap.set(ip, Date.now());
+    rateLimitMap.set(key, Date.now());
     return false;
 }
 
-let writeLock = false;
-async function withLock<T>(fn: () => T | Promise<T>): Promise<T> {
-    while (writeLock) await new Promise((r) => setTimeout(r, 5));
-    writeLock = true;
+// Per-group write locks
+const locks: Record<number, boolean> = { 1: false, 2: false };
+async function withLock<T>(group: number, fn: () => T | Promise<T>): Promise<T> {
+    while (locks[group]) await new Promise((r) => setTimeout(r, 5));
+    locks[group] = true;
     try { return await fn(); }
-    finally { writeLock = false; }
+    finally { locks[group] = false; }
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -66,18 +75,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (req.method === "OPTIONS") return res.status(200).end();
 
-    const voteStore: VoteStore = loadVotes();
+    // Parse and validate group param
+    const groupParam = Number(req.query.group);
+    if (!VALID_GROUPS.has(groupParam)) {
+        return res.status(400).json({ error: "Parâmetro 'group' inválido. Use group=1 ou group=2." });
+    }
+    const group = groupParam as 1 | 2;
 
     if (req.method === "GET") {
-        return res.json({ companies: buildCompanyList(voteStore) });
+        const store = loadVotes(group);
+        return res.json({ companies: buildCompanyList(store) });
     }
 
     if (req.method === "POST") {
-        const ip =
-            (req.headers["x-forwarded-for"] as string)?.split(",")[0].trim() ?? "unknown";
+        const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0].trim() ?? "unknown";
 
-        if (isRateLimited(ip)) {
-            return res.status(429).json({ error: "Você já votou recentemente. Aguarde alguns minutos." });
+        if (isRateLimited(ip, group)) {
+            return res.status(429).json({ error: "Você já votou recentemente neste grupo. Aguarde alguns minutos." });
         }
 
         const { companies } = req.body as { companies?: unknown };
@@ -94,14 +108,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             return res.status(400).json({ error: "Seleções duplicadas não são permitidas." });
         }
 
-        const result = await withLock(() => {
-            const store = loadVotes();
+        const result = await withLock(group, () => {
+            const store = loadVotes(group);
             const overCapacity = names.filter((c) => (store[c] ?? 0) >= MAX_VOTES);
             if (overCapacity.length > 0) {
                 return { error: `Vagas esgotadas: ${overCapacity.join(", ")}. Escolha outras empresas.` };
             }
             for (const c of names) store[c] = (store[c] ?? 0) + 1;
-            saveVotes(store);
+            saveVotes(store, group);
             return { companies: buildCompanyList(store) };
         });
 
