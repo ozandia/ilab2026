@@ -45,16 +45,14 @@ export default function Home() {
     <div className="min-h-screen bg-site text-foreground font-sans selection:bg-accent selection:text-primary">
       {/* Header/Navigation */}
       <header className="sticky top-0 z-50 header-gradient shadow-lg">
-        <div className="container py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img
-              src="/fnsp.png"
-              alt="FNSP"
-              className="h-12 w-auto object-contain"
-            />
+        <div className="container py-4 flex items-center gap-8">
+          {/* Logo + barra amarela */}
+          <div className="flex items-center gap-3 shrink-0">
+            <img src="/fnsp.png" alt="FNSP" className="h-20 w-auto object-contain" />
+            <div className="w-1.5 h-10 bg-accent rounded-full" aria-hidden="true"></div>
           </div>
 
-          {/* Desktop Nav */}
+          {/* Desktop Nav — alinhado à esquerda */}
           <nav className="hidden md:flex gap-8" aria-label="Navegação principal">
             <a href="#programacao" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Programação</a>
             <a href="#passagens" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Diárias</a>
@@ -66,7 +64,7 @@ export default function Home() {
 
           {/* Mobile Hamburger */}
           <button
-            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-all"
+            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-all ml-auto"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={mobileMenuOpen}
@@ -479,6 +477,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </div >
   );
 }
