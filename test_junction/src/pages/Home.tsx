@@ -47,6 +47,11 @@ export default function Home() {
       <header className="sticky top-0 z-50 header-gradient shadow-lg">
         <div className="container py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <img
+              src="/fnsp.png"
+              alt="FNSP"
+              className="h-8 w-auto object-contain"
+            />
             <div className="w-1.5 h-8 bg-accent rounded-full" aria-hidden="true"></div>
             <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">ComprasSusp 2026</h1>
           </div>
