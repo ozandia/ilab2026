@@ -142,7 +142,7 @@ async function startServer() {
     return res.json({ ok: true, ...result });
   });
 
-  // ── Static / Vite ────────────────────────────────────────────────────────
+  // ── Production / Development logic ──────────────────────────────────────
   const isProduction = process.env.NODE_ENV === "production";
 
   if (!isProduction) {
@@ -171,12 +171,18 @@ async function startServer() {
     });
   } else {
     const staticPath = path.resolve(__dirname, "public");
+    console.log(`[Server] Serving static files from: ${staticPath}`);
+
     app.use(express.static(staticPath, { maxAge: "1d" }));
-    app.get("*", (_req, res) => {
+
+    app.get("/health", (_req, res) => res.json({ status: "ok", mode: "production" }));
+
+    app.get("*", (req, res) => {
       const indexPath = path.join(staticPath, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
+        console.error(`[Server] index.html not found at: ${indexPath}`);
         res.status(404).send("Build not found. Run 'npm run build' first.");
       }
     });
@@ -189,8 +195,9 @@ async function startServer() {
     }
   });
 
-  server.listen(PORT, () => {
-    console.log(`[Server] Running in ${isProduction ? "production" : "development"} mode on http://localhost:${PORT}/`);
+  server.listen(PORT, "0.0.0.0", () => {
+    console.log(`[Server] Running in ${isProduction ? "production" : "development"} mode on port ${PORT}`);
+    console.log(`[Server] Access at http://0.0.0.0:${PORT}/`);
   });
 }
 
