@@ -322,12 +322,9 @@ export function ProgramacaoWizard() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div>
-                                <p className="font-semibold">Plenária</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h</p>
-                            </div>
-                            <div>
                                 <p className="font-semibold">Visita ao Instituto Nacional de Criminalística - INC</p>
-                                <p className="text-sm text-muted-foreground">04/03</p>
+                                <p className="text-sm text-muted-foreground">8h - 12h</p>
+
                                 {/* Transport notice */}
                                 <div className="mt-3 flex gap-3 rounded-lg border border-accent/20 bg-accent/5 p-3">
                                     <div className="flex-shrink-0 w-7 h-7 rounded-full bg-accent/15 flex items-center justify-center">
