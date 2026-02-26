@@ -240,7 +240,7 @@ export default function Home() {
                   PRAZO DE ENTREGA
                 </div>
                 <p className="text-base sm:text-lg font-semibold text-black text-center">
-                  Os Cartões de Embarque (Ida e volta) e Relatório de Viagem (Assinados) devem ser entregues até a data de retorno.
+                  Os Cartões de Embarque (Ida e volta) e Relatório de Viagem (Assinado) devem ser entregues até a data de retorno.
                 </p>
               </div>
             </CardContent>
@@ -258,7 +258,7 @@ export default function Home() {
           </div>
 
           <Card className="card-premium">
-            <CardContent className="p-6 sm:p-12">
+            <CardContent className="p-4 sm:p-6">
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 À critério de cada instituição integrante do Sistema Único de Segurança Pública.
               </p>
@@ -295,11 +295,15 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="card-premium">
               <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <UtensilsCrossed className="w-6 h-6 text-primary" />
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <UtensilsCrossed className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-2xl text-primary">Culinária</CardTitle>
+                    <CardDescription>Experiências gastronômicas recomendadas</CardDescription>
+                  </div>
                 </div>
-                <CardTitle className="text-2xl text-primary">Culinária</CardTitle>
-                <CardDescription>Experiências gastronômicas recomendadas</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
@@ -319,11 +323,15 @@ export default function Home() {
 
             <Card className="card-premium">
               <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <MapPin className="w-6 h-6 text-primary" />
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-2xl text-primary">Cultura</CardTitle>
+                    <CardDescription>Pontos turísticos essenciais</CardDescription>
+                  </div>
                 </div>
-                <CardTitle className="text-2xl text-primary">Cultura</CardTitle>
-                <CardDescription>Pontos turísticos essenciais</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
