@@ -331,7 +331,7 @@ export default function Home() {
                       <div className="flex-1">
                         <p className="font-bold text-primary">Shopping Pier 21</p>
                         <p className="text-xs text-gray-500">St. de Clubes Esportivos Sul Trecho 2 - Asa Sul, Brasília - DF</p>
-                        <a href="https://maps.app.goo.gl/nKM38V38ZtN7W7B7" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                        <a href="https://maps.app.goo.gl/9RzG5aJ8Bf1Z2rJ79" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
                           <MapPin className="w-3 h-3" /> Ver no Maps
                         </a>
                       </div>
@@ -342,7 +342,7 @@ export default function Home() {
                       <div className="flex-1">
                         <p className="font-bold text-primary">Açougue do Berg</p>
                         <p className="text-xs text-gray-500">St. de Clubes Esportivos Sul Trecho 2 Ao lado da ASBAC conjunto 31</p>
-                        <a href="https://maps.app.goo.gl/B8tN7W7B7nKM38V38" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Açougue+do+Berg+Setor+de+Clubes+Esportivos+Sul+Trecho+2+Brasília" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
                           <MapPin className="w-3 h-3" /> Ver no Maps
                         </a>
                       </div>
@@ -353,7 +353,7 @@ export default function Home() {
                       <div className="flex-1">
                         <p className="font-bold text-primary">Coco Bambu Lado Sul</p>
                         <p className="text-xs text-gray-500">St. de Clubes Esportivos Sul Trecho 2 Ícone Parque Conjunto 36</p>
-                        <a href="https://maps.app.goo.gl/v7W7B7nKM38V38ZtN" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Coco+Bambu+Lago+Sul+SCES+Trecho+2+Conjunto+36+Brasília" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
                           <MapPin className="w-3 h-3" /> Ver no Maps
                         </a>
                       </div>
@@ -364,7 +364,7 @@ export default function Home() {
                       <div className="flex-1">
                         <p className="font-bold text-primary">Fogo de Chão Brasília</p>
                         <p className="text-xs text-gray-500">ST DE CLUBES ESPORTIVOS SUL, Asa Sul Trecho 2 2/11</p>
-                        <a href="https://maps.app.goo.gl/ZtN7W7B7nKM38V38M" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Fogo+de+Chão+Brasília+Setor+de+Clubes+Esportivos+Sul+Trecho+2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
                           <MapPin className="w-3 h-3" /> Ver no Maps
                         </a>
                       </div>
@@ -375,7 +375,7 @@ export default function Home() {
                       <div className="flex-1">
                         <p className="font-bold text-primary">Nau Frutos do Mar</p>
                         <p className="text-xs text-gray-500">Setor de Clubes Esportivos Sul, Asa Sul Trecho 2</p>
-                        <a href="https://maps.app.goo.gl/N7W7B7nKM38V38ZtU" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Nau+Frutos+do+Mar+Brasília+SCES+Trecho+2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
                           <MapPin className="w-3 h-3" /> Ver no Maps
                         </a>
                       </div>
@@ -386,7 +386,7 @@ export default function Home() {
                       <div className="flex-1">
                         <p className="font-bold text-primary">Mangai Lago</p>
                         <p className="text-xs text-gray-500">SCE Sul, s/n - Lote 2, Asa Sul, Brasília - DF</p>
-                        <a href="https://maps.app.goo.gl/7W7B7nKM38V38ZtN8" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Mangai+Lago+Brasília+SCES+Trecho+2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
                           <MapPin className="w-3 h-3" /> Ver no Maps
                         </a>
                       </div>
@@ -397,7 +397,7 @@ export default function Home() {
                       <div className="flex-1">
                         <p className="font-bold text-primary">Galeteria Beira Lago</p>
                         <p className="text-xs text-gray-500">SCE Sul, Trecho 2, Conjunto 33 - Centro, Brasília - DF</p>
-                        <a href="https://maps.app.goo.gl/ZM7W7B7nKM38V38Zt" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Galeteria+Beira+Lago+SCES+Trecho+2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
                           <MapPin className="w-3 h-3" /> Ver no Maps
                         </a>
                       </div>
@@ -526,7 +526,7 @@ export default function Home() {
 
             <div className="space-y-2">
               <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Organização</p>
-              <p className="text-sm font-semibold text-primary">SENASP - Ministério da Justiça e Segurança Pública</p>
+              <p className="text-base font-semibold text-primary">SENASP - Secretaria Nacional de Segurança Pública</p>
               <p className="text-xs text-gray-500">Governo Federal do Brasil</p>
             </div>
           </div>

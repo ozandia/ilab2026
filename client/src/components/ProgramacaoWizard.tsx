@@ -201,8 +201,7 @@ export function ProgramacaoWizard() {
                                     <div className="space-y-0.5">
                                         <p className="text-xs font-semibold text-accent uppercase tracking-wide">Translado</p>
                                         <p className="text-xs text-muted-foreground leading-relaxed">
-                                            Saída às <span className="font-semibold text-foreground">9h</span> da Sede do MJSP
-                                            Â· Retorno ao CICB previsto para as <span className="font-semibold text-foreground">13h</span>
+                                            Saída às <span className="font-semibold text-foreground">9h</span> da Sede do MJSP. Retorno ao CICB previsto para as <span className="font-semibold text-foreground">13h</span>
                                         </p>
                                     </div>
                                 </div>
@@ -362,7 +361,7 @@ export function ProgramacaoWizard() {
                             </div>
                             <div>
                                 <p className="font-semibold">Mesa Redonda</p>
-                                <p className="text-sm text-muted-foreground">17h30 â€“ Sede da APCF</p>
+                                <p className="text-sm text-muted-foreground">17h30 Local: Sede da APCF</p>
                                 <p className="text-xs text-primary/70 italic mt-0.5">Protagonismo do ComprasSusp na Modernização da PCI</p>
                                 <a
                                     href="https://maps.google.com/?q=APCF+Associação+dos+Delegados+da+Polícia+Federal+Brasília"
