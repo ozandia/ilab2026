@@ -326,6 +326,22 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">9h - 12h</p>
                             </div>
                             <div>
+                                <p className="font-semibold">Visita ao Instituto Nacional de Criminalística - INC</p>
+                                <p className="text-sm text-muted-foreground">04/03</p>
+                                {/* Transport notice */}
+                                <div className="mt-3 flex gap-3 rounded-lg border border-accent/20 bg-accent/5 p-3">
+                                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-accent/15 flex items-center justify-center">
+                                        <Bus className="w-4 h-4 text-accent" aria-hidden="true" />
+                                    </div>
+                                    <div className="space-y-0.5">
+                                        <p className="text-xs font-semibold text-accent uppercase tracking-wide">Transporte</p>
+                                        <p className="text-xs text-muted-foreground leading-relaxed">
+                                            Saída às <span className="font-semibold text-foreground">08h</span> da Sede do MJ
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
                                 <p className="font-semibold">Tarde Livre</p>
                             </div>
                         </CardContent>
