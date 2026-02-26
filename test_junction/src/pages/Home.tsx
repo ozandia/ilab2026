@@ -207,15 +207,15 @@ export default function Home() {
             </div>
           </div>
 
-          <Card className="card-premium border-accent/30 bg-accent/5">
+          <Card className="card-premium border-accent/30 bg-accent/20">
             <CardContent className="p-6 sm:p-12 space-y-8">
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed text-center max-w-3xl mx-auto">
-                A entrega da documentação é <span className="font-bold text-primary underline decoration-accent/30 decoration-4">imprescindível</span> para a regularização da sua viagem no sistema.
+                A entrega da documentação é <span className="font-bold text-black underline decoration-accent/30 decoration-4">imprescindível</span> para a regularização da sua viagem no sistema.
               </p>
 
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto">
                 <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all" aria-hidden="true">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-black text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-black transition-all" aria-hidden="true">
                     1
                   </div>
                   <div>
@@ -224,7 +224,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-primary transition-all" aria-hidden="true">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-black text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-black transition-all" aria-hidden="true">
                     2
                   </div>
                   <div>
@@ -239,7 +239,7 @@ export default function Home() {
                   <Clock className="w-5 h-5" aria-hidden="true" />
                   PRAZO DE ENTREGA
                 </div>
-                <p className="text-xl sm:text-2xl font-black text-primary">
+                <p className="text-xl sm:text-2xl font-black text-black">
                   Até 5 dias após o término do evento
                 </p>
               </div>
@@ -247,44 +247,21 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* Regras Section */}
+        {/* Traje Section */}
         <section id="regras" className="container pt-24">
           <div className="flex items-center gap-4 mb-12">
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
-              <h2 className="text-4xl font-bold text-primary">Regras Importantes</h2>
-              <p className="text-primary/60 font-medium">Normas e procedimentos do evento</p>
+              <h2 className="text-4xl font-bold text-primary">Traje</h2>
+              <p className="text-primary/60 font-medium">Conduta de vestimenta</p>
             </div>
           </div>
 
           <Card className="card-premium">
             <CardContent className="p-6 sm:p-12">
-              <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
-                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
-                    <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <span className="font-semibold text-primary text-sm sm:text-base">Afastamento SCDP obrigatório</span>
-                </li>
-                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
-                    <Plane className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <span className="font-semibold text-primary text-sm sm:text-base">Bilhetes emitidos pela agência MJ</span>
-                </li>
-                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
-                    <UserSquare2 className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <span className="font-semibold text-primary text-sm sm:text-base">Traje formal institucional</span>
-                </li>
-                <li className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 bg-primary/5 rounded-2xl border border-primary/10 hover:bg-primary/10 transition-all">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary" aria-hidden="true">
-                    <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <span className="font-semibold text-primary text-sm sm:text-base">Check-in antecipado no hotel</span>
-                </li>
-              </ul>
+              <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                À critério de cada instituição integrante do Sistema Único de Segurança Pública.
+              </p>
             </CardContent>
           </Card>
         </section>
