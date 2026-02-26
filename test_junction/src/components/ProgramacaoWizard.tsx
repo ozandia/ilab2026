@@ -331,9 +331,9 @@ export function ProgramacaoWizard() {
                                         <Bus className="w-4 h-4 text-accent" aria-hidden="true" />
                                     </div>
                                     <div className="space-y-0.5">
-                                        <p className="text-xs font-semibold text-accent uppercase tracking-wide">Transporte</p>
+                                        <p className="text-xs font-semibold text-accent uppercase tracking-wide">Translado</p>
                                         <p className="text-xs text-muted-foreground leading-relaxed">
-                                            Saída às <span className="font-semibold text-foreground">08h</span> da Sede do MJ
+                                            Saída às <span className="font-semibold text-foreground">08h</span> da Sede do Ministério da Justiça e Segurança Pública
                                         </p>
                                     </div>
                                 </div>
