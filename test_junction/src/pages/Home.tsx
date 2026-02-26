@@ -116,7 +116,7 @@ export default function Home() {
           <div className="container relative z-20">
             <div className="max-w-3xl space-y-8 animate-in fade-in slide-in-from-left-8 duration-1000">
               <div className="space-y-4">
-                <span className="inline-block px-4 py-1.5 bg-accent/20 text-accent font-bold rounded-full text-sm tracking-widest uppercase">
+                <span className="inline-block px-4 py-1.5 bg-accent/20 text-accent font-bold rounded-full text-base tracking-widest uppercase">
                   Brasília • 03-06 Março
                 </span>
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
@@ -135,15 +135,10 @@ export default function Home() {
                   <MapPin className="w-5 h-5 text-accent" aria-hidden="true" />
                   <span className="font-semibold text-base sm:text-lg">CICB - Brasília/DF</span>
                 </div>
-                <div className="h-6 w-px bg-white/20 hidden md:block" aria-hidden="true"></div>
-                <div className="flex items-center gap-2 text-white">
-                  <Calendar className="w-5 h-5 text-accent" aria-hidden="true" />
-                  <span className="font-semibold text-base sm:text-lg">Março 2026</span>
-                </div>
               </div>
 
               <div className="flex flex-wrap gap-4 pt-2">
-                <Button asChild className="btn-gold h-11 sm:h-14 px-6 sm:px-10 text-base sm:text-lg shadow-xl shadow-accent/20">
+                <Button asChild className="h-11 sm:h-14 px-6 sm:px-10 text-base sm:text-lg shadow-xl bg-accent text-primary font-bold hover:bg-accent/90 rounded-md transition-all">
                   <a
                     href="https://www.google.com/maps/place/Centro+Internacional+de+Conven%C3%A7%C3%B5es+do+Brasil/@-15.812877,-47.832388,12z/data=!4m8!3m7!1s0x935a235b9cbb04f5:0x891cb2fcc1ef260!8m2!3d-15.8156846!4d-47.8447472!9m1!1b1!16s%2Fg%2F1q5gppnwh?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
