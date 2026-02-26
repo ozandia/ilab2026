@@ -57,7 +57,7 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">9h - 12h | Sala GTI</p>
                             </div>
                             <div>
-                                <p className="font-semibold">Tarde Livre</p>
+                                <p className="font-semibold">Visitação iLab-Segurança</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -126,7 +126,7 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">9h - 12h | Sala GTI</p>
                             </div>
                             <div>
-                                <p className="font-semibold">Tarde Livre</p>
+                                <p className="font-semibold">Visitação iLab-Segurança</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -208,7 +208,7 @@ export function ProgramacaoWizard() {
                                 </div>
                             </div>
                             <div>
-                                <p className="font-semibold">Tarde Livre</p>
+                                <p className="font-semibold">Visitação iLab-Segurança</p>
                             </div>
                         </CardContent>
 
@@ -258,7 +258,7 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">9h - 12h</p>
                             </div>
                             <div>
-                                <p className="font-semibold">Tarde Livre</p>
+                                <p className="font-semibold">Visitação iLab-Segurança</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -339,7 +339,7 @@ export function ProgramacaoWizard() {
                                 </div>
                             </div>
                             <div>
-                                <p className="font-semibold">Tarde Livre</p>
+                                <p className="font-semibold">Visitação iLab-Segurança</p>
                             </div>
                         </CardContent>
                     </Card>
