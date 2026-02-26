@@ -50,10 +50,8 @@ export default function Home() {
             <img
               src="/fnsp.png"
               alt="FNSP"
-              className="h-8 w-auto object-contain"
+              className="h-12 w-auto object-contain"
             />
-            <div className="w-1.5 h-8 bg-accent rounded-full" aria-hidden="true"></div>
-            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">ComprasSusp 2026</h1>
           </div>
 
           {/* Desktop Nav */}
