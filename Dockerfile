@@ -30,10 +30,15 @@ RUN pnpm install --frozen-lockfile --prod
 # Copy compiled server and frontend build
 COPY --from=builder /app/dist ./dist
 
+# Create dedicated data directory for persistence
+RUN mkdir -p /app/data && chown node:node /app/data
+
 # Expose port (default 5000, override via PORT env)
 EXPOSE 5000
 
-# Votes persist in this volume — mount it to avoid data loss on redeploy
-VOLUME ["/app/dist/votes.json"]
+# Data persistence goes here 
+VOLUME ["/app/data"]
+
+USER node
 
 CMD ["node", "dist/index.js"]

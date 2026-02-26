@@ -7,14 +7,36 @@ import fs from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// ── Global Error Handlers (Silent Crash Prevention) ──────────────────────────
+process.on("uncaughtException", (err) => {
+  console.error("[FATAL] Uncaught Exception:", err);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("[FATAL] Unhandled Rejection at:", promise, "reason:", reason);
+});
+
 // ── Config (override via env vars) ───────────────────────────────────────────
 const PORT = Number(process.env.PORT) || 5000;
 const MAX_VOTES = Number(process.env.MAX_VOTES) || 27;
 const MAX_SELECTIONS = Number(process.env.MAX_SELECTIONS) || 8;
 const RATE_LIMIT_MS = Number(process.env.RATE_LIMIT_MS) || 60_000;
+
+// Production-ready data path
+const isProd = process.env.NODE_ENV === "production";
 const VOTE_FILE = process.env.VOTE_FILE
   ? path.resolve(process.env.VOTE_FILE)
-  : path.resolve(__dirname, "votes.json");
+  : isProd
+    ? path.resolve(process.cwd(), "data", "votes.json")
+    : path.resolve(__dirname, "votes.json");
+
+// Ensure data directory exists
+const dataDir = path.dirname(VOTE_FILE);
+if (!fs.existsSync(dataDir)) {
+  console.log(`[BOOT] Creating data directory: ${dataDir}`);
+  fs.mkdirSync(dataDir, { recursive: true });
+}
 
 // ── Company master list ───────────────────────────────────────────────────────
 const COMPANIES: readonly string[] = [
@@ -142,7 +164,7 @@ async function startServer() {
     return res.json({ ok: true, ...result });
   });
 
-  // ── Mode & Path Resolution (v2.5 - DevOps Audit) ────────────────────────
+  // ── Mode & Path Resolution (v2.6 - Maximum Resilience) ───────────────────
   const isProduction = process.env.NODE_ENV === "production";
   const rootDir = process.cwd();
 
@@ -154,9 +176,9 @@ async function startServer() {
 
   let staticPath = isProduction ? candidatePaths[0] : path.resolve(rootDir, "client");
 
-  console.log(`[Server] v2.5 DevOps Audit:`);
+  console.log(`[BOOT] v2.6 Resilience Layer:`);
   console.log(`  - CWD: ${rootDir}`);
-  console.log(`  - Environment: ${process.env.NODE_ENV}`);
+  console.log(`  - PORT: ${PORT}`);
 
   if (isProduction) {
     for (const p of candidatePaths) {
@@ -166,12 +188,6 @@ async function startServer() {
         break;
       }
     }
-
-    // List interfaces for network debug
-    import("os").then((os) => {
-      const interfaces = os.networkInterfaces();
-      console.log(`  - Network Interfaces:`, Object.keys(interfaces).map(k => `${k}: ${interfaces[k]?.map(i => i.address).join(", ")}`));
-    }).catch(() => { });
   }
 
   app.use((req, _res, next) => {
@@ -180,16 +196,15 @@ async function startServer() {
   });
 
   // Diagnostic Endpoint
-  app.get("/api/debug/system", (req, res) => {
+  app.get("/api/debug/system", (_req, res) => {
     res.json({
-      version: "2.5",
+      version: "2.6",
       env: process.env.NODE_ENV,
       cwd: process.cwd(),
-      time: new Date(),
+      PORT,
       staticPath,
       staticFiles: fs.existsSync(staticPath) ? fs.readdirSync(staticPath) : "NOT_FOUND",
       rootDirFiles: fs.readdirSync(rootDir),
-      headers: req.headers,
     });
   });
 
@@ -242,7 +257,7 @@ async function startServer() {
   });
 
   server.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Server] v2.5 - Listening on http://0.0.0.0:${PORT}`);
+    console.log(`[Server] v2.6 READY - Listening on http://0.0.0.0:${PORT}`);
   });
 }
 
