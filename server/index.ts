@@ -24,18 +24,31 @@ const MAX_SELECTIONS = Number(process.env.MAX_SELECTIONS) || 8;
 const RATE_LIMIT_MS = Number(process.env.RATE_LIMIT_MS) || 60_000;
 
 // Production-ready data path
+// Production-ready data path with write-check
 const isProd = process.env.NODE_ENV === "production";
-const VOTE_FILE = process.env.VOTE_FILE
+let VOTE_FILE = process.env.VOTE_FILE
   ? path.resolve(process.env.VOTE_FILE)
   : isProd
     ? path.resolve(process.cwd(), "data", "votes.json")
     : path.resolve(__dirname, "votes.json");
 
-// Ensure data directory exists
-const dataDir = path.dirname(VOTE_FILE);
-if (!fs.existsSync(dataDir)) {
-  console.log(`[BOOT] Creating data directory: ${dataDir}`);
-  fs.mkdirSync(dataDir, { recursive: true });
+// ── Startup Persistence Check ────────────────────────────────────────────────
+try {
+  const dataDir = path.dirname(VOTE_FILE);
+  if (!fs.existsSync(dataDir)) {
+    console.log(`[BOOT] Attempting to create directory: ${dataDir}`);
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  // Test write permission
+  fs.appendFileSync(VOTE_FILE, "");
+} catch (e) {
+  console.warn(`[BOOT] WARNING: Data directory not writable at ${VOTE_FILE}. Falling back to /tmp/votes.json`);
+  VOTE_FILE = path.join("/tmp", "votes.json");
+  try {
+    fs.writeFileSync(VOTE_FILE, JSON.stringify({}, null, 2));
+  } catch (err) {
+    console.error(`[BOOT] FATAL: Persistence failed even in /tmp. Server may run with empty state.`);
+  }
 }
 
 // ── Company master list ───────────────────────────────────────────────────────
