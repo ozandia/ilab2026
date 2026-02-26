@@ -489,14 +489,26 @@
   font-weight: 500;
 }
 
-/* List */
+/* List / Grid 3-col */
 .poll-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.375rem;
 }
 
-/* Keep grid as alias for backward compat */
+@media (max-width: 768px) {
+  .poll-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .poll-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keep poll-grid as alias */
 .poll-grid {
   display: flex;
   flex-direction: column;

@@ -14,11 +14,12 @@ const isVotingClosed = () => Date.now() >= DEADLINE.getTime();
 const VALID_GROUPS = new Set([1, 2]);
 
 const COMPANIES: readonly string[] = [
-    "Techbiz", "Teltronic", "Valid", "Flash", "Funcional", "Aeromot", "Axon",
-    "Berkana", "BGS", "Condor", "Glagio", "Helper", "Inspect", "Iron Fence",
-    "Magnet", "Raytec", "Revo", "Smart Power", "VMI", "Digitro", "ADTech",
-    "Motorola", "Protecta", "Ford", "Airbus", "Byrna", "Ulbrichts", "Clarian",
-    "Hex360", "Montreal", "Actatec",
+    "Actatec", "ADTech", "Aeromot", "Airbus", "Axon",
+    "Berkana", "BGS", "Byrna", "Clarian", "Condor",
+    "Digitro", "Flash", "Ford", "Funcional", "Glagio",
+    "Helper", "Hex360", "Inspect", "Iron Fence", "Magnet",
+    "Montreal", "Motorola", "Protecta", "Raytec", "Revo",
+    "Smart Power", "Techbiz", "Teltronic", "Ulbrichts", "Valid", "VMI",
 ];
 const COMPANY_SET = new Set(COMPANIES);
 
