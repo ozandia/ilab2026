@@ -79,7 +79,6 @@
     "add": "^2.0.6",
     "autoprefixer": "^10.4.20",
     "esbuild": "^0.25.0",
-    "pnpm": "9.15.4",
     "postcss": "^8.4.47",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.14",
@@ -90,7 +89,6 @@
     "vite-plugin-manus-runtime": "^0.0.57",
     "vitest": "^2.1.4"
   },
-  "packageManager": "pnpm@9.15.4",
   "overrides": {
     "@builder.io/vite-plugin-jsx-loc": {
       "vite": "$vite"
