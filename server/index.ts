@@ -171,19 +171,38 @@ async function startServer() {
     });
   } else {
     const staticPath = path.resolve(__dirname, "public");
-    console.log(`[Server] Serving static files from: ${staticPath}`);
+
+    // Debug Structure
+    console.log(`[Server] Production Mode: ${isProduction}`);
+    console.log(`[Server] Directory: ${process.cwd()}`);
+    console.log(`[Server] __dirname: ${__dirname}`);
+    try {
+      if (fs.existsSync(__dirname)) {
+        console.log(`[Server] Files in __dirname: ${fs.readdirSync(__dirname).join(", ")}`);
+      }
+      if (fs.existsSync(staticPath)) {
+        console.log(`[Server] Files in staticPath: ${fs.readdirSync(staticPath).join(", ")}`);
+      }
+    } catch (e) {
+      console.error("[Server] Dir listing failed:", e);
+    }
+
+    app.use((req, _res, next) => {
+      console.log(`[Server] ${new Date().toISOString()} - ${req.method} ${req.url}`);
+      next();
+    });
 
     app.use(express.static(staticPath, { maxAge: "1d" }));
 
-    app.get("/health", (_req, res) => res.json({ status: "ok", mode: "production" }));
+    app.get("/health", (_req, res) => res.json({ status: "ok", mode: "production", timestamp: new Date() }));
 
     app.get("*", (req, res) => {
       const indexPath = path.join(staticPath, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        console.error(`[Server] index.html not found at: ${indexPath}`);
-        res.status(404).send("Build not found. Run 'npm run build' first.");
+        console.error(`[Server] 404 - index.html not found at: ${indexPath}`);
+        res.status(404).send(`Build not found at ${indexPath}`);
       }
     });
   }
