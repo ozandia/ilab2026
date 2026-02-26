@@ -146,8 +146,6 @@ async function startServer() {
   const isProduction = process.env.NODE_ENV === "production";
 
   if (!isProduction) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error — vite is a devDependency; resolved at runtime only in dev mode
     const { createServer: createViteServer } = await import("vite");
 
     const vite = await createViteServer({
