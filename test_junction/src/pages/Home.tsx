@@ -306,17 +306,103 @@ export default function Home() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <h4 className="font-bold text-primary">Setor de Clubes Sul</h4>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    Localizado às margens do Lago Paranoá, oferece restaurantes sofisticados com carnes, frutos do mar e culinária contemporânea.
-                  </p>
-                </div>
-                <div className="space-y-2 pt-4 border-t border-gray-100">
-                  <h4 className="font-bold text-primary">Pontão do Lago Sul</h4>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    O maior centro de lazer e gastronomia da capital, ideal para um jantar com vista para a Ponte JK.
-                  </p>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-primary">Setor de Clubes Sul</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      Localizado às margens do Lago Paranoá, oferece restaurantes sofisticados com carnes, frutos do mar e culinária contemporânea.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 pt-4 border-t border-gray-100">
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Pontão do Lago Sul</p>
+                        <p className="text-xs text-gray-500">O maior centro de lazer e gastronomia da capital, ideal para um jantar com vista para a Ponte JK.</p>
+                        <a href="https://maps.app.goo.gl/vP3Zc6u8zWp8N8yA8" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Shopping Pier 21</p>
+                        <p className="text-xs text-gray-500">St. de Clubes Esportivos Sul Trecho 2 - Asa Sul, Brasília - DF</p>
+                        <a href="https://maps.app.goo.gl/nKM38V38ZtN7W7B7" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Açougue do Berg</p>
+                        <p className="text-xs text-gray-500">St. de Clubes Esportivos Sul Trecho 2 Ao lado da ASBAC conjunto 31</p>
+                        <a href="https://maps.app.goo.gl/B8tN7W7B7nKM38V38" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Coco Bambu Lado Sul</p>
+                        <p className="text-xs text-gray-500">St. de Clubes Esportivos Sul Trecho 2 Ícone Parque Conjunto 36</p>
+                        <a href="https://maps.app.goo.gl/v7W7B7nKM38V38ZtN" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Fogo de Chão Brasília</p>
+                        <p className="text-xs text-gray-500">ST DE CLUBES ESPORTIVOS SUL, Asa Sul Trecho 2 2/11</p>
+                        <a href="https://maps.app.goo.gl/ZtN7W7B7nKM38V38M" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Nau Frutos do Mar</p>
+                        <p className="text-xs text-gray-500">Setor de Clubes Esportivos Sul, Asa Sul Trecho 2</p>
+                        <a href="https://maps.app.goo.gl/N7W7B7nKM38V38ZtU" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Mangai Lago</p>
+                        <p className="text-xs text-gray-500">SCE Sul, s/n - Lote 2, Asa Sul, Brasília - DF</p>
+                        <a href="https://maps.app.goo.gl/7W7B7nKM38V38ZtN8" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 p-3 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                      <div className="flex-1">
+                        <p className="font-bold text-primary">Galeteria Beira Lago</p>
+                        <p className="text-xs text-gray-500">SCE Sul, Trecho 2, Conjunto 33 - Centro, Brasília - DF</p>
+                        <a href="https://maps.app.goo.gl/ZM7W7B7nKM38V38Zt" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1">
+                          <MapPin className="w-3 h-3" /> Ver no Maps
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
