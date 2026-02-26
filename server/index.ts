@@ -142,39 +142,49 @@ async function startServer() {
     return res.json({ ok: true, ...result });
   });
 
-  // ── Mode & Path Resolution ─────────────────────────────────────────────
+  // ── Mode & Path Resolution (v2.4 - Ultra Resilient) ─────────────────────
   const isProduction = process.env.NODE_ENV === "production";
   const rootDir = process.cwd();
 
-  // Base path for public files
-  // In Docker, we run from /app, and files are in /app/dist/public
-  const staticPath = isProduction
-    ? path.resolve(rootDir, "dist", "public")
-    : path.resolve(rootDir, "client");
+  // Potential paths for static files in production
+  const candidatePaths = [
+    path.resolve(rootDir, "dist", "public"), // Standard root-relative
+    path.resolve(__dirname, "public"),         // Relative to server script
+    path.resolve(rootDir, "public"),           // Legacy/Fallback
+  ];
 
-  console.log(`[Server] v2.3 Startup:`);
-  console.log(`  - NODE_ENV: ${process.env.NODE_ENV}`);
-  console.log(`  - rootDir: ${rootDir}`);
-  console.log(`  - staticPath: ${staticPath}`);
+  let staticPath = isProduction ? candidatePaths[0] : path.resolve(rootDir, "client");
+
+  console.log(`[Server] v2.4 Startup Diagnostics:`);
+  console.log(`  - rootDir (CWD): ${rootDir}`);
+  console.log(`  - __dirname: ${__dirname}`);
 
   if (isProduction) {
-    try {
-      if (fs.existsSync(staticPath)) {
-        console.log(`  - Contents of ${staticPath}:`, fs.readdirSync(staticPath));
-      } else {
-        console.error(`  - ERROR: staticPath does not exist: ${staticPath}`);
-        const distPath = path.resolve(rootDir, "dist");
-        if (fs.existsSync(distPath)) {
-          console.log(`  - Contents of ${distPath}:`, fs.readdirSync(distPath));
-        }
+    // Audit available paths to find the first one that exists
+    for (const p of candidatePaths) {
+      const exists = fs.existsSync(p);
+      console.log(`  - Checking path: ${p} -> ${exists ? "FOUND" : "NOT FOUND"}`);
+      if (exists && isProduction) {
+        staticPath = p;
+        break;
       }
-    } catch (e) {
-      console.error("  - Failed to check directories:", e);
     }
+
+    // Deep Audit: List files in root and dist to solve path mystery
+    const listDir = (dir: string, label: string) => {
+      try {
+        if (fs.existsSync(dir)) {
+          console.log(`  - [Tree] ${label} (${dir}):`, fs.readdirSync(dir).join(", "));
+        }
+      } catch (e) { /* ignore */ }
+    };
+    listDir(rootDir, "ROOT");
+    listDir(path.resolve(rootDir, "dist"), "DIST");
+    listDir(staticPath, "STATIC");
   }
 
   app.use((req, _res, next) => {
-    console.log(`[Request] ${new Date().toISOString()} - ${req.method} ${req.url}`);
+    console.log(`[Request] ${new Date().toISOString()} - ${req.method} ${req.url} | IP: ${req.ip}`);
     next();
   });
 
@@ -203,7 +213,7 @@ async function startServer() {
 
     app.get("/health", (_req, res) => res.json({
       status: "ok",
-      time: new Date(),
+      version: "2.4",
       staticPath,
       exists: fs.existsSync(staticPath)
     }));
@@ -213,8 +223,8 @@ async function startServer() {
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        console.error(`[404] Missing: ${indexPath}`);
-        res.status(404).send(`Server error: Static files not found at ${indexPath}`);
+        console.error(`[CRITICAL 404] No index.html found at ${indexPath}`);
+        res.status(404).send(`System error: Frontend files not found. Server is looking in ${staticPath}.`);
       }
     });
   }
@@ -227,7 +237,7 @@ async function startServer() {
   });
 
   server.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Server] v2.3 - Listening on http://0.0.0.0:${PORT}`);
+    console.log(`[Server] v2.4 - Listening on http://0.0.0.0:${PORT}`);
   });
 }
 
