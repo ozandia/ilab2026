@@ -1,12 +1,11 @@
 {
+    "framework": null,
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist/public",
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "server/index.ts"
-        },
-        {
-            "source": "/health",
-            "destination": "server/index.ts"
+            "destination": "/api/index.ts"
         },
         {
             "source": "/(.*)",
