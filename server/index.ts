@@ -164,47 +164,52 @@ async function startServer() {
     return res.json({ ok: true, ...result });
   });
 
-  // ── Mode & Path Resolution (v2.6 - Maximum Resilience) ───────────────────
+  // ── Mode & Path Resolution (v2.7 - Universal Cloud) ─────────────────────
   const isProduction = process.env.NODE_ENV === "production";
   const rootDir = process.cwd();
+
+  // Port discovery for Cloud Platforms (Heroku, Render, Railay, Vercel)
+  const FINAL_PORT = Number(process.env.PORT) || 8080;
 
   const candidatePaths = [
     path.resolve(rootDir, "dist", "public"),
     path.resolve(__dirname, "public"),
     path.resolve(rootDir, "public"),
+    path.resolve(rootDir, "client"),
   ];
 
   let staticPath = isProduction ? candidatePaths[0] : path.resolve(rootDir, "client");
 
-  console.log(`[BOOT] v2.6 Resilience Layer:`);
-  console.log(`  - CWD: ${rootDir}`);
-  console.log(`  - PORT: ${PORT}`);
+  console.log(`\n************************************************`);
+  console.log(`* [BOOT] SERVER v2.7 STARTING UP             *`);
+  console.log(`* Port: ${FINAL_PORT} | Node: ${process.version}          *`);
+  console.log(`************************************************\n`);
 
   if (isProduction) {
     for (const p of candidatePaths) {
-      if (fs.existsSync(p)) {
+      if (fs.existsSync(p) && fs.existsSync(path.join(p, "index.html"))) {
         staticPath = p;
-        console.log(`  - FOUND staticPath: ${p}`);
+        console.log(`[v2.7] SUCCESS: Found index.html at ${staticPath}`);
         break;
       }
     }
   }
 
+  // Request logger
   app.use((req, _res, next) => {
-    console.log(`[Request] ${new Date().toISOString()} - ${req.method} ${req.url} | IP: ${req.ip} | Host: ${req.headers.host}`);
+    console.log(`[v2.7] ${req.method} ${req.url} - ${req.ip}`);
     next();
   });
 
   // Diagnostic Endpoint
   app.get("/api/debug/system", (_req, res) => {
     res.json({
-      version: "2.6",
+      version: "2.7",
       env: process.env.NODE_ENV,
-      cwd: process.cwd(),
-      PORT,
+      port: FINAL_PORT,
       staticPath,
-      staticFiles: fs.existsSync(staticPath) ? fs.readdirSync(staticPath) : "NOT_FOUND",
-      rootDirFiles: fs.readdirSync(rootDir),
+      exists: fs.existsSync(staticPath),
+      files: fs.existsSync(staticPath) ? fs.readdirSync(staticPath) : []
     });
   });
 
@@ -231,33 +236,26 @@ async function startServer() {
   } else {
     app.use(express.static(staticPath, { maxAge: "1d" }));
 
-    app.get("/health", (_req, res) => res.json({
-      status: "ok",
-      version: "2.5",
-      staticPath,
-      exists: fs.existsSync(staticPath)
-    }));
+    app.get("/health", (_req, res) => res.json({ status: "ok", v: "2.7" }));
 
     app.get("*", (req, res) => {
       const indexPath = path.join(staticPath, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        console.error(`[FATAL] index.html missing at ${indexPath}`);
-        res.status(404).send(`Application Error (v2.5): Build files not found. Contact support with code DEPLOY_404.`);
+        console.error(`[v2.7 ERROR] File not found: ${indexPath}`);
+        res.status(404).send(`Application Error (v2.7): Static assets missing. Please verify build output.`);
       }
     });
   }
 
   server.on("error", (e: any) => {
-    if (e.code === "EADDRINUSE") {
-      console.error(`[FATAL] Port ${PORT} occupied.`);
-      process.exit(1);
-    }
+    console.error(`[v2.7 FATAL ERR] ${e.message}`);
+    process.exit(1);
   });
 
-  server.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Server] v2.6 READY - Listening on http://0.0.0.0:${PORT}`);
+  server.listen(FINAL_PORT, "0.0.0.0", () => {
+    console.log(`\n[v2.7 READY] ==> Access at: http://0.0.0.0:${FINAL_PORT}\n`);
   });
 }
 
