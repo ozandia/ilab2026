@@ -142,26 +142,55 @@ async function startServer() {
     return res.json({ ok: true, ...result });
   });
 
-  // ── Production / Development logic ──────────────────────────────────────
+  // ── Mode & Path Resolution ─────────────────────────────────────────────
   const isProduction = process.env.NODE_ENV === "production";
+  const rootDir = process.cwd();
+
+  // Base path for public files
+  // In Docker, we run from /app, and files are in /app/dist/public
+  const staticPath = isProduction
+    ? path.resolve(rootDir, "dist", "public")
+    : path.resolve(rootDir, "client");
+
+  console.log(`[Server] v2.3 Startup:`);
+  console.log(`  - NODE_ENV: ${process.env.NODE_ENV}`);
+  console.log(`  - rootDir: ${rootDir}`);
+  console.log(`  - staticPath: ${staticPath}`);
+
+  if (isProduction) {
+    try {
+      if (fs.existsSync(staticPath)) {
+        console.log(`  - Contents of ${staticPath}:`, fs.readdirSync(staticPath));
+      } else {
+        console.error(`  - ERROR: staticPath does not exist: ${staticPath}`);
+        const distPath = path.resolve(rootDir, "dist");
+        if (fs.existsSync(distPath)) {
+          console.log(`  - Contents of ${distPath}:`, fs.readdirSync(distPath));
+        }
+      }
+    } catch (e) {
+      console.error("  - Failed to check directories:", e);
+    }
+  }
+
+  app.use((req, _res, next) => {
+    console.log(`[Request] ${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+  });
 
   if (!isProduction) {
     const { createServer: createViteServer } = await import("vite");
-
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "custom",
-      configFile: path.resolve(__dirname, "..", "vite.config.ts"),
+      configFile: path.resolve(rootDir, "vite.config.ts"),
     });
 
     app.use(vite.middlewares);
 
     app.get("*", async (req, res, next) => {
       try {
-        let template = fs.readFileSync(
-          path.resolve(__dirname, "..", "client", "index.html"),
-          "utf-8",
-        );
+        let template = fs.readFileSync(path.resolve(rootDir, "client", "index.html"), "utf-8");
         template = await vite.transformIndexHtml(req.originalUrl, template);
         res.status(200).set({ "Content-Type": "text/html" }).end(template);
       } catch (e: any) {
@@ -170,39 +199,22 @@ async function startServer() {
       }
     });
   } else {
-    const staticPath = path.resolve(__dirname, "public");
-
-    // Debug Structure
-    console.log(`[Server] Production Mode: ${isProduction}`);
-    console.log(`[Server] Directory: ${process.cwd()}`);
-    console.log(`[Server] __dirname: ${__dirname}`);
-    try {
-      if (fs.existsSync(__dirname)) {
-        console.log(`[Server] Files in __dirname: ${fs.readdirSync(__dirname).join(", ")}`);
-      }
-      if (fs.existsSync(staticPath)) {
-        console.log(`[Server] Files in staticPath: ${fs.readdirSync(staticPath).join(", ")}`);
-      }
-    } catch (e) {
-      console.error("[Server] Dir listing failed:", e);
-    }
-
-    app.use((req, _res, next) => {
-      console.log(`[Server] ${new Date().toISOString()} - ${req.method} ${req.url}`);
-      next();
-    });
-
     app.use(express.static(staticPath, { maxAge: "1d" }));
 
-    app.get("/health", (_req, res) => res.json({ status: "ok", mode: "production", timestamp: new Date() }));
+    app.get("/health", (_req, res) => res.json({
+      status: "ok",
+      time: new Date(),
+      staticPath,
+      exists: fs.existsSync(staticPath)
+    }));
 
     app.get("*", (req, res) => {
       const indexPath = path.join(staticPath, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        console.error(`[Server] 404 - index.html not found at: ${indexPath}`);
-        res.status(404).send(`Build not found at ${indexPath}`);
+        console.error(`[404] Missing: ${indexPath}`);
+        res.status(404).send(`Server error: Static files not found at ${indexPath}`);
       }
     });
   }
@@ -215,8 +227,7 @@ async function startServer() {
   });
 
   server.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Server] Running in ${isProduction ? "production" : "development"} mode on port ${PORT}`);
-    console.log(`[Server] Access at http://0.0.0.0:${PORT}/`);
+    console.log(`[Server] v2.3 - Listening on http://0.0.0.0:${PORT}`);
   });
 }
 
