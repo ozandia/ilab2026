@@ -60,6 +60,7 @@ export default function Home() {
             <a href="#roteiro" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Roteiro</a>
             <a href="#regras" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Regras</a>
             <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Contato</a>
+            <a href="https://drive.google.com/drive/folders/1BvwogQt_T3VH2T6YqbSwqawYB4zmXP8h?usp=drive_link" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Documentos</a>
           </nav>
 
           {/* Mobile Hamburger */}
@@ -84,10 +85,13 @@ export default function Home() {
               { href: "#roteiro", label: "Roteiro" },
               { href: "#regras", label: "Regras" },
               { href: "#contato", label: "Contato" },
-            ].map(({ href, label }) => (
+              { href: "https://drive.google.com/drive/folders/1BvwogQt_T3VH2T6YqbSwqawYB4zmXP8h?usp=drive_link", label: "Documentos", external: true },
+            ].map(({ href, label, external }) => (
               <a
                 key={href}
                 href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-3 text-white/80 hover:text-accent font-medium border-b border-white/5 transition-all"
               >
