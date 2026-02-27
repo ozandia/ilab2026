@@ -94,27 +94,9 @@ export function ProgramacaoWizard() {
                 </div>
             )
         },
+
         {
             id: 4,
-            label: "TRANSFERÊNCIAS VOLUNTÁRIAS",
-            description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS VOLUNTÁRIAS",
-            content: (
-                <div className="space-y-4">
-                    <Day03Card />
-                    <SimpleCard title="04 de março" items={[
-                        { label: "Plenária", detail: "9h - 12h" },
-                        { label: "Visita ao iLab-Seg", detail: "14h - 17h" },
-                    ]} />
-                    <SimpleCard title="05 de março" items={[
-                        { label: "Security Day", detail: "9h - 12h" },
-                        { label: "Reunião Técnica", detail: "14h - 17h" },
-                    ]} />
-                    <Day06Card />
-                </div>
-            )
-        },
-        {
-            id: 5,
             label: "ORÇAMENTO",
             description: "CÂMARAS TÉCNICAS DE ORÇAMENTO",
             content: (
