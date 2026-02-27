@@ -124,7 +124,7 @@ export default function Home() {
                 </span>
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
                   Encontro Nacional <br />
-                  <span className="text-accent underline decoration-white/20 underline-offset-8">ComprasSusp 2026</span>
+                  <span className="text-accent underline decoration-white/20 underline-offset-8">Rede Federativa 2026</span>
                 </h1>
                 <p className="text-base sm:text-xl text-white/80 leading-relaxed font-light">
                   A excelência na gestão de contratações e aquisições
