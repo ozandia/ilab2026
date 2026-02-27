@@ -452,10 +452,6 @@ export default function Home() {
                       CONVÊNIOS
                     </div>
                     <div className="space-y-4">
-                      <div className="space-y-1 text-base sm:text-xl text-white font-medium">
-                        <p>(61) 2025-3008</p>
-                        <p>(61) 2025-9796</p>
-                      </div>
                       <a
                         href="https://wa.me/5541996167578"
                         target="_blank"
