@@ -57,7 +57,7 @@ export default function Home() {
             <a href="#passagens" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Diárias</a>
             <a href="#contas" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Prestação</a>
             <a href="#roteiro" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Roteiro</a>
-            <a href="#regras" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Regras</a>
+            <a href="#trajes" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Trajes</a>
             <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Contatos</a>
           </nav>
 
@@ -81,7 +81,7 @@ export default function Home() {
               { href: "#passagens", label: "Diárias" },
               { href: "#contas", label: "Prestação de Contas" },
               { href: "#roteiro", label: "Roteiro" },
-              { href: "#regras", label: "Regras" },
+              { href: "#trajes", label: "Trajes" },
               { href: "#contato", label: "Contatos" },
             ].map(({ href, label }) => (
               <a
@@ -245,7 +245,7 @@ export default function Home() {
         </section>
 
         {/* Traje Section */}
-        <section id="regras" className="container pt-24">
+        <section id="trajes" className="container pt-24">
           <div className="flex items-center gap-4 mb-12">
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
