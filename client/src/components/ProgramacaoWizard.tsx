@@ -238,12 +238,12 @@ export function ProgramacaoWizard() {
                         </button>
                     ))}
                 </div>
-                <div className="wizard-step-label" aria-live="polite">
-                    <span className="wizard-step-title">
+                <div className="wizard-step-label flex flex-col items-center" aria-live="polite">
+                    <span className="wizard-step-title text-center">
                         {gtiSteps.find((s) => s.id === currentStep)?.label}
                     </span>
                     {gtiSteps.find((s) => s.id === currentStep)?.description && (
-                        <span className="wizard-step-desc text-xs text-primary/60 mt-0.5 block">
+                        <span className="wizard-step-desc text-xs text-primary/60 mt-0.5 block text-center">
                             {gtiSteps.find((s) => s.id === currentStep)?.description}
                         </span>
                     )}
@@ -256,7 +256,7 @@ export function ProgramacaoWizard() {
                     {gtiSteps.map((step) => (
                         <button
                             key={step.id}
-                            className="wizard-progress-btn"
+                            className="wizard-progress-btn flex flex-col items-start text-left py-3 px-4"
                             type="button"
                             role="tab"
                             data-step={step.id}
@@ -265,9 +265,9 @@ export function ProgramacaoWizard() {
                             id={`tab-step-${step.id}`}
                             onClick={() => setCurrentStep(step.id)}
                         >
-                            <span className="info">{step.label}</span>
+                            <span className="info font-bold">{step.label}</span>
                             {step.description && (
-                                <span className="text-[10px] text-primary/50 font-normal mt-0.5 block leading-tight">
+                                <span className="text-[10px] text-primary/50 font-medium mt-1 block leading-tight">
                                     {step.description}
                                 </span>
                             )}
