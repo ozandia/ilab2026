@@ -156,7 +156,7 @@ export function ProgramacaoWizard() {
                             onClick={() => setCurrentStep(step.id)}
                         >
                             <span className="info font-bold text-primary group-hover:text-accent transition-colors leading-none">
-                                {String(step.id).padStart(2, '0')}. {step.label}
+                                {step.label}
                             </span>
                             {step.description && (
                                 <span className="text-[10px] text-primary/70 font-medium italic block leading-none mt-0.5">
