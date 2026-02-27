@@ -470,11 +470,11 @@ export default function Home() {
                         </div>
                       </a>
                       <a
-                        href="https://wa.me/5567996616928"
+                        href="https://wa.me/5561996616928"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 py-2 px-4 bg-[#25D366]/10 border border-[#25D366]/20 rounded-lg group hover:bg-[#25D366]/20 transition-all w-fit"
-                        aria-label="WhatsApp: (67) 99661-6928 (abre em nova janela)"
+                        aria-label="WhatsApp: (61) 99661-6928 (abre em nova janela)"
                       >
                         <div className="w-8 h-8 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                           <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
@@ -482,7 +482,7 @@ export default function Home() {
                           </svg>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[#25D366] font-bold text-lg leading-tight">(67) 99661-6928</span>
+                          <span className="text-[#25D366] font-bold text-lg leading-tight">(61) 99661-6928</span>
                           <span className="text-white/50 text-[10px] uppercase tracking-wider font-bold">WhatsApp</span>
                         </div>
                       </a>
