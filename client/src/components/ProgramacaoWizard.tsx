@@ -2,6 +2,7 @@
 import { Clock, MapPin, Bus } from "lucide-react";
 import { ScheduleCard } from "@/components/ScheduleCard";
 import { ScheduleCardDay2 } from "@/components/ScheduleCardDay2";
+import { ScheduleFundoAFundo } from "@/components/ScheduleFundoAFundo";
 
 // Reusable day card components
 function Day03Card() {
@@ -77,15 +78,7 @@ export function ProgramacaoWizard() {
             content: (
                 <div className="space-y-4">
                     <Day03Card />
-                    <SimpleCard title="04 de março" items={[
-                        { label: "Plenária", detail: "9h - 12h | CICB" },
-                        { label: "Reunião Técnica", detail: "14h - 17h | Sala GTI" },
-                    ]} />
-                    <SimpleCard title="05 de março" items={[
-                        { label: "Security Day", detail: "9h - 12h | Sala GTI" },
-                        { label: "Visita ao iLab-Seg", detail: "14h - 17h" },
-                    ]} />
-                    <Day06Card />
+                    <ScheduleFundoAFundo />
                 </div>
             )
         },
