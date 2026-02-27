@@ -122,9 +122,7 @@ export default function Home() {
                   Encontro Nacional <span className="text-accent underline decoration-white/20 underline-offset-8">Rede Interfederativa 2026</span>
                 </h1>
                 <p className="text-base sm:text-xl text-white/80 leading-relaxed font-light">
-                  A excelência na gestão de contratações e aquisições
-                  <span className="hidden sm:inline"><br /></span>
-                  {" "}fortalecendo a segurança pública em todo o Brasil.
+                  Fortalecimento da articulação entre o Governo Federal e os entes federativos, aprimorando a execução orçamentária e a troca de informações técnicas.
                 </p>
               </div>
 
