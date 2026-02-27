@@ -3,6 +3,7 @@ import { Clock, MapPin, Bus } from "lucide-react";
 import { ScheduleCard } from "@/components/ScheduleCard";
 import { ScheduleCardDay2 } from "@/components/ScheduleCardDay2";
 import { ScheduleFundoAFundo } from "@/components/ScheduleFundoAFundo";
+import { ScheduleLogistica } from "@/components/ScheduleLogistica";
 
 // Reusable day card components
 function Day03Card() {
@@ -88,37 +89,7 @@ export function ProgramacaoWizard() {
             description: "REDE INTERFEDERATIVA DE LOGÍSTICA",
             content: (
                 <div className="space-y-4">
-                    <Day03Card />
-                    <SimpleCard title="04 de março" items={[
-                        { label: "Plenária", detail: "9h - 12h" },
-                        { label: "Reunião Técnica", detail: "14h - 17h" },
-                    ]} />
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                        <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                            <Clock className="w-4 h-4 text-blue-500" />
-                            <h2 className="text-sm font-semibold text-slate-700">05 de março</h2>
-                        </div>
-                        <div className="px-6 py-5 space-y-3">
-                            <div>
-                                <p className="font-semibold text-gray-900">Visita Técnica Canil CBMDF</p>
-                                <p className="text-sm text-gray-500">9h - 12h | Academia CBMDF</p>
-                                <div className="mt-3 flex gap-3 rounded-lg border border-blue-100 bg-blue-50/40 p-3">
-                                    <Bus className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                                    <div>
-                                        <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Translado</p>
-                                        <p className="text-xs text-gray-500 leading-relaxed mt-0.5">
-                                            Saída às <span className="font-semibold text-gray-700">9h</span> da Sede do MJSP. Retorno ao CICB previsto para as <span className="font-semibold text-gray-700">13h</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-gray-900">Visita ao iLab-Seg</p>
-                                <p className="text-sm text-gray-500">14h - 17h</p>
-                            </div>
-                        </div>
-                    </div>
-                    <Day06Card />
+                    <ScheduleLogistica />
                 </div>
             )
         },
