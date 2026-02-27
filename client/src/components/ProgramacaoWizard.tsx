@@ -15,34 +15,31 @@ export function ProgramacaoWizard() {
             description: "REDE INTERFEDERATIVA DE CONVÊNIOS",
             content: (
                 <div className="space-y-4">
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                03 de março - Abertura
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <p className="font-semibold">Horário: 19h</p>
-                            <p className="text-sm text-muted-foreground">Local: CICB</p>
-                        </CardContent>
-                    </Card>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                      </div>
+                      <div className="px-6 py-5">
+                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
+                      </div>
+                    </div>
 
                     <ScheduleCard />
 
                     <ScheduleCardDay2 />
 
 
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                06 de março - Palestras SENASP
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">9h - 17h | CICB</p>
-                        </CardContent>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                      </div>
+                      <div className="px-6 py-5 flex items-center">
+                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
+                      </div>
+                    </div>
                     </Card>
                 </div>
             )
@@ -52,18 +49,16 @@ export function ProgramacaoWizard() {
             label: "FUNDO A FUNDO",\n            description: "REDE INTERFEDERATIVA DE TRANSFER\u00caNCIAS FUNDO A FUNDO",
             content: (
                 <div className="space-y-4">
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                03 de março - Abertura
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <p className="font-semibold">Horário: 19h</p>
-                            <p className="text-sm text-muted-foreground">Local: CICB</p>
-                        </CardContent>
-                    </Card>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                      </div>
+                      <div className="px-6 py-5">
+                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
+                      </div>
+                    </div>
 
                     <Card className="card-elevated">
                         <CardHeader>
@@ -102,16 +97,15 @@ export function ProgramacaoWizard() {
                         </CardContent>
                     </Card>
 
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                06 de março - Palestras SENASP
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">9h - 17h | CICB</p>
-                        </CardContent>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                      </div>
+                      <div className="px-6 py-5 flex items-center">
+                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
+                      </div>
+                    </div>
                     </Card>
                 </div>
             )
@@ -121,18 +115,16 @@ export function ProgramacaoWizard() {
             label: "LOGÍSTICA",\n            description: "REDE INTERFEDERATIVA DE LOG\u00cdSTICA",
             content: (
                 <div className="space-y-4">
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                03 de março - Abertura
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <p className="font-semibold">Horário: 19h</p>
-                        </CardContent>
-                    </Card>
-
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                      </div>
+                      <div className="px-6 py-5">
+                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
+                      </div>
+                    </div>
                     <Card className="card-elevated">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -184,16 +176,15 @@ export function ProgramacaoWizard() {
 
                     </Card>
 
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                06 de março - Palestras SENASP
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">9h - 17h</p>
-                        </CardContent>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                      </div>
+                      <div className="px-6 py-5 flex items-center">
+                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
+                      </div>
+                    </div>
                     </Card>
                 </div>
             )
@@ -203,18 +194,16 @@ export function ProgramacaoWizard() {
             label: "TRANSFERÊNCIAS VOLUNTÁRIAS",\n            description: "REDE INTERFEDERATIVA DE TRANSFER\u00caNCIAS VOLUNT\u00c1RIAS",
             content: (
                 <div className="space-y-4">
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                03 de março - Abertura
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <p className="font-semibold">Horário: 19h</p>
-                        </CardContent>
-                    </Card>
-
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                      </div>
+                      <div className="px-6 py-5">
+                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
+                      </div>
+                    </div>
                     <Card className="card-elevated">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -252,16 +241,15 @@ export function ProgramacaoWizard() {
                         </CardContent>
                     </Card>
 
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                06 de março - Palestras SENASP
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">9h - 17h</p>
-                        </CardContent>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                      </div>
+                      <div className="px-6 py-5 flex items-center">
+                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
+                      </div>
+                    </div>
                     </Card>
                 </div>
             )
@@ -271,18 +259,16 @@ export function ProgramacaoWizard() {
             label: "ORÇAMENTO",\n            description: "C\u00c2MARAS T\u00c9CNICAS DE OR\u00c7AMENTO",
             content: (
                 <div className="space-y-4">
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                03 de março - Abertura
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <p className="font-semibold">Horário: 19h</p>
-                        </CardContent>
-                    </Card>
-
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                      </div>
+                      <div className="px-6 py-5">
+                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
+                      </div>
+                    </div>
                     <Card className="card-elevated">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -349,16 +335,15 @@ export function ProgramacaoWizard() {
 
                     </Card>
 
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                06 de março - Palestras SENASP
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">9h - 17h</p>
-                        </CardContent>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                        <Clock className="w-4 h-4 text-blue-500" />
+                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                      </div>
+                      <div className="px-6 py-5 flex items-center">
+                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
+                      </div>
+                    </div>
                     </Card>
                 </div>
             )
