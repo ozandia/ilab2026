@@ -451,15 +451,6 @@ export default function Home() {
                 <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 text-accent font-bold">
-                      <Mail className="w-5 h-5" aria-hidden="true" />
-                      E-MAIL
-                    </div>
-                    <a href="mailto:comprassusp@mj.gov.br" className="text-base sm:text-xl text-white font-medium hover:text-accent transition-all break-all">
-                      comprassusp@mj.gov.br
-                    </a>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold">
                       <Phone className="w-5 h-5" aria-hidden="true" />
                       TELEFONE
                     </div>
