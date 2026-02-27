@@ -612,11 +612,7 @@ export default function Home() {
             <p className="text-xs text-gray-400 font-medium">
               © 2026 Todos os direitos reservados.
             </p>
-            <div className="flex gap-6 text-xs text-gray-500 font-medium">
-              <span className="hover:text-primary cursor-default">Privacidade</span>
-              <span className="hover:text-primary cursor-default">Termos de Uso</span>
-              <span className="hover:text-primary cursor-default">Acessibilidade</span>
-            </div>
+
           </div>
         </div>
       </footer>
