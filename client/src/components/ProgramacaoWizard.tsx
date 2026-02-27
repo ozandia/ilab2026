@@ -1,9 +1,57 @@
 ﻿import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Clock, Calendar, MapPin, Bus } from "lucide-react";
+import { Clock, MapPin, Bus } from "lucide-react";
 import { ScheduleCard } from "@/components/ScheduleCard";
 import { ScheduleCardDay2 } from "@/components/ScheduleCardDay2";
+
+// Reusable day card components
+function Day03Card() {
+    return (
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
+            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                <Clock className="w-4 h-4 text-blue-500" />
+                <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
+            </div>
+            <div className="px-6 py-5">
+                <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
+                <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
+            </div>
+        </div>
+    );
+}
+
+function Day06Card() {
+    return (
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                <Clock className="w-4 h-4 text-blue-500" />
+                <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
+            </div>
+            <div className="px-6 py-5 flex items-center">
+                <p className="text-sm text-gray-500">9h - 17h | CICB</p>
+            </div>
+        </div>
+    );
+}
+
+// Simple card for other days
+function SimpleCard({ title, items }: { title: string; items: { label: string; detail?: string }[] }) {
+    return (
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                <Clock className="w-4 h-4 text-blue-500" />
+                <h2 className="text-sm font-semibold text-slate-700">{title}</h2>
+            </div>
+            <div className="px-6 py-5 space-y-3">
+                {items.map((item, i) => (
+                    <div key={i}>
+                        <p className="font-semibold text-gray-900">{item.label}</p>
+                        {item.detail && <p className="text-sm text-gray-500">{item.detail}</p>}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
 
 export function ProgramacaoWizard() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -15,31 +63,10 @@ export function ProgramacaoWizard() {
             description: "REDE INTERFEDERATIVA DE CONVÊNIOS",
             content: (
                 <div className="space-y-4">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
-                      </div>
-                      <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
-                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
-                      </div>
-                    </div>
-
+                    <Day03Card />
                     <ScheduleCard />
-
                     <ScheduleCardDay2 />
-
-
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
-                      </div>
-                      <div className="px-6 py-5 flex items-center">
-                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
-                      </div>
-                    </div>
+                    <Day06Card />
                 </div>
             )
         },
@@ -49,61 +76,16 @@ export function ProgramacaoWizard() {
             description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS FUNDO A FUNDO",
             content: (
                 <div className="space-y-4">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
-                      </div>
-                      <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
-                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
-                      </div>
-                    </div>
-
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                04 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div>
-                                <p className="font-semibold">Plenária</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h | CICB</p>
-                            </div>
-                            <div>
-                                <p className="font-semibold">Reunião Técnica</p>
-                                <p className="text-sm text-muted-foreground">14h - 17h | Sala GTI</p>
-                            </div>
-                        </CardContent>
-
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                05 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div>
-                                <p className="font-semibold">Security Day</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h | Sala GTI</p>
-                            </div>
-                            <div>
-                                <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
-                            </div>
-                        </CardContent>
-
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
-                      </div>
-                      <div className="px-6 py-5 flex items-center">
-                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
-                      </div>
-                    </div>
+                    <Day03Card />
+                    <SimpleCard title="04 de março" items={[
+                        { label: "Plenária", detail: "9h - 12h | CICB" },
+                        { label: "Reunião Técnica", detail: "14h - 17h | Sala GTI" },
+                    ]} />
+                    <SimpleCard title="05 de março" items={[
+                        { label: "Security Day", detail: "9h - 12h | Sala GTI" },
+                        { label: "Visita ao iLab-Seg", detail: "14h - 17h" },
+                    ]} />
+                    <Day06Card />
                 </div>
             )
         },
@@ -113,73 +95,37 @@ export function ProgramacaoWizard() {
             description: "REDE INTERFEDERATIVA DE LOGÍSTICA",
             content: (
                 <div className="space-y-4">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
-                      </div>
-                      <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
-                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
-                      </div>
-                    </div>
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                04 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
+                    <Day03Card />
+                    <SimpleCard title="04 de março" items={[
+                        { label: "Plenária", detail: "9h - 12h" },
+                        { label: "Reunião Técnica", detail: "14h - 17h" },
+                    ]} />
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                        <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                            <Clock className="w-4 h-4 text-blue-500" />
+                            <h2 className="text-sm font-semibold text-slate-700">05 de março</h2>
+                        </div>
+                        <div className="px-6 py-5 space-y-3">
                             <div>
-                                <p className="font-semibold">Plenária</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h</p>
-                            </div>
-                            <div>
-                                <p className="font-semibold">Reunião Técnica</p>
-                                <p className="text-sm text-muted-foreground">14h - 17h</p>
-                            </div>
-                        </CardContent>
-
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                05 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div>
-                                <p className="font-semibold">Visita Técnica Canil CBMDF</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h | Academia CBMDF</p>
-
-                                {/* Transport notice */}
-                                <div className="mt-3 flex gap-3 rounded-lg border border-accent/20 bg-accent/5 p-3">
-                                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-accent/15 flex items-center justify-center">
-                                        <Bus className="w-4 h-4 text-accent" aria-hidden="true" />
-                                    </div>
-                                    <div className="space-y-0.5">
-                                        <p className="text-xs font-semibold text-accent uppercase tracking-wide">Translado</p>
-                                        <p className="text-xs text-muted-foreground leading-relaxed">
-                                            Saída às <span className="font-semibold text-foreground">9h</span> da Sede do MJSP. Retorno ao CICB previsto para as <span className="font-semibold text-foreground">13h</span>
+                                <p className="font-semibold text-gray-900">Visita Técnica Canil CBMDF</p>
+                                <p className="text-sm text-gray-500">9h - 12h | Academia CBMDF</p>
+                                <div className="mt-3 flex gap-3 rounded-lg border border-blue-100 bg-blue-50/40 p-3">
+                                    <Bus className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                                    <div>
+                                        <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Translado</p>
+                                        <p className="text-xs text-gray-500 leading-relaxed mt-0.5">
+                                            Saída às <span className="font-semibold text-gray-700">9h</span> da Sede do MJSP. Retorno ao CICB previsto para as <span className="font-semibold text-gray-700">13h</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
+                                <p className="font-semibold text-gray-900">Visita ao iLab-Seg</p>
+                                <p className="text-sm text-gray-500">14h - 17h</p>
                             </div>
-                        </CardContent>
-
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
-                      </div>
-                      <div className="px-6 py-5 flex items-center">
-                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
-                      </div>
+                        </div>
                     </div>
+                    <Day06Card />
                 </div>
             )
         },
@@ -189,60 +135,16 @@ export function ProgramacaoWizard() {
             description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS VOLUNTÁRIAS",
             content: (
                 <div className="space-y-4">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
-                      </div>
-                      <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
-                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
-                      </div>
-                    </div>
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                04 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div>
-                                <p className="font-semibold">Plenária</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h</p>
-                            </div>
-                            <div>
-                                <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
-                            </div>
-                        </CardContent>
-
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                05 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div>
-                                <p className="font-semibold">Security Day</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h</p>
-                            </div>
-                            <div>
-                                <p className="font-semibold">Reunião Técnica</p>
-                                <p className="text-sm text-muted-foreground">14h - 17h</p>
-                            </div>
-                        </CardContent>
-
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
-                      </div>
-                      <div className="px-6 py-5 flex items-center">
-                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
-                      </div>
-                    </div>
+                    <Day03Card />
+                    <SimpleCard title="04 de março" items={[
+                        { label: "Plenária", detail: "9h - 12h" },
+                        { label: "Visita ao iLab-Seg", detail: "14h - 17h" },
+                    ]} />
+                    <SimpleCard title="05 de março" items={[
+                        { label: "Security Day", detail: "9h - 12h" },
+                        { label: "Reunião Técnica", detail: "14h - 17h" },
+                    ]} />
+                    <Day06Card />
                 </div>
             )
         },
@@ -252,99 +154,73 @@ export function ProgramacaoWizard() {
             description: "CÂMARAS TÉCNICAS DE ORÇAMENTO",
             content: (
                 <div className="space-y-4">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
-                      </div>
-                      <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
-                        <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
-                      </div>
-                    </div>
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                04 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
+                    <Day03Card />
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                        <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                            <Clock className="w-4 h-4 text-blue-500" />
+                            <h2 className="text-sm font-semibold text-slate-700">04 de março</h2>
+                        </div>
+                        <div className="px-6 py-5 space-y-3">
                             <div>
-                                <p className="font-semibold">Visita ao Instituto Nacional de Criminalística - INC</p>
-                                <p className="text-sm text-muted-foreground">8h - 12h</p>
-
-                                {/* Transport notice */}
-                                <div className="mt-3 flex gap-3 rounded-lg border border-accent/20 bg-accent/5 p-3">
-                                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-accent/15 flex items-center justify-center">
-                                        <Bus className="w-4 h-4 text-accent" aria-hidden="true" />
-                                    </div>
-                                    <div className="space-y-0.5">
-                                        <p className="text-xs font-semibold text-accent uppercase tracking-wide">Translado</p>
-                                        <p className="text-xs text-muted-foreground leading-relaxed">
-                                            Saída às <span className="font-semibold text-foreground">08h</span> da Sede do Ministério da Justiça e Segurança Pública
+                                <p className="font-semibold text-gray-900">Visita ao Instituto Nacional de Criminalística - INC</p>
+                                <p className="text-sm text-gray-500">8h - 12h</p>
+                                <div className="mt-3 flex gap-3 rounded-lg border border-blue-100 bg-blue-50/40 p-3">
+                                    <Bus className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                                    <div>
+                                        <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Translado</p>
+                                        <p className="text-xs text-gray-500 leading-relaxed mt-0.5">
+                                            Saída às <span className="font-semibold text-gray-700">08h</span> da Sede do Ministério da Justiça e Segurança Pública
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
+                                <p className="font-semibold text-gray-900">Visita ao iLab-Seg</p>
+                                <p className="text-sm text-gray-500">14h - 17h</p>
                             </div>
-                        </CardContent>
-
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                05 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
+                        </div>
+                    </div>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                        <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+                            <Clock className="w-4 h-4 text-blue-500" />
+                            <h2 className="text-sm font-semibold text-slate-700">05 de março</h2>
+                        </div>
+                        <div className="px-6 py-5 space-y-3">
                             <div>
-                                <p className="font-semibold">Security Day</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h</p>
-                            </div>
-                            <div>
-                                <p className="font-semibold">Reunião Técnica</p>
-                                <p className="text-sm text-muted-foreground">14h - 17h</p>
+                                <p className="font-semibold text-gray-900">Security Day</p>
+                                <p className="text-sm text-gray-500">9h - 12h</p>
                             </div>
                             <div>
-                                <p className="font-semibold">Mesa Redonda</p>
-                                <p className="text-sm text-muted-foreground">17h30 Local: Sede da APCF</p>
-                                <p className="text-xs text-primary/70 italic mt-0.5">Protagonismo do ComprasSusp na Modernização da PCI</p>
+                                <p className="font-semibold text-gray-900">Reunião Técnica</p>
+                                <p className="text-sm text-gray-500">14h - 17h</p>
+                            </div>
+                            <div>
+                                <p className="font-semibold text-gray-900">Mesa Redonda</p>
+                                <p className="text-sm text-gray-500">17h30 | Sede da APCF</p>
+                                <p className="text-xs text-blue-500 italic mt-0.5">Protagonismo do ComprasSusp na Modernização da PCI</p>
                                 <a
                                     href="https://maps.google.com/?q=APCF+Associação+dos+Delegados+da+Polícia+Federal+Brasília"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1"
-                                    aria-label="Ver localização da Sede da APCF no Google Maps (abre em nova janela)"
+                                    className="inline-flex items-center gap-1 text-xs text-blue-500 hover:underline mt-1"
+                                    aria-label="Ver localização da Sede da APCF no Google Maps"
                                 >
                                     <MapPin className="w-3 h-3" aria-hidden="true" />
                                     Ver no Maps
                                 </a>
                             </div>
-                        </CardContent>
-
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                        <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
-                      </div>
-                      <div className="px-6 py-5 flex items-center">
-                        <p className="text-sm text-gray-500">9h - 17h | CICB</p>
-                      </div>
+                        </div>
                     </div>
+                    <Day06Card />
                 </div>
             )
         }
     ];
 
-
-
     return (
         <div className="br-wizard" data-vertical="vertical" data-step={currentStep}>
 
-            {/* Mobile: elegant step indicator — numbered circles + dynamic label */}
+            {/* Mobile: numbered dots + dynamic label */}
             <div className="wizard-mobile-steps md:hidden" aria-label="Grupos de trabalho">
                 <div className="wizard-steps-row" role="tablist">
                     {gtiSteps.map((step) => (
@@ -376,11 +252,7 @@ export function ProgramacaoWizard() {
 
             {/* Desktop: vertical sidebar tabs */}
             <div className="wizard-header hidden md:block">
-                <div
-                    className="wizard-progress"
-                    role="tablist"
-                    aria-label="Grupos de trabalho"
-                >
+                <div className="wizard-progress" role="tablist" aria-label="Grupos de trabalho">
                     {gtiSteps.map((step) => (
                         <button
                             key={step.id}
