@@ -39,7 +39,7 @@ export function ProgramacaoWizard() {
                             </div>
                             <div>
                                 <p className="font-semibold">Reuni�o T�cnica</p>
-                                <p className="text-sm text-muted-foreground">14h - 17h | Sala GTI</p>
+                                <p className="text-sm text-muted-foreground">14h - 18h | Sala da Rede Interfederativa de Conv&#234;nios</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -108,7 +108,7 @@ export function ProgramacaoWizard() {
                             </div>
                             <div>
                                 <p className="font-semibold">Reuni�o T�cnica</p>
-                                <p className="text-sm text-muted-foreground">14h - 17h | Sala GTI</p>
+                                <p className="text-sm text-muted-foreground">14h - 18h | Sala da Rede Interfederativa de Conv&#234;nios</p>
                             </div>
                         </CardContent>
                     </Card>
