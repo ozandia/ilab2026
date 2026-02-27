@@ -442,7 +442,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div className="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 sm:gap-8 lg:gap-4">
                   {/* Bloco 1 */}
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
@@ -487,6 +487,9 @@ export default function Home() {
                     </div>
                   </div>
 
+                  {/* Divisor 1 - Somente Desktop */}
+                  <div className="hidden lg:block w-1.5 h-10 bg-white/20 rounded-full mt-2 shrink-0" aria-hidden="true"></div>
+
                   {/* Bloco 2 */}
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
@@ -514,6 +517,9 @@ export default function Home() {
                     </div>
                   </div>
 
+                  {/* Divisor 2 - Somente Desktop */}
+                  <div className="hidden lg:block w-1.5 h-10 bg-white/20 rounded-full mt-2 shrink-0" aria-hidden="true"></div>
+
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
                       <Phone className="w-5 h-5" aria-hidden="true" />
@@ -539,6 +545,9 @@ export default function Home() {
                       </a>
                     </div>
                   </div>
+
+                  {/* Divisor 3 - Somente Desktop */}
+                  <div className="hidden lg:block w-1.5 h-10 bg-white/20 rounded-full mt-2 shrink-0" aria-hidden="true"></div>
 
                   {/* Bloco 4 */}
                   <div className="space-y-3">
