@@ -62,7 +62,18 @@ export function ProgramacaoWizard() {
     const gtiSteps = [
         {
             id: 1,
-            label: "Tranferências Voluntárias",
+            label: "Transferências Obrigatórias",
+            description: "Rede Interfederativa de Transferências Fundo a Fundo",
+            content: (
+                <div className="space-y-4">
+                    <Day03Card />
+                    <ScheduleFundoAFundo />
+                </div>
+            )
+        },
+        {
+            id: 2,
+            label: "Transferências Voluntárias",
             description: "Rede Interfederativa de Convênios",
             content: (
                 <div className="space-y-4">
@@ -74,34 +85,22 @@ export function ProgramacaoWizard() {
             )
         },
         {
-            id: 2,
-            label: "FUNDO A FUNDO",
-            description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS FUNDO A FUNDO",
-            content: (
-                <div className="space-y-4">
-                    <Day03Card />
-                    <ScheduleFundoAFundo />
-                </div>
-            )
-        },
-        {
             id: 3,
-            label: "LOGÍSTICA",
-            description: "REDE INTERFEDERATIVA DE LOGÍSTICA",
-            content: (
-                <div className="space-y-4">
-                    <ScheduleLogistica />
-                </div>
-            )
-        },
-
-        {
-            id: 4,
-            label: "ORÇAMENTO",
-            description: "CÂMARAS TÉCNICAS DE ORÇAMENTO",
+            label: "Orçamento",
+            description: "Câmaras Técnicas de Orçamento",
             content: (
                 <div className="space-y-4">
                     <ScheduleOrcamento />
+                </div>
+            )
+        },
+        {
+            id: 4,
+            label: "Logística",
+            description: "Rede Interfederativa de Logística",
+            content: (
+                <div className="space-y-4">
+                    <ScheduleLogistica />
                 </div>
             )
         }
@@ -133,7 +132,7 @@ export function ProgramacaoWizard() {
                         {gtiSteps.find((s) => s.id === currentStep)?.label}
                     </span>
                     {gtiSteps.find((s) => s.id === currentStep)?.description && (
-                        <span className="wizard-step-desc text-xs text-primary/60 mt-0.5 block text-center">
+                        <span className="wizard-step-desc text-[10px] text-primary/60 mt-0.5 block text-center italic">
                             {gtiSteps.find((s) => s.id === currentStep)?.description}
                         </span>
                     )}
@@ -142,11 +141,15 @@ export function ProgramacaoWizard() {
 
             {/* Desktop: vertical sidebar tabs */}
             <div className="wizard-header hidden md:block">
-                <div className="wizard-progress" role="tablist" aria-label="Grupos de trabalho">
+                <div className="wizard-progress space-y-3" role="tablist" aria-label="Grupos de trabalho">
                     {gtiSteps.map((step) => (
                         <button
                             key={step.id}
-                            className="wizard-progress-btn flex flex-col items-start text-left py-2.5 px-4 group"
+                            className={`w-full flex flex-row items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left border-none shadow-sm
+                                ${currentStep === step.id
+                                    ? "bg-[#104EAD] shadow-md scale-[1.02]"
+                                    : "bg-[#F0F5FF] hover:bg-[#E0EAFF] shadow-sm hover:scale-[1.01]"
+                                }`}
                             type="button"
                             role="tab"
                             data-step={step.id}
@@ -155,14 +158,22 @@ export function ProgramacaoWizard() {
                             id={`tab-step-${step.id}`}
                             onClick={() => setCurrentStep(step.id)}
                         >
-                            <span className="info font-bold text-primary group-hover:text-accent transition-colors leading-none">
-                                {step.label}
-                            </span>
-                            {step.description && (
-                                <span className="text-[10px] text-primary/70 font-medium italic block leading-none mt-0.5">
-                                    {step.description}
+                            <div className={`flex-shrink-0 w-11 h-11 border-radius-50 rounded-full flex items-center justify-center font-bold text-lg transition-colors
+                                ${currentStep === step.id ? "bg-white text-[#104EAD]" : "bg-[#104EAD] text-white"}`}>
+                                {step.id}
+                            </div>
+                            <div className="flex flex-col justify-center min-w-0">
+                                <span className={`text-xl font-bold leading-tight truncate transition-colors
+                                    ${currentStep === step.id ? "text-white" : "text-[#104EAD]"}`}>
+                                    {step.label}
                                 </span>
-                            )}
+                                {step.description && (
+                                    <span className={`text-[12px] font-normal italic leading-tight truncate transition-colors mt-1
+                                        ${currentStep === step.id ? "text-white/90" : "text-[#333333]"}`}>
+                                        {step.description}
+                                    </span>
+                                )}
+                            </div>
                         </button>
                     ))}
                 </div>
