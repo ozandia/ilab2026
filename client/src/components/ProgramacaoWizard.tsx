@@ -62,19 +62,6 @@ export function ProgramacaoWizard() {
     const gtiSteps = [
         {
             id: 1,
-            label: "Transferências Voluntárias",
-            description: "Rede Interfederativa de Convênios",
-            content: (
-                <div className="space-y-4">
-                    <Day03Card />
-                    <ScheduleCard />
-                    <ScheduleCardDay2 />
-                    <Day06Card />
-                </div>
-            )
-        },
-        {
-            id: 2,
             label: "FUNDO A FUNDO",
             description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS FUNDO A FUNDO",
             content: (
@@ -85,7 +72,7 @@ export function ProgramacaoWizard() {
             )
         },
         {
-            id: 3,
+            id: 2,
             label: "LOGÍSTICA",
             description: "REDE INTERFEDERATIVA DE LOGÍSTICA",
             content: (
@@ -95,7 +82,7 @@ export function ProgramacaoWizard() {
             )
         },
         {
-            id: 4,
+            id: 3,
             label: "TRANSFERÊNCIAS VOLUNTÁRIAS",
             description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS VOLUNTÁRIAS",
             content: (
@@ -114,7 +101,7 @@ export function ProgramacaoWizard() {
             )
         },
         {
-            id: 5,
+            id: 4,
             label: "ORÇAMENTO",
             description: "CÂMARAS TÉCNICAS DE ORÇAMENTO",
             content: (
