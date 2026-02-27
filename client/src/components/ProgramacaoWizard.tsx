@@ -49,7 +49,7 @@ export function ProgramacaoWizard() {
         },
         {
             id: 2,
-            label: "FUNDO A FUNDO",
+            label: "FUNDO A FUNDO",\n            description: "REDE INTERFEDERATIVA DE TRANSFER\u00caNCIAS FUNDO A FUNDO",
             content: (
                 <div className="space-y-4">
                     <Card className="card-elevated">
@@ -118,7 +118,7 @@ export function ProgramacaoWizard() {
         },
         {
             id: 3,
-            label: "LOGÍSTICA",
+            label: "LOGÍSTICA",\n            description: "REDE INTERFEDERATIVA DE LOG\u00cdSTICA",
             content: (
                 <div className="space-y-4">
                     <Card className="card-elevated">
@@ -200,7 +200,7 @@ export function ProgramacaoWizard() {
         },
         {
             id: 4,
-            label: "TRANSFERÊNCIAS VOLUNTÁRIAS",
+            label: "TRANSFERÊNCIAS VOLUNTÁRIAS",\n            description: "REDE INTERFEDERATIVA DE TRANSFER\u00caNCIAS VOLUNT\u00c1RIAS",
             content: (
                 <div className="space-y-4">
                     <Card className="card-elevated">
@@ -268,7 +268,7 @@ export function ProgramacaoWizard() {
         },
         {
             id: 5,
-            label: "ORÇAMENTO",
+            label: "ORÇAMENTO",\n            description: "C\u00c2MARAS T\u00c9CNICAS DE OR\u00c7AMENTO",
             content: (
                 <div className="space-y-4">
                     <Card className="card-elevated">
