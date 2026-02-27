@@ -18,10 +18,10 @@ export function ProgramacaoWizard() {
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
                       </div>
                       <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
                         <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
                       </div>
                     </div>
@@ -34,28 +34,28 @@ export function ProgramacaoWizard() {
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
                       </div>
                       <div className="px-6 py-5 flex items-center">
                         <p className="text-sm text-gray-500">9h - 17h | CICB</p>
                       </div>
                     </div>
-                    </Card>
                 </div>
             )
         },
         {
             id: 2,
-            label: "FUNDO A FUNDO",\n            description: "REDE INTERFEDERATIVA DE TRANSFER\u00caNCIAS FUNDO A FUNDO",
+            label: "FUNDO A FUNDO",
+            description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS FUNDO A FUNDO",
             content: (
                 <div className="space-y-4">
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
                       </div>
                       <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
                         <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
                       </div>
                     </div>
@@ -77,7 +77,6 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">14h - 17h | Sala GTI</p>
                             </div>
                         </CardContent>
-                    </Card>
 
                     <Card className="card-elevated">
                         <CardHeader>
@@ -95,33 +94,32 @@ export function ProgramacaoWizard() {
                                 <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
                             </div>
                         </CardContent>
-                    </Card>
 
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
                       </div>
                       <div className="px-6 py-5 flex items-center">
                         <p className="text-sm text-gray-500">9h - 17h | CICB</p>
                       </div>
                     </div>
-                    </Card>
                 </div>
             )
         },
         {
             id: 3,
-            label: "LOGÍSTICA",\n            description: "REDE INTERFEDERATIVA DE LOG\u00cdSTICA",
+            label: "LOGÍSTICA",
+            description: "REDE INTERFEDERATIVA DE LOGÍSTICA",
             content: (
                 <div className="space-y-4">
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
                       </div>
                       <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
                         <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
                       </div>
                     </div>
@@ -142,7 +140,6 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">14h - 17h</p>
                             </div>
                         </CardContent>
-                    </Card>
 
                     <Card className="card-elevated">
                         <CardHeader>
@@ -174,33 +171,31 @@ export function ProgramacaoWizard() {
                             </div>
                         </CardContent>
 
-                    </Card>
-
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
                       </div>
                       <div className="px-6 py-5 flex items-center">
                         <p className="text-sm text-gray-500">9h - 17h | CICB</p>
                       </div>
                     </div>
-                    </Card>
                 </div>
             )
         },
         {
             id: 4,
-            label: "TRANSFERÊNCIAS VOLUNTÁRIAS",\n            description: "REDE INTERFEDERATIVA DE TRANSFER\u00caNCIAS VOLUNT\u00c1RIAS",
+            label: "TRANSFERÊNCIAS VOLUNTÁRIAS",
+            description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS VOLUNTÁRIAS",
             content: (
                 <div className="space-y-4">
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
                       </div>
                       <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
                         <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
                       </div>
                     </div>
@@ -220,7 +215,6 @@ export function ProgramacaoWizard() {
                                 <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
                             </div>
                         </CardContent>
-                    </Card>
 
                     <Card className="card-elevated">
                         <CardHeader>
@@ -239,33 +233,32 @@ export function ProgramacaoWizard() {
                                 <p className="text-sm text-muted-foreground">14h - 17h</p>
                             </div>
                         </CardContent>
-                    </Card>
 
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
                       </div>
                       <div className="px-6 py-5 flex items-center">
                         <p className="text-sm text-gray-500">9h - 17h | CICB</p>
                       </div>
                     </div>
-                    </Card>
                 </div>
             )
         },
         {
             id: 5,
-            label: "ORÇAMENTO",\n            description: "C\u00c2MARAS T\u00c9CNICAS DE OR\u00c7AMENTO",
+            label: "ORÇAMENTO",
+            description: "CÂMARAS TÉCNICAS DE ORÇAMENTO",
             content: (
                 <div className="space-y-4">
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">03 de mar&#231;o - Abertura</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
                       </div>
                       <div className="px-6 py-5">
-                        <h3 className="text-base font-bold text-gray-900">Hor&#225;rio: 19h</h3>
+                        <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
                         <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
                       </div>
                     </div>
@@ -298,7 +291,6 @@ export function ProgramacaoWizard() {
                                 <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
                             </div>
                         </CardContent>
-                    </Card>
 
                     <Card className="card-elevated">
                         <CardHeader>
@@ -333,18 +325,15 @@ export function ProgramacaoWizard() {
                             </div>
                         </CardContent>
 
-                    </Card>
-
                     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
                       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                         <Clock className="w-4 h-4 text-blue-500" />
-                        <h2 className="text-sm font-semibold text-slate-700">06 de mar&#231;o - Palestras SENASP</h2>
+                        <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
                       </div>
                       <div className="px-6 py-5 flex items-center">
                         <p className="text-sm text-gray-500">9h - 17h | CICB</p>
                       </div>
                     </div>
-                    </Card>
                 </div>
             )
         }
