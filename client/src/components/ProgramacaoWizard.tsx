@@ -155,9 +155,9 @@ export function ProgramacaoWizard() {
                             id={`tab-step-${step.id}`}
                             onClick={() => setCurrentStep(step.id)}
                         >
-                            <span className="info font-bold">{step.label}</span>
+                            <span className="info font-bold text-primary group-hover:text-accent transition-colors">{step.label}</span>
                             {step.description && (
-                                <span className="text-[10px] text-primary/50 font-medium mt-1 block leading-tight">
+                                <span className="text-[10px] text-primary/70 font-medium italic block leading-tight">
                                     {step.description}
                                 </span>
                             )}
