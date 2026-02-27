@@ -1,173 +1,186 @@
-import { useState } from "react";
-import { Clock, ChevronDown, ChevronUp, CheckCircle2, MapPin } from "lucide-react";
-
-interface TimelineEvent {
-    time: string;
-    title: string;
-    bullets?: string[];
-    isLast?: boolean;
-}
-
-interface DayCardProps {
-    date: string;
-    summaryTitle: string;
-    summaryDetail: string;
-    isOpen: boolean;
-    onToggle: () => void;
-    events: TimelineEvent[];
-}
-
-function DayCard({ date, summaryTitle, summaryDetail, isOpen, onToggle, events }: DayCardProps) {
-    return (
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            {/* Standardized Header */}
-            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-                <Clock className="w-4 h-4 text-blue-500" />
-                <h2 className="text-sm font-semibold text-slate-700">{date}</h2>
-            </div>
-
-            {/* Expandable Row Summary */}
-            <div
-                className="px-6 py-5 flex justify-between items-center cursor-pointer group hover:bg-slate-50/30 transition-colors"
-                onClick={onToggle}
-            >
-                <div className="flex-1">
-                    <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                        {summaryTitle}
-                    </h3>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-gray-500">
-                    <span className="hidden sm:inline">{summaryDetail}</span>
-                    {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                </div>
-            </div>
-
-            {/* Expanded State: Vertical Timeline */}
-            {isOpen && (
-                <div className="px-6 pb-6 animate-in fade-in slide-in-from-top-1 duration-200">
-                    <div className="relative border-l-2 border-slate-100 ml-3 pl-8 space-y-8 py-2">
-                        {events.map((event, idx) => (
-                            <div key={idx} className="relative">
-                                {/* Timeline Node */}
-                                <div className="absolute -left-[41px] top-1">
-                                    {event.isLast ? (
-                                        <div className="bg-white rounded-full p-0.5">
-                                            <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                                        </div>
-                                    ) : (
-                                        <div className="w-4 h-4 rounded-full border-2 border-blue-500 bg-white" />
-                                    )}
-                                </div>
-
-                                {/* Event Content */}
-                                <div className="space-y-2">
-                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                                        <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded w-fit uppercase tracking-wider">
-                                            {event.time}
-                                        </span>
-                                        <h4 className="text-sm font-bold text-gray-900 leading-snug">
-                                            {event.title}
-                                        </h4>
-                                    </div>
-
-                                    {event.bullets && event.bullets.length > 0 && (
-                                        <ul className="space-y-2">
-                                            {event.bullets.map((bullet, bIdx) => (
-                                                <li key={bIdx} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
-                                                    <span className="text-blue-400 font-bold">›</span>
-                                                    {bullet}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-        </div>
-    );
-}
+import { useState } from 'react';
+import { Clock, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
 
 export function ScheduleFundoAFundo() {
+    // Estados para controlar o abre/fecha de cada dia (iniciam fechados)
     const [isOpenDay4, setIsOpenDay4] = useState(false);
     const [isOpenDay5, setIsOpenDay5] = useState(false);
     const [isOpenDay6, setIsOpenDay6] = useState(false);
 
     return (
-        <div className="space-y-4 max-w-4xl mx-auto">
-            {/* Day 04 */}
-            <DayCard
-                date="04 de março"
-                summaryTitle="Reunião da Rede Interfederativa"
-                summaryDetail="14h – 17h30 | Sala 4, ILAB"
-                isOpen={isOpenDay4}
-                onToggle={() => setIsOpenDay4(!isOpenDay4)}
-                events={[
-                    {
-                        time: "14h00 – 17h30",
-                        title: "Reunião da Rede Interfederativa da Transferência Fundo a Fundo",
-                        bullets: [
-                            "Execução dos recursos do FNSP",
-                            "Compartilhamento de boas práticas entre Entes Federados",
-                            "Pactuação 2026",
-                        ]
-                    }
-                ]}
-            />
+        <div className="space-y-4 max-w-4xl mx-auto font-sans text-gray-800 pb-8">
 
-            {/* Day 05 */}
-            <DayCard
-                date="05 de março"
-                summaryTitle="Oficina Técnica Gestão Segura"
-                summaryDetail="09h – 17h30 | Salas Modulares, MJSP"
-                isOpen={isOpenDay5}
-                onToggle={() => setIsOpenDay5(!isOpenDay5)}
-                events={[
-                    {
-                        time: "09h00 – 12h00",
-                        title: "Oficina Técnica – Gestão Segura (Manhã)",
-                        bullets: [
-                            "Apresentação do Módulo do Plano de Aplicação no Sistema Gestão Segura",
-                            "Fluxos operacionais e funcionalidades",
-                            "Demonstração prática orientada",
-                        ]
-                    },
-                    {
-                        time: "14h00 – 17h30",
-                        title: "Oficina Técnica – Gestão Segura (Tarde)",
-                        bullets: [
-                            "Apresentação do Módulo do Relatório de Gestão (análise financeira) no Sistema Gestão Segura",
-                            "Demonstração prática orientada",
-                        ]
-                    }
-                ]}
-            />
+            {/* ================= CARD DIA 04 ================= */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                {/* Cabeçalho Padronizado */}
+                <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-500" />
+                    <h2 className="text-sm font-semibold text-slate-700">04 de março</h2>
+                </div>
 
-            {/* Day 06 */}
-            <DayCard
-                date="06 de março"
-                summaryTitle="Lançamento dos Módulos do Plano de Aplicação e de Gestão"
-                summaryDetail="09h – 11h30 | Auditório, ILAB"
-                isOpen={isOpenDay6}
-                onToggle={() => setIsOpenDay6(!isOpenDay6)}
-                events={[
-                    {
-                        time: "09h00 – 10h00",
-                        title: "Cerimônia de Lançamento dos Módulos de Gestão – Gestão Segura",
-                        bullets: [
-                            "Apresentação dos novos módulos do sistema",
-                            "Demonstração das funcionalidades estratégicas",
-                        ]
-                    },
-                    {
-                        time: "10h30 – 11h30",
-                        title: "Ferramenta Transferegov.",
-                        isLast: true
-                    }
-                ]}
-            />
+                {/* Linha Resumo (Clicável) */}
+                <div className="px-6 py-5">
+                    <div
+                        className="flex justify-between items-center cursor-pointer group"
+                        onClick={() => setIsOpenDay4(!isOpenDay4)}
+                    >
+                        <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            Reunião da Rede Interfederativa
+                        </h3>
+                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                            <span className="hidden md:inline">14h – 17h30 | Sala 4, no ILAB</span>
+                            {isOpenDay4 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        </div>
+                    </div>
+                    {/* Fallback para mobile (mostra embaixo se a tela for pequena) */}
+                    <p className="md:hidden text-xs text-gray-500 mt-1">14h – 17h30 | Sala 4, no ILAB</p>
+
+                    {/* Timeline Expandida */}
+                    {isOpenDay4 && (
+                        <div className="mt-5 pt-6 border-t border-gray-100 relative">
+                            <div className="absolute left-2.5 md:left-3 top-8 bottom-0 w-0.5 bg-gray-100"></div>
+
+                            <div className="relative pl-8 md:pl-10 space-y-8 pb-2">
+                                {/* Item Único */}
+                                <div className="relative">
+                                    <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
+                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
+                                        <span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">14h00 – 17h30</span>
+                                        <h4 className="text-base font-bold text-gray-900">Reunião da Rede Interfederativa da Transferência Fundo a Fundo</h4>
+                                    </div>
+                                    <ul className="text-sm text-gray-600 list-disc list-inside space-y-1 md:ml-32">
+                                        <li>Execução dos recursos do FNSP</li>
+                                        <li>Compartilhamento de boas práticas entre Entes Federados</li>
+                                        <li>Pactuação 2026</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* ================= CARD DIA 05 ================= */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                {/* Cabeçalho Padronizado */}
+                <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-500" />
+                    <h2 className="text-sm font-semibold text-slate-700">05 de março</h2>
+                </div>
+
+                {/* Linha Resumo (Clicável) */}
+                <div className="px-6 py-5">
+                    <div
+                        className="flex justify-between items-center cursor-pointer group"
+                        onClick={() => setIsOpenDay5(!isOpenDay5)}
+                    >
+                        <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            Oficina Técnica Gestão Segura
+                        </h3>
+                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                            <span className="hidden md:inline">09h00 – 17h30 | Salas Modulares, no MJSP</span>
+                            {isOpenDay5 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        </div>
+                    </div>
+                    <p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 17h30 | Salas Modulares, no MJSP</p>
+
+                    {/* Timeline Expandida */}
+                    {isOpenDay5 && (
+                        <div className="mt-5 pt-6 border-t border-gray-100 relative">
+                            <div className="absolute left-2.5 md:left-3 top-8 bottom-0 w-0.5 bg-gray-100"></div>
+
+                            <div className="relative pl-8 md:pl-10 space-y-8 pb-2">
+                                {/* Item 1 */}
+                                <div className="relative">
+                                    <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
+                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
+                                        <span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">09h00 – 12h00</span>
+                                        <h4 className="text-base font-bold text-gray-900">Oficina Técnica – Gestão Segura (Manhã)</h4>
+                                    </div>
+                                    <ul className="text-sm text-gray-600 list-disc list-inside space-y-1 md:ml-32">
+                                        <li>Apresentação do Módulo do Plano de Aplicação no Sistema Gestão Segura</li>
+                                        <li>Fluxos operacionais e funcionalidades</li>
+                                        <li>Demonstração prática orientada</li>
+                                    </ul>
+                                </div>
+
+                                {/* Item 2 */}
+                                <div className="relative">
+                                    <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
+                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
+                                        <span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">14h00 – 17h30</span>
+                                        <h4 className="text-base font-bold text-gray-900">Oficina Técnica – Gestão Segura (Tarde)</h4>
+                                    </div>
+                                    <ul className="text-sm text-gray-600 list-disc list-inside space-y-1 md:ml-32">
+                                        <li>Apresentação do Módulo do Relatório de Gestão (análise financeira) no Sistema Gestão Segura</li>
+                                        <li>Demonstração prática orientada</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* ================= CARD DIA 06 ================= */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                {/* Cabeçalho Padronizado */}
+                <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-500" />
+                    <h2 className="text-sm font-semibold text-slate-700">06 de março</h2>
+                </div>
+
+                {/* Linha Resumo (Clicável) */}
+                <div className="px-6 py-5">
+                    <div
+                        className="flex justify-between items-center cursor-pointer group"
+                        onClick={() => setIsOpenDay6(!isOpenDay6)}
+                    >
+                        <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            Lançamento dos Módulos de Plano e Gestão
+                        </h3>
+                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                            <span className="hidden md:inline">09h00 – 11h30 | Auditório, no ILAB</span>
+                            {isOpenDay6 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        </div>
+                    </div>
+                    <p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 11h30 | Auditório, no ILAB</p>
+
+                    {/* Timeline Expandida */}
+                    {isOpenDay6 && (
+                        <div className="mt-5 pt-6 border-t border-gray-100 relative">
+                            <div className="absolute left-2.5 md:left-3 top-8 bottom-0 w-0.5 bg-gray-100"></div>
+
+                            <div className="relative pl-8 md:pl-10 space-y-8 pb-2">
+                                {/* Item 1 */}
+                                <div className="relative">
+                                    <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
+                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
+                                        <span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">09h00 – 10h00</span>
+                                        <h4 className="text-base font-bold text-gray-900">Cerimônia de Lançamento dos Módulos de Gestão</h4>
+                                    </div>
+                                    <ul className="text-sm text-gray-600 list-disc list-inside space-y-1 md:ml-32">
+                                        <li>Apresentação dos novos módulos do sistema</li>
+                                        <li>Demonstração das funcionalidades estratégicas</li>
+                                    </ul>
+                                </div>
+
+                                {/* Item 2 */}
+                                <div className="relative">
+                                    <div className="absolute -left-8 top-0.5 bg-white p-0.5">
+                                        <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                                    </div>
+                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
+                                        <span className="text-sm font-bold text-emerald-600 md:w-28 shrink-0">10h30 – 11h30</span>
+                                        <h4 className="text-base font-bold text-gray-900">Ferramenta Transferegov</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
         </div>
     );
 }
