@@ -488,7 +488,7 @@ export default function Home() {
                   </div>
 
                   {/* Divisor 1 - Somente Desktop */}
-                  <div className="hidden lg:block w-1.5 h-10 bg-white/20 rounded-full mt-2 shrink-0" aria-hidden="true"></div>
+                  <div className="hidden lg:block w-1.5 h-10 bg-white rounded-full mt-2 shrink-0" aria-hidden="true"></div>
 
                   {/* Bloco 2 */}
                   <div className="space-y-3">
@@ -518,7 +518,7 @@ export default function Home() {
                   </div>
 
                   {/* Divisor 2 - Somente Desktop */}
-                  <div className="hidden lg:block w-1.5 h-10 bg-white/20 rounded-full mt-2 shrink-0" aria-hidden="true"></div>
+                  <div className="hidden lg:block w-1.5 h-10 bg-white rounded-full mt-2 shrink-0" aria-hidden="true"></div>
 
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
