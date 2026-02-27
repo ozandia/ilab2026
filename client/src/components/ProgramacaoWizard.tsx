@@ -4,6 +4,7 @@ import { ScheduleCard } from "@/components/ScheduleCard";
 import { ScheduleCardDay2 } from "@/components/ScheduleCardDay2";
 import { ScheduleFundoAFundo } from "@/components/ScheduleFundoAFundo";
 import { ScheduleLogistica } from "@/components/ScheduleLogistica";
+import { ScheduleOrcamento } from "@/components/ScheduleOrcamento";
 
 // Reusable day card components
 function Day03Card() {
@@ -118,64 +119,7 @@ export function ProgramacaoWizard() {
             description: "CÂMARAS TÉCNICAS DE ORÇAMENTO",
             content: (
                 <div className="space-y-4">
-                    <Day03Card />
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                        <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                            <Clock className="w-4 h-4 text-blue-500" />
-                            <h2 className="text-sm font-semibold text-slate-700">04 de março</h2>
-                        </div>
-                        <div className="px-6 py-5 space-y-3">
-                            <div>
-                                <p className="font-semibold text-gray-900">Visita ao Instituto Nacional de Criminalística - INC</p>
-                                <p className="text-sm text-gray-500">8h - 12h</p>
-                                <div className="mt-3 flex gap-3 rounded-lg border border-blue-100 bg-blue-50/40 p-3">
-                                    <Bus className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                                    <div>
-                                        <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Translado</p>
-                                        <p className="text-xs text-gray-500 leading-relaxed mt-0.5">
-                                            Saída às <span className="font-semibold text-gray-700">08h</span> da Sede do Ministério da Justiça e Segurança Pública
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-gray-900">Visita ao iLab-Seg</p>
-                                <p className="text-sm text-gray-500">14h - 17h</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                        <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
-                            <Clock className="w-4 h-4 text-blue-500" />
-                            <h2 className="text-sm font-semibold text-slate-700">05 de março</h2>
-                        </div>
-                        <div className="px-6 py-5 space-y-3">
-                            <div>
-                                <p className="font-semibold text-gray-900">Security Day</p>
-                                <p className="text-sm text-gray-500">9h - 12h</p>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-gray-900">Reunião Técnica</p>
-                                <p className="text-sm text-gray-500">14h - 17h</p>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-gray-900">Mesa Redonda</p>
-                                <p className="text-sm text-gray-500">17h30 | Sede da APCF</p>
-                                <p className="text-xs text-blue-500 italic mt-0.5">Protagonismo do ComprasSusp na Modernização da PCI</p>
-                                <a
-                                    href="https://maps.google.com/?q=APCF+Associação+dos+Delegados+da+Polícia+Federal+Brasília"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 text-xs text-blue-500 hover:underline mt-1"
-                                    aria-label="Ver localização da Sede da APCF no Google Maps"
-                                >
-                                    <MapPin className="w-3 h-3" aria-hidden="true" />
-                                    Ver no Maps
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <Day06Card />
+                    <ScheduleOrcamento />
                 </div>
             )
         }
