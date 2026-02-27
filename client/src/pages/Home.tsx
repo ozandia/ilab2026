@@ -183,10 +183,12 @@ export default function Home() {
                   <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Valor da Diária</p>
                   <p className="text-3xl font-bold text-primary">R$ 425,00</p>
                 </div>
-                <div className="p-6 bg-accent/10 rounded-xl border border-accent/20">
-                  <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Adicional Embarque</p>
-                  <p className="text-3xl font-bold text-primary">R$ 95,00</p>
-                  <p className="text-xs text-primary/60 mt-1">Taxa única por trecho</p>
+                <div className="p-6 bg-[#0E4DA4] rounded-xl border border-white/10 shadow-lg">
+                  <p className="text-xs text-white/70 font-bold uppercase tracking-wider mb-2">Adicional Embarque</p>
+                  <div className="flex items-baseline gap-2">
+                    <p className="text-3xl font-bold text-white">R$ 95,00</p>
+                    <p className="text-[10px] text-white/50 uppercase font-medium">Taxa única / trecho</p>
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -210,23 +212,23 @@ export default function Home() {
                 A entrega da documentação é <span className="font-bold text-black underline decoration-accent/30 decoration-4">imprescindível</span> para a regularização da sua viagem no sistema.
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto">
-                <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-black text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-black transition-all" aria-hidden="true">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                <div className="flex flex-row items-center gap-[15px] px-[20px] py-[15px] bg-[#F4F8FF] border border-[#E6EFFF] rounded-xl shadow-sm hover:scale-[1.02] transition-all group">
+                  <div className="flex-shrink-0 w-[45px] h-[45px] rounded-full bg-[#0E4DA4] text-white flex items-center justify-center font-bold text-[20px]">
                     1
                   </div>
-                  <div>
-                    <span className="text-base sm:text-xl font-bold text-gray-800 block">Relatório de Viagem</span>
-                    <span className="text-sm text-gray-500">Documento base detalhado</span>
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <span className="text-[18px] font-bold leading-[1.1] text-[#0E4DA4]">Relatório de Viagem</span>
+                    <span className="text-[12px] font-normal italic leading-[1.2] text-[#333333] mt-[3px]">Documento base detalhado</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-black text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-black transition-all" aria-hidden="true">
+                <div className="flex flex-row items-center gap-[15px] px-[20px] py-[15px] bg-[#F4F8FF] border border-[#E6EFFF] rounded-xl shadow-sm hover:scale-[1.02] transition-all group">
+                  <div className="flex-shrink-0 w-[45px] h-[45px] rounded-full bg-[#0E4DA4] text-white flex items-center justify-center font-bold text-[20px]">
                     2
                   </div>
-                  <div>
-                    <span className="text-base sm:text-xl font-bold text-gray-800 block">Canhotos de Embarque</span>
-                    <span className="text-sm text-gray-500">Comprovantes originais</span>
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <span className="text-[18px] font-bold leading-[1.1] text-[#0E4DA4]">Canhotos de Embarque</span>
+                    <span className="text-[12px] font-normal italic leading-[1.2] text-[#333333] mt-[3px]">Comprovantes originais</span>
                   </div>
                 </div>
               </div>
