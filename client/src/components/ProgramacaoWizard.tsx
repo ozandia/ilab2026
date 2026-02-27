@@ -10,13 +10,20 @@ import { ScheduleOrcamento } from "@/components/ScheduleOrcamento";
 function Day03Card() {
     return (
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-blue-500" />
                 <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
             </div>
             <div className="px-6 py-5">
-                <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
-                <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
+                <div className="flex justify-between items-center group">
+                    <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        Abertura
+                    </h3>
+                    <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <span className="hidden md:inline">19h | CICB</span>
+                    </div>
+                </div>
+                <p className="md:hidden text-xs text-gray-500 mt-1">19h | CICB</p>
             </div>
         </div>
     );
@@ -25,12 +32,20 @@ function Day03Card() {
 function Day06Card() {
     return (
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-blue-500" />
                 <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
             </div>
-            <div className="px-6 py-5 flex items-center">
-                <p className="text-sm text-gray-500">9h - 17h | CICB</p>
+            <div className="px-6 py-5">
+                <div className="flex justify-between items-center group">
+                    <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        Programação Técnica
+                    </h3>
+                    <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <span className="hidden md:inline">9h - 17h | CICB</span>
+                    </div>
+                </div>
+                <p className="md:hidden text-xs text-gray-500 mt-1">9h - 17h | CICB</p>
             </div>
         </div>
     );
@@ -40,15 +55,24 @@ function Day06Card() {
 function SimpleCard({ title, items }: { title: string; items: { label: string; detail?: string }[] }) {
     return (
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
+            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-blue-500" />
                 <h2 className="text-sm font-semibold text-slate-700">{title}</h2>
             </div>
-            <div className="px-6 py-5 space-y-3">
+            <div className="px-6 py-5 space-y-4">
                 {items.map((item, i) => (
                     <div key={i}>
-                        <p className="font-semibold text-gray-900">{item.label}</p>
-                        {item.detail && <p className="text-sm text-gray-500">{item.detail}</p>}
+                        <div className="flex justify-between items-center group">
+                            <p className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                {item.label}
+                            </p>
+                            {item.detail && (
+                                <div className="flex items-center gap-3 text-sm text-gray-500">
+                                    <span className="hidden md:inline">{item.detail}</span>
+                                </div>
+                            )}
+                        </div>
+                        {item.detail && <p className="md:hidden text-xs text-gray-500 mt-1">{item.detail}</p>}
                     </div>
                 ))}
             </div>
