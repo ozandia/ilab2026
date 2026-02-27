@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { SecurityDayPoll } from "@/components/SecurityDayPoll";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -270,21 +269,6 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* Security Day Poll Section */}
-        <section id="security-day" className="container pt-24">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="w-2 h-10 bg-accent rounded-full"></div>
-            <div>
-              <h2 className="text-4xl font-bold text-primary">Security Day</h2>
-              <p className="text-primary/60 font-medium">Clique em 8 empresas de seu interesse</p>
-            </div>
-          </div>
-          <Card className="card-premium">
-            <CardContent className="p-6 sm:p-10">
-              <SecurityDayPoll />
-            </CardContent>
-          </Card>
-        </section>
 
         {/* Roteiro Cultural Section */}
         <section id="roteiro" className="container pt-24">

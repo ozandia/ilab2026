@@ -1,4 +1,4 @@
-import express from "express";
+﻿import express from "express";
 import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -7,61 +7,57 @@ import fs from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ── Global Error Handlers (Silent Crash Prevention) ──────────────────────────
-process.on("uncaughtException", (err) => {
-  console.error("[FATAL] Uncaught Exception:", err);
-  process.exit(1);
-});
-
-process.on("unhandledRejection", (reason, promise) => {
-  console.error("[FATAL] Unhandled Rejection at:", promise, "reason:", reason);
-});
-
-// ── Config (override via env vars) ───────────────────────────────────────────
+// ÔöÇÔöÇ Config (override via env vars) ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 const PORT = Number(process.env.PORT) || 5000;
 const MAX_VOTES = Number(process.env.MAX_VOTES) || 27;
 const MAX_SELECTIONS = Number(process.env.MAX_SELECTIONS) || 8;
 const RATE_LIMIT_MS = Number(process.env.RATE_LIMIT_MS) || 60_000;
-
-// Production-ready data path
-// Production-ready data path with write-check
-const isProd = process.env.NODE_ENV === "production";
-let VOTE_FILE = process.env.VOTE_FILE
+const VOTE_FILE = process.env.VOTE_FILE
   ? path.resolve(process.env.VOTE_FILE)
-  : isProd
-    ? path.resolve(process.cwd(), "data", "votes.json")
-    : path.resolve(__dirname, "votes.json");
+  : path.resolve(__dirname, "votes.json");
 
-// ── Startup Persistence Check ────────────────────────────────────────────────
-try {
-  const dataDir = path.dirname(VOTE_FILE);
-  if (!fs.existsSync(dataDir)) {
-    console.log(`[BOOT] Attempting to create directory: ${dataDir}`);
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  // Test write permission
-  fs.appendFileSync(VOTE_FILE, "");
-} catch (e) {
-  console.warn(`[BOOT] WARNING: Data directory not writable at ${VOTE_FILE}. Falling back to /tmp/votes.json`);
-  VOTE_FILE = path.join("/tmp", "votes.json");
-  try {
-    fs.writeFileSync(VOTE_FILE, JSON.stringify({}, null, 2));
-  } catch (err) {
-    console.error(`[BOOT] FATAL: Persistence failed even in /tmp. Server may run with empty state.`);
-  }
+// ÔöÇÔöÇ Company master list ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+interface CompanyInfo {
+  name: string;
+  description?: string;
 }
 
-// ── Company master list ───────────────────────────────────────────────────────
-const COMPANIES: readonly string[] = [
-  "Techbiz", "Teltronic", "Valid", "Flash", "Funcional", "Aeromot", "Axon",
-  "Berkana", "BGS", "Condor", "Glagio", "Helper", "Inspect", "Iron Fence",
-  "Magnet", "Raytec", "Revo", "Smart Power", "VMI", "Digitro", "ADTech",
-  "Motorola", "Protecta", "Ford", "Airbus", "Byrna", "Ulbrichts", "Clarian",
-  "Hex360", "Montreal", "Actatec",
+const COMPANIES: readonly CompanyInfo[] = [
+  { name: "Techbiz", description: "Solu├º├Áes tecnol├│gicas de ponta, com foco em per├¡cia forense digital." },
+  { name: "Teltronic" },
+  { name: "Valid" },
+  { name: "Flash" },
+  { name: "Funcional" },
+  { name: "Aeromot" },
+  { name: "Axon" },
+  { name: "Berkana" },
+  { name: "BGS" },
+  { name: "Condor" },
+  { name: "Glagio" },
+  { name: "Helper" },
+  { name: "Inspect" },
+  { name: "Iron Fence" },
+  { name: "Magnet" },
+  { name: "Raytec" },
+  { name: "Revo" },
+  { name: "Smart Power" },
+  { name: "VMI" },
+  { name: "Digitro" },
+  { name: "ADTech" },
+  { name: "Motorola" },
+  { name: "Protecta" },
+  { name: "Ford" },
+  { name: "Airbus" },
+  { name: "Byrna" },
+  { name: "Ulbrichts" },
+  { name: "Clarian" },
+  { name: "Hex360" },
+  { name: "Montreal" },
+  { name: "Actatec" },
 ];
-const COMPANY_SET = new Set(COMPANIES);
+const COMPANY_SET = new Set(COMPANIES.map(c => c.name));
 
-// ── Vote store (in-memory + JSON file) ───────────────────────────────────────
+// ÔöÇÔöÇ Vote store (in-memory + JSON file) ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 type VoteStore = Record<string, number>;
 
 function loadVotes(): VoteStore {
@@ -70,10 +66,10 @@ function loadVotes(): VoteStore {
       return JSON.parse(fs.readFileSync(VOTE_FILE, "utf-8")) as VoteStore;
     }
   } catch {
-    // Corrupted file — reset to zero
+    // Corrupted file ÔÇö reset to zero
   }
   const initial: VoteStore = {};
-  for (const c of COMPANIES) initial[c] = 0;
+  for (const c of COMPANIES) initial[c.name] = 0;
   return initial;
 }
 
@@ -83,7 +79,7 @@ function saveVotes(votes: VoteStore): void {
 
 let voteStore: VoteStore = loadVotes();
 
-// ── Mutex: prevents race conditions during concurrent vote writes ─────────────
+// ÔöÇÔöÇ Mutex: prevents race conditions during concurrent vote writes ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 let writeLock = false;
 
 async function withLock<T>(fn: () => T | Promise<T>): Promise<T> {
@@ -98,7 +94,7 @@ async function withLock<T>(fn: () => T | Promise<T>): Promise<T> {
   }
 }
 
-// ── Rate limiter (in-memory, per IP) ─────────────────────────────────────────
+// ÔöÇÔöÇ Rate limiter (in-memory, per IP) ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 const rateLimitMap = new Map<string, number>();
 
 function isRateLimited(ip: string): boolean {
@@ -108,33 +104,34 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+// ÔöÇÔöÇ Helpers ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 function buildCompanyList(store: VoteStore) {
-  return COMPANIES.map((name) => ({
-    name,
-    votes: store[name] ?? 0,
-    disabled: (store[name] ?? 0) >= MAX_VOTES,
+  return COMPANIES.map((c) => ({
+    name: c.name,
+    description: c.description,
+    votes: store[c.name] ?? 0,
+    disabled: (store[c.name] ?? 0) >= MAX_VOTES,
   }));
 }
 
-// ── Server ───────────────────────────────────────────────────────────────────
+// ÔöÇÔöÇ Server ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 async function startServer() {
   const app = express();
   const server = createServer(app);
 
   app.use(express.json());
 
-  // ── API: GET /api/poll ───────────────────────────────────────────────────
+  // ÔöÇÔöÇ API: GET /api/poll ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
   app.get("/api/poll", (_req, res) => {
     res.json({ companies: buildCompanyList(voteStore) });
   });
 
-  // ── API: POST /api/poll ──────────────────────────────────────────────────
+  // ÔöÇÔöÇ API: POST /api/poll ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
   app.post("/api/poll", async (req, res) => {
     const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0] ?? req.ip ?? "unknown";
 
     if (isRateLimited(ip)) {
-      return res.status(429).json({ error: "Você já votou recentemente. Aguarde alguns minutos." });
+      return res.status(429).json({ error: "Voc├¬ j├í votou recentemente. Aguarde alguns minutos." });
     }
 
     const { companies } = req.body as { companies?: unknown };
@@ -147,12 +144,12 @@ async function startServer() {
 
     const unknowns = names.filter((c) => !COMPANY_SET.has(c));
     if (unknowns.length > 0) {
-      return res.status(400).json({ error: `Empresa(s) inválida(s): ${unknowns.join(", ")}` });
+      return res.status(400).json({ error: `Empresa(s) inv├ílida(s): ${unknowns.join(", ")}` });
     }
 
     const hasDuplicates = new Set(names).size !== names.length;
     if (hasDuplicates) {
-      return res.status(400).json({ error: "Seleções duplicadas não são permitidas." });
+      return res.status(400).json({ error: "Sele├º├Áes duplicadas n├úo s├úo permitidas." });
     }
 
     // Atomic write under mutex lock to prevent race conditions
@@ -177,85 +174,27 @@ async function startServer() {
     return res.json({ ok: true, ...result });
   });
 
-  // ── Mode & Path Resolution (v2.7 - Universal Cloud) ─────────────────────
+  // ÔöÇÔöÇ Static / Vite ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
   const isProduction = process.env.NODE_ENV === "production";
-  const rootDir = process.cwd();
-
-  // Port discovery for Cloud Platforms (Heroku, Render, Railay, Vercel)
-  // Defaulting to 5000 to match Dockerfile EXPOSE
-  const FINAL_PORT = Number(process.env.PORT) || 5000;
-
-  const candidatePaths = [
-    path.resolve(rootDir, "dist", "public"),
-    path.resolve(__dirname, "public"),
-    path.resolve(rootDir, "public"),
-    path.resolve(rootDir, "client"),
-  ];
-
-  let staticPath = isProduction ? candidatePaths[0] : path.resolve(rootDir, "client");
-
-  console.log(`\n************************************************`);
-  console.log(`* [BOOT] SERVER v3.1 - DIAGNOSTIC MODE       *`);
-  console.log(`* CWD: ${rootDir} | Port: ${FINAL_PORT}          *`);
-  console.log(`************************************************\n`);
-
-  if (isProduction) {
-    console.log(`[BOOT] Auditing static file locations:`);
-    for (const p of candidatePaths) {
-      const exists = fs.existsSync(p);
-      const hasIndex = exists && fs.existsSync(path.join(p, "index.html"));
-      console.log(`  - ${p} => Exists: ${exists} | Has index.html: ${hasIndex}`);
-      if (hasIndex) {
-        staticPath = p;
-        break;
-      }
-    }
-
-    try {
-      if (fs.existsSync(staticPath)) {
-        console.log(`[BOOT] Files in staticPath (${staticPath}):`, fs.readdirSync(staticPath).join(", "));
-      }
-    } catch (e) {
-      console.error(`[BOOT] Audit failed:`, e);
-    }
-  }
-
-  // Request logger
-  app.use((req, _res, next) => {
-    console.log(`[v2.7] ${req.method} ${req.url} - ${req.ip}`);
-    next();
-  });
-
-  // Diagnostic Endpoint
-  app.get("/api/debug/system", (_req, res) => {
-    res.json({
-      version: "3.1",
-      env: process.env.NODE_ENV,
-      port: FINAL_PORT,
-      cwd: process.cwd(),
-      staticPath,
-      exists: fs.existsSync(staticPath),
-      files: fs.existsSync(staticPath) ? fs.readdirSync(staticPath) : [],
-      envVars: {
-        PORT: process.env.PORT,
-        NODE_ENV: process.env.NODE_ENV,
-      }
-    });
-  });
 
   if (!isProduction) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     const { createServer: createViteServer } = await import("vite");
+
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "custom",
-      configFile: path.resolve(rootDir, "vite.config.ts"),
+      configFile: path.resolve(__dirname, "..", "vite.config.ts"),
     });
 
     app.use(vite.middlewares);
 
     app.get("*", async (req, res, next) => {
       try {
-        let template = fs.readFileSync(path.resolve(rootDir, "client", "index.html"), "utf-8");
+        let template = fs.readFileSync(
+          path.resolve(__dirname, "..", "client", "index.html"),
+          "utf-8",
+        );
         template = await vite.transformIndexHtml(req.originalUrl, template);
         res.status(200).set({ "Content-Type": "text/html" }).end(template);
       } catch (e: any) {
@@ -264,28 +203,27 @@ async function startServer() {
       }
     });
   } else {
+    const staticPath = path.resolve(__dirname, "public");
     app.use(express.static(staticPath, { maxAge: "1d" }));
-
-    app.get("/health", (_req, res) => res.json({ status: "ok", v: "2.7" }));
-
-    app.get("*", (req, res) => {
+    app.get("*", (_req, res) => {
       const indexPath = path.join(staticPath, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        console.error(`[v2.7 ERROR] File not found: ${indexPath}`);
-        res.status(404).send(`Application Error (v2.7): Static assets missing. Please verify build output.`);
+        res.status(404).send("Build not found. Run 'npm run build' first.");
       }
     });
   }
 
   server.on("error", (e: any) => {
-    console.error(`[v2.7 FATAL ERR] ${e.message}`);
-    process.exit(1);
+    if (e.code === "EADDRINUSE") {
+      console.error(`[Server] Port ${PORT} is already in use.`);
+      process.exit(1);
+    }
   });
 
-  server.listen(FINAL_PORT, "0.0.0.0", () => {
-    console.log(`\n[v3.1 READY] ==> Listening on http://0.0.0.0:${FINAL_PORT}\n`);
+  server.listen(PORT, () => {
+    console.log(`[Server] Running in ${isProduction ? "production" : "development"} mode on http://localhost:${PORT}/`);
   });
 }
 
