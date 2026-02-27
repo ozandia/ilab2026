@@ -58,7 +58,7 @@ export default function Home() {
             <a href="#contas" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Prestação</a>
             <a href="#roteiro" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Roteiro</a>
             <a href="#regras" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Regras</a>
-            <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Contato</a>
+            <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Contatos</a>
           </nav>
 
           {/* Mobile Hamburger */}
@@ -82,7 +82,7 @@ export default function Home() {
               { href: "#contas", label: "Prestação de Contas" },
               { href: "#roteiro", label: "Roteiro" },
               { href: "#regras", label: "Regras" },
-              { href: "#contato", label: "Contato" },
+              { href: "#contato", label: "Contatos" },
             ].map(({ href, label }) => (
               <a
                 key={href}
@@ -119,8 +119,7 @@ export default function Home() {
                   Brasília • 03-06 Março
                 </span>
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
-                  Encontro Nacional <br />
-                  <span className="text-accent underline decoration-white/20 underline-offset-8">Rede Interfederativa 2026</span>
+                  Encontro Nacional <span className="text-accent underline decoration-white/20 underline-offset-8">Rede Interfederativa 2026</span>
                 </h1>
                 <p className="text-base sm:text-xl text-white/80 leading-relaxed font-light">
                   A excelência na gestão de contratações e aquisições
