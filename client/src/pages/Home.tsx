@@ -445,9 +445,9 @@ export default function Home() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                   {/* Bloco 1 */}
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold">
+                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      CONVÊNIOS
+                      Rede Interfederativa de Convênios
                     </div>
                     <div className="space-y-4">
                       <a
@@ -489,9 +489,9 @@ export default function Home() {
 
                   {/* Bloco 2 */}
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold">
+                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      FUNDO A FUNDO
+                      Rede Interfederativa de Transferências Fundo a Fundo
                     </div>
                     <div className="space-y-4">
                       <a
@@ -515,9 +515,9 @@ export default function Home() {
                   </div>
 
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold">
+                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      LOGÍSTICA
+                      Rede Interfederativa de Logística
                     </div>
                     <div className="space-y-4">
                       <a
@@ -542,9 +542,9 @@ export default function Home() {
 
                   {/* Bloco 4 */}
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold">
+                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      ORÇAMENTO
+                      Câmaras Técnicas de Orçamento
                     </div>
                     <div className="space-y-3">
                       {/* Telefone Fixo */}
