@@ -118,7 +118,7 @@ export default function Home() {
                 <span className="inline-block px-4 py-1.5 bg-accent/20 text-accent font-bold rounded-full text-base tracking-widest uppercase">
                   Brasília • 03-06 Março
                 </span>
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
+                <h1 className="text-lg sm:text-4xl md:text-5xl font-bold text-white leading-tight whitespace-nowrap">
                   Encontro Nacional <span className="text-accent underline decoration-white/20 underline-offset-8">Rede Interfederativa 2026</span>
                 </h1>
                 <p className="text-base sm:text-xl text-white/80 leading-relaxed font-light">
