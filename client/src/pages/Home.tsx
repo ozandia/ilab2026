@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -120,7 +120,7 @@ export default function Home() {
                 </span>
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
                   Encontro Nacional <br />
-                  <span className="text-accent underline decoration-white/20 underline-offset-8">Rede Federativa 2026</span>
+                  <span className="text-accent underline decoration-white/20 underline-offset-8">Rede Interfederativa 2026</span>
                 </h1>
                 <p className="text-base sm:text-xl text-white/80 leading-relaxed font-light">
                   A excelência na gestão de contratações e aquisições
@@ -583,7 +583,7 @@ export default function Home() {
             <div className="space-y-4">
               <div className="flex items-center justify-center md:justify-start gap-3">
                 <div className="w-1 h-6 bg-primary rounded-full"></div>
-                <h3 className="text-lg font-bold text-primary tracking-tight">Rede Federativa 2026</h3>
+                <h3 className="text-lg font-bold text-primary tracking-tight">Rede Interfederativa 2026</h3>
               </div>
               <p className="text-sm text-gray-500 max-w-xs">
                 O fortalecimento da Segurança Pública através da governança e inovação em aquisições.

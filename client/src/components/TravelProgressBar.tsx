@@ -1,4 +1,4 @@
-import { CheckCircle2, Circle } from "lucide-react";
+﻿import { CheckCircle2, Circle } from "lucide-react";
 
 interface Step {
     id: string;
