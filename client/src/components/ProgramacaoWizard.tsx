@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, Calendar, MapPin, Bus } from "lucide-react";
 import { ScheduleCard } from "@/components/ScheduleCard";
+import { ScheduleCardDay2 } from "@/components/ScheduleCardDay2";
 
 export function ProgramacaoWizard() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -28,23 +29,8 @@ export function ProgramacaoWizard() {
 
                     <ScheduleCard />
 
-                    <Card className="card-elevated">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-accent" />
-                                05 de março
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div>
-                                <p className="font-semibold">Security Day</p>
-                                <p className="text-sm text-muted-foreground">9h - 12h | Sala GTI</p>
-                            </div>
-                            <div>
-                                <div className="space-y-1"><p className="font-semibold">Visita ao iLab-Seg</p><p className="text-sm text-muted-foreground">14h - 17h</p></div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <ScheduleCardDay2 />
+
 
                     <Card className="card-elevated">
                         <CardHeader>
