@@ -62,8 +62,8 @@ export function ProgramacaoWizard() {
     const gtiSteps = [
         {
             id: 1,
-            label: "CONVÊNIOS",
-            description: "REDE INTERFEDERATIVA DE CONVÊNIOS",
+            label: "Transferências Voluntárias",
+            description: "Rede Interfederativa de Convênios",
             content: (
                 <div className="space-y-4">
                     <Day03Card />
