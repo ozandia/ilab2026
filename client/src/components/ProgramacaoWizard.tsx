@@ -62,7 +62,7 @@ export function ProgramacaoWizard() {
     const gtiSteps = [
         {
             id: 1,
-            label: "Transferências Obrigatórias",
+            label: "Obrigatórias",
             description: "Rede Interfederativa de Transferências Fundo a Fundo",
             content: (
                 <div className="space-y-4">
@@ -73,7 +73,7 @@ export function ProgramacaoWizard() {
         },
         {
             id: 2,
-            label: "Transferências Voluntárias",
+            label: "Voluntárias",
             description: "Rede Interfederativa de Convênios",
             content: (
                 <div className="space-y-4">
@@ -145,10 +145,10 @@ export function ProgramacaoWizard() {
                     {gtiSteps.map((step) => (
                         <button
                             key={step.id}
-                            className={`w-full flex flex-row items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left border-none shadow-sm
+                            className={`w-full flex flex-row items-center gap-[20px] px-[25px] py-[20px] rounded-xl transition-all duration-200 text-left border-none shadow-sm
                                 ${currentStep === step.id
-                                    ? "bg-[#104EAD] shadow-md scale-[1.02]"
-                                    : "bg-[#F0F5FF] hover:bg-[#E0EAFF] shadow-sm hover:scale-[1.01]"
+                                    ? "bg-[#0E4DA4] shadow-md scale-[1.02]"
+                                    : "bg-[#F4F8FF] border border-[#E6EFFF] hover:bg-[#E0EAFF] shadow-sm hover:scale-[1.01]"
                                 }`}
                             type="button"
                             role="tab"
@@ -158,18 +158,18 @@ export function ProgramacaoWizard() {
                             id={`tab-step-${step.id}`}
                             onClick={() => setCurrentStep(step.id)}
                         >
-                            <div className={`flex-shrink-0 w-11 h-11 border-radius-50 rounded-full flex items-center justify-center font-bold text-lg transition-colors
-                                ${currentStep === step.id ? "bg-white text-[#104EAD]" : "bg-[#104EAD] text-white"}`}>
+                            <div className={`flex-shrink-0 w-[50px] h-[50px] rounded-full flex items-center justify-center font-bold text-[22px] transition-colors
+                                ${currentStep === step.id ? "bg-white text-[#0E4DA4]" : "bg-[#0E4DA4] text-white"}`}>
                                 {step.id}
                             </div>
-                            <div className="flex flex-col justify-center min-w-0">
-                                <span className={`text-xl font-bold leading-tight truncate transition-colors
-                                    ${currentStep === step.id ? "text-white" : "text-[#104EAD]"}`}>
+                            <div className="flex flex-col justify-center min-w-0 flex-1">
+                                <span className={`text-[20px] font-bold leading-[1.1] truncate transition-colors
+                                    ${currentStep === step.id ? "text-white" : "text-[#0E4DA4]"}`}>
                                     {step.label}
                                 </span>
                                 {step.description && (
-                                    <span className={`text-[12px] font-normal italic leading-tight truncate transition-colors mt-1
-                                        ${currentStep === step.id ? "text-white/90" : "text-[#333333]"}`}>
+                                    <span className={`text-[13px] font-normal italic leading-[1.2] truncate transition-colors mt-1
+                                        ${currentStep === step.id ? "text-[#E0E0E0]" : "text-[#333333]"}`}>
                                         {step.description}
                                     </span>
                                 )}
