@@ -587,7 +587,7 @@ export default function Home() {
                 <h3 className="text-lg font-bold text-primary tracking-tight">Rede Interfederativa 2026</h3>
               </div>
               <p className="text-sm text-gray-500 max-w-xs">
-                O fortalecimento da Segurança Pública através da governança e inovação em aquisições.
+                Fortalecimento da articulação entre o Governo Federal e os entes federativos, aprimorando a execução orçamentária e a troca de informações técnicas.
               </p>
             </div>
 
