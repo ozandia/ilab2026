@@ -8,7 +8,7 @@ export function ScheduleFundoAFundo() {
     const [isOpenDay6, setIsOpenDay6] = useState(false);
 
     return (
-        <div className="space-y-4 max-w-4xl mx-auto font-sans text-gray-800 pb-8">
+        <div className="w-full space-y-4 font-sans text-gray-800 pb-8">
 
             {/* ================= CARD DIA 04 ================= */}
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
