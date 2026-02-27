@@ -146,7 +146,7 @@ export function ProgramacaoWizard() {
                     {gtiSteps.map((step) => (
                         <button
                             key={step.id}
-                            className="wizard-progress-btn flex flex-col items-start text-left py-3 px-4"
+                            className="wizard-progress-btn flex flex-col items-start text-left py-2 px-4 group"
                             type="button"
                             role="tab"
                             data-step={step.id}
@@ -155,9 +155,16 @@ export function ProgramacaoWizard() {
                             id={`tab-step-${step.id}`}
                             onClick={() => setCurrentStep(step.id)}
                         >
-                            <span className="info font-bold text-primary group-hover:text-accent transition-colors">{step.label}</span>
+                            <div className="flex items-center gap-2">
+                                <span className="text-[10px] font-black text-accent bg-accent/10 px-1.5 py-0.5 rounded leading-none">
+                                    {String(step.id).padStart(2, '0')}
+                                </span>
+                                <span className="info font-bold text-primary group-hover:text-accent transition-colors leading-none">
+                                    {step.label}
+                                </span>
+                            </div>
                             {step.description && (
-                                <span className="text-[10px] text-primary/70 font-medium italic block leading-tight">
+                                <span className="text-[9px] text-primary/70 font-medium italic block leading-tight mt-0.5">
                                     {step.description}
                                 </span>
                             )}
