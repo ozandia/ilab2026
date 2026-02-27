@@ -1,4 +1,4 @@
-import { useRef } from "react";
+﻿import { useRef } from "react";
 import { usePersistFn } from "./usePersistFn";
 
 export interface UseCompositionReturn<

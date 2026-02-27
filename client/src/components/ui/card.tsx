@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -32,7 +32,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn("leading-none font-semibold flex items-center gap-2 bg-[#2b7fff]/5 px-3 py-1 rounded-lg", className)}
       {...props}
     />
   );
