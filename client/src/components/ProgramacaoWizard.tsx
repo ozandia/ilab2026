@@ -12,6 +12,7 @@ export function ProgramacaoWizard() {
         {
             id: 1,
             label: "CONVÊNIOS",
+            description: "REDE INTERFEDERATIVA DE CONVÊNIOS",
             content: (
                 <div className="space-y-4">
                     <Card className="card-elevated">
@@ -391,6 +392,11 @@ export function ProgramacaoWizard() {
                     <span className="wizard-step-title">
                         {gtiSteps.find((s) => s.id === currentStep)?.label}
                     </span>
+                    {gtiSteps.find((s) => s.id === currentStep)?.description && (
+                        <span className="wizard-step-desc text-xs text-primary/60 mt-0.5 block">
+                            {gtiSteps.find((s) => s.id === currentStep)?.description}
+                        </span>
+                    )}
                 </div>
             </div>
 
@@ -414,6 +420,11 @@ export function ProgramacaoWizard() {
                             onClick={() => setCurrentStep(step.id)}
                         >
                             <span className="info">{step.label}</span>
+                            {step.description && (
+                                <span className="text-[10px] text-primary/50 font-normal mt-0.5 block leading-tight">
+                                    {step.description}
+                                </span>
+                            )}
                         </button>
                     ))}
                 </div>
