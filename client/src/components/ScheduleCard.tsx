@@ -64,8 +64,11 @@ const timeline: TimelineItem[] = [
         ],
     },
     {
-        time: "18h00",
-        title: "Encerramento",
+        time: "17h30-18h30",
+        title: "Reunião Dra. Camila Pintarelli - Palco 01",
+         bullets: [
+           Painel 13 - Tema: 25 anos do FNSP, Segurança e Investimento.
+        ],
     },
 ];
 
