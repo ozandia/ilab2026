@@ -162,7 +162,7 @@ export function ScheduleOrcamento() {
                                     </div>
                                     <div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
                                         <User className="w-4 h-4" />
-                                        <span>Major Squena</span>
+                                        <span>Major João Claudio Schena</span>
                                     </div>
                                 </div>
 
