@@ -114,7 +114,9 @@ export function ProgramacaoWizard() {
             description: "Câmaras Técnicas de Orçamento",
             content: (
                 <div className="space-y-4">
+                          <Day03Card />
                     <ScheduleOrcamento />
+                        <Day06Card />
                 </div>
             )
         },
@@ -124,7 +126,9 @@ export function ProgramacaoWizard() {
             description: "Rede Interfederativa de Logística",
             content: (
                 <div className="space-y-4">
+                     <Day03Card />
                     <ScheduleLogistica />
+                      <Day06Card />
                 </div>
             )
         }
