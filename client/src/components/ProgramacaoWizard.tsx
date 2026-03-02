@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Clock, MapPin, Bus } from "lucide-react";
 import { ScheduleCard } from "@/components/ScheduleCard";
 import { ScheduleCardDay2 } from "@/components/ScheduleCardDay2";
@@ -10,20 +10,13 @@ import { ScheduleOrcamento } from "@/components/ScheduleOrcamento";
 function Day03Card() {
     return (
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                 <Clock className="w-4 h-4 text-blue-500" />
                 <h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
             </div>
             <div className="px-6 py-5">
-                <div className="flex justify-between items-center group">
-                    <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                        Abertura
-                    </h3>
-                    <div className="flex items-center gap-3 text-sm text-gray-500">
-                        <span className="hidden md:inline">19h | CICB</span>
-                    </div>
-                </div>
-                <p className="md:hidden text-xs text-gray-500 mt-1">19h | CICB</p>
+                <h3 className="text-base font-bold text-gray-900">Horário: 19h</h3>
+                <p className="text-sm text-gray-500 mt-1">Local: CICB</p>
             </div>
         </div>
     );
@@ -32,20 +25,12 @@ function Day03Card() {
 function Day06Card() {
     return (
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                 <Clock className="w-4 h-4 text-blue-500" />
                 <h2 className="text-sm font-semibold text-slate-700">06 de março - Palestras SENASP</h2>
             </div>
-            <div className="px-6 py-5">
-                <div className="flex justify-between items-center group">
-                    <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                        Programação Técnica
-                    </h3>
-                    <div className="flex items-center gap-3 text-sm text-gray-500">
-                        <span className="hidden md:inline">9h - 17h | CICB</span>
-                    </div>
-                </div>
-                <p className="md:hidden text-xs text-gray-500 mt-1">9h - 17h | CICB</p>
+            <div className="px-6 py-5 flex items-center">
+                <p className="text-sm text-gray-500">9h - 17h | CICB</p>
             </div>
         </div>
     );
@@ -55,24 +40,15 @@ function Day06Card() {
 function SimpleCard({ title, items }: { title: string; items: { label: string; detail?: string }[] }) {
     return (
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2 bg-slate-50/30">
                 <Clock className="w-4 h-4 text-blue-500" />
                 <h2 className="text-sm font-semibold text-slate-700">{title}</h2>
             </div>
-            <div className="px-6 py-5 space-y-4">
+            <div className="px-6 py-5 space-y-3">
                 {items.map((item, i) => (
                     <div key={i}>
-                        <div className="flex justify-between items-center group">
-                            <p className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                                {item.label}
-                            </p>
-                            {item.detail && (
-                                <div className="flex items-center gap-3 text-sm text-gray-500">
-                                    <span className="hidden md:inline">{item.detail}</span>
-                                </div>
-                            )}
-                        </div>
-                        {item.detail && <p className="md:hidden text-xs text-gray-500 mt-1">{item.detail}</p>}
+                        <p className="font-semibold text-gray-900">{item.label}</p>
+                        {item.detail && <p className="text-sm text-gray-500">{item.detail}</p>}
                     </div>
                 ))}
             </div>
@@ -86,19 +62,8 @@ export function ProgramacaoWizard() {
     const gtiSteps = [
         {
             id: 1,
-            label: "Tranferências Obrigatórias",
-            description: "Rede Interfederativa de Transferências Fundo a Fundo",
-            content: (
-                <div className="space-y-4">
-                    <Day03Card />
-                    <ScheduleFundoAFundo />
-                </div>
-            )
-        },
-        {
-            id: 2,
-            label: "Tranferências Voluntárias",
-            description: "Rede Interfederativa de Convênios",
+            label: "CONVÊNIOS",
+            description: "REDE INTERFEDERATIVA DE CONVÊNIOS",
             content: (
                 <div className="space-y-4">
                     <Day03Card />
@@ -109,25 +74,54 @@ export function ProgramacaoWizard() {
             )
         },
         {
-            id: 3,
-            label: "Orçamento",
-            description: "Câmaras Técnicas de Orçamento",
+            id: 2,
+            label: "FUNDO A FUNDO",
+            description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS FUNDO A FUNDO",
             content: (
                 <div className="space-y-4">
                     <Day03Card />
-                    <ScheduleOrcamento />
+                    <ScheduleFundoAFundo />
+                </div>
+            )
+        },
+        {
+            id: 3,
+            label: "LOGÍSTICA",
+            description: "REDE INTERFEDERATIVA DE LOGÍSTICA",
+            content: (
+                <div className="space-y-4">
+                    <Day03Card />
+                    <ScheduleLogistica />
                 </div>
             )
         },
         {
             id: 4,
-            label: "Logística",
-            description: "Rede Interfederativa de Logística",
+            label: "TRANSFERÊNCIAS VOLUNTÁRIAS",
+            description: "REDE INTERFEDERATIVA DE TRANSFERÊNCIAS VOLUNTÁRIAS",
             content: (
                 <div className="space-y-4">
                     <Day03Card />
-                    <ScheduleLogistica />
-                     <Day06Card />
+                    <SimpleCard title="04 de março" items={[
+                        { label: "Plenária", detail: "9h - 12h" },
+                        { label: "Visita ao iLab-Seg", detail: "14h - 17h" },
+                    ]} />
+                    <SimpleCard title="05 de março" items={[
+                        { label: "Security Day", detail: "9h - 12h" },
+                        { label: "Reunião Técnica", detail: "14h - 17h" },
+                    ]} />
+                    <Day06Card />
+                </div>
+            )
+        },
+        {
+            id: 5,
+            label: "ORÇAMENTO",
+            description: "CÂMARAS TÉCNICAS DE ORÇAMENTO",
+            content: (
+                <div className="space-y-4">
+                    <Day03Card />
+                    <ScheduleOrcamento />
                 </div>
             )
         }
@@ -159,7 +153,7 @@ export function ProgramacaoWizard() {
                         {gtiSteps.find((s) => s.id === currentStep)?.label}
                     </span>
                     {gtiSteps.find((s) => s.id === currentStep)?.description && (
-                        <span className="wizard-step-desc text-[10px] text-primary/60 mt-0.5 block text-center italic">
+                        <span className="wizard-step-desc text-xs text-primary/60 mt-0.5 block text-center">
                             {gtiSteps.find((s) => s.id === currentStep)?.description}
                         </span>
                     )}
@@ -168,15 +162,11 @@ export function ProgramacaoWizard() {
 
             {/* Desktop: vertical sidebar tabs */}
             <div className="wizard-header hidden md:block">
-                <div className="wizard-progress space-y-3" role="tablist" aria-label="Grupos de trabalho">
+                <div className="wizard-progress" role="tablist" aria-label="Grupos de trabalho">
                     {gtiSteps.map((step) => (
                         <button
                             key={step.id}
-                            className={`w-full flex flex-row items-center gap-[15px] px-[20px] py-[15px] rounded-xl transition-all duration-200 text-left border-none shadow-sm
-                                ${currentStep === step.id
-                                    ? "bg-[#0E4DA4] shadow-md scale-[1.01]"
-                                    : "bg-[#F4F8FF] border border-[#E6EFFF] hover:bg-[#E0EAFF] shadow-sm hover:scale-[1.005]"
-                                }`}
+                            className="wizard-progress-btn flex flex-col items-start text-left py-3 px-4"
                             type="button"
                             role="tab"
                             data-step={step.id}
@@ -185,22 +175,12 @@ export function ProgramacaoWizard() {
                             id={`tab-step-${step.id}`}
                             onClick={() => setCurrentStep(step.id)}
                         >
-                            <div className={`flex-shrink-0 w-[45px] h-[45px] rounded-full flex items-center justify-center font-bold text-[20px] transition-colors
-                                ${currentStep === step.id ? "bg-white text-[#0E4DA4]" : "bg-[#0E4DA4] text-white"}`}>
-                                {step.id}
-                            </div>
-                            <div className="flex flex-col justify-center min-w-0 flex-1">
-                                <span className={`text-[18px] font-bold leading-[1.1] transition-colors break-words whitespace-normal
-                                    ${currentStep === step.id ? "text-white" : "text-[#0E4DA4]"}`}>
-                                    {step.label}
+                            <span className="info font-bold">{step.label}</span>
+                            {step.description && (
+                                <span className="text-[10px] text-primary/50 font-medium mt-1 block leading-tight">
+                                    {step.description}
                                 </span>
-                                {step.description && (
-                                    <span className={`text-[12px] font-normal italic leading-[1.2] transition-colors mt-[3px] break-words whitespace-normal
-                                        ${currentStep === step.id ? "text-[#E0E0E0]" : "text-[#333333]"}`}>
-                                        {step.description}
-                                    </span>
-                                )}
-                            </div>
+                            )}
                         </button>
                     ))}
                 </div>
