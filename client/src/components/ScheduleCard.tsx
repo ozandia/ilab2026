@@ -1,361 +1,188 @@
-import { useState } from 'react';
-import { Clock, ChevronDown, ChevronUp, CheckCircle2, User, Users, Coffee, Utensils } from 'lucide-react';
+import { useState } from "react";
+import { Clock, ChevronDown, ChevronUp, User, Coffee } from "lucide-react";
 
-export function ScheduleLogistica() {
-const [isOpenDay4, setIsOpenDay4] = useState(false);
-const [isOpenDay5, setIsOpenDay5] = useState(false);
-    const [isOpenDay6, setIsOpenDay6] = useState(false);
+interface TimelineItem {
+    time: string;
+    title: string;
+    speaker?: string;
+    bullets?: string[];
+    isBreak?: boolean;
+}
 
-return (
-<div className="w-full space-y-4 font-sans text-gray-800 pb-8">
+const timeline: TimelineItem[] = [
+    {
+        time: "14h00–14h30",
+        title: "Abertura e Alinhamento dos Objetivos",
+        speaker: "Keila Silveira Vasconcelos",
+        bullets: [
+            "Apresentação dos participantes e objetivos estratégicos da reunião.",
+            "Visão geral da pauta e metodologia de trabalho do encontro.",
+        ],
+    },
+    {
+        time: "14h30–16h00",
+        title: "Procedimento Licitatório sob visão da CGU",
+        speaker: "Carlos Henrique Benedito Nitão Loureiro",
+        bullets: [
+            "Análise dos principais achados das fiscalizações recentes da CGU.",
+            "Critérios de regularidade formal e material dos processos licitatórios.",
+            "Gestão de riscos e controles internos aplicados às contratações.",
+            "Boas práticas e recomendações para garantia de conformidade.",
+        ],
+    },
+    {
+        time: "16h00–16h15",
+        title: "Intervalo",
+        isBreak: true,
+    },
+    {
+        time: "16h15–16h30",
+        title: "Panorama Geral dos Instrumentos de Repasse",
+        speaker: "Suzana Mara Fontes Cunha",
+        bullets: [
+            "Mapeamento dos instrumentos vigentes, suas especificidades e aplicabilidade.",
+        ],
+    },
+    {
+        time: "16h30–17h15",
+        title: "Aceites de Procedimentos Licitatórios",
+        speaker: "Edivaldo Marques Rodrigues",
+        bullets: [
+            "Critérios técnicos para aceite de documentação licitatória nos convênios.",
+            "Procedimentos de análise, conformidade e homologação dos processos.",
+            "Prazos regulatórios e fluxos internos de aprovação.",
+        ],
+    },
+    {
+        time: "17h15–18h00",
+        title: "Processo de Pagamento",
+        speaker: "Edivaldo Marques Rodrigues",
+        bullets: [
+            "Documentação obrigatória para processamento e liquidação de pagamentos.",
+            "Prazos e fluxos financeiros no âmbito dos convênios federais.",
+            "Conformidade legal, vedações e responsabilidades do gestor.",
+        ],
+    },
+    {
+        time: "18h00",
+        title: "Encerramento",
+    },
+];
 
-{/* ================= CARD DIA 04 ================= */}
-<div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-<div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-<Clock className="w-4 h-4 text-blue-500" />
-<h2 className="text-sm font-semibold text-slate-700">04 de março</h2>
-</div>
+export function ScheduleCard() {
+    const [open, setOpen] = useState(false);
 
-<div className="px-6 py-5">
-<div
-className="flex justify-between items-center cursor-pointer group"
-onClick={() => setIsOpenDay4(!isOpenDay4)}
->
-<h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-Programação Setor de Logística
-</h3>
-<div className="flex items-center gap-3 text-sm text-gray-500">
-<span className="hidden md:inline">09h00 – 18h30 | Salão Modular do MJSP</span>
-{isOpenDay4 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-</div>
-</div>
-<p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 18h30 | Salão Modular do MJSP</p>
+    return (
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            {/* Card Header */}
+            <div className="flex items-center gap-2 px-5 py-3 bg-slate-50 border-b border-gray-200">
+                <Clock className="w-4 h-4 text-blue-500 flex-shrink-0" />
+                <span className="text-sm font-semibold text-slate-700">04 de março</span>
+            </div>
 
-{isOpenDay4 && (
-<div className="mt-5 pt-6 border-t border-gray-100 relative">
-<div className="absolute left-2.5 md:left-3 top-8 bottom-0 w-0.5 bg-gray-100"></div>
-
-<div className="relative pl-8 md:pl-10 space-y-8 pb-4">
-
-{/* 09:00 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">09h00 - 09h30</span>
-<h4 className="text-base font-bold text-gray-900">Apresentação Geral</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Tc Dantas e Tc Guimarães</span>
-</div>
-</div>
-
-{/* 09:30 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">09h30 - 10h10</span>
-<h4 className="text-base font-bold text-gray-900">Fluxo de Doações: políticas públicas, legado, extralegado e emendas parlamentares</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Naiana, Gélvica e Patrícia</span>
-</div>
-</div>
-
-{/* 10:10 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">10h10 - 10h30</span>
-<h4 className="text-base font-bold text-gray-900">Transferência de propriedade de veículos</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Arrais e J Neto</span>
-</div>
-</div>
-
-{/* Intervalo Manhã */}
-<div className="relative">
-<div className="absolute -left-8 md:-left-9 top-0 bg-white p-1">
-<Coffee className="w-5 h-5 text-amber-600" />
-</div>
-<div className="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col md:flex-row md:gap-4 md:items-center">
-<span className="text-sm font-bold text-gray-500 md:w-28 shrink-0">10h30 - 10h50</span>
-<h4 className="text-sm font-bold text-gray-700">INTERVALO (20 min)</h4>
-</div>
-</div>
-
-{/* 10:50 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">10h50 - 11h30</span>
-<h4 className="text-base font-bold text-gray-900">Baixa contábil e patrimonial de bens doados pela Senasp</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<User className="w-4 h-4" />
-<span>Moisés Bastos</span>
-</div>
-</div>
-
-{/* 11:30 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">11h30 - 12h00</span>
-<h4 className="text-base font-bold text-gray-900">Dúvidas e sugestões</h4>
-</div>
-</div>
-
-{/* Intervalo Almoço */}
-<div className="relative">
-<div className="absolute -left-8 md:-left-9 top-0 bg-white p-1">
-<Utensils className="w-5 h-5 text-amber-600" />
-</div>
-<div className="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col md:flex-row md:gap-4 md:items-center">
-<span className="text-sm font-bold text-gray-500 md:w-28 shrink-0">12h00 - 14h00</span>
-<h4 className="text-sm font-bold text-gray-700">INTERVALO ALMOÇO</h4>
-</div>
-</div>
-
-{/* 14:00 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">14h00 - 15h30</span>
-<h4 className="text-base font-bold text-gray-900">Regularização de passivos</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Uindnayra, Antony e Arcanjo</span>
-</div>
-</div>
-
-{/* Intervalo Tarde */}
-<div className="relative">
-<div className="absolute -left-8 md:-left-9 top-0 bg-white p-1">
-<Coffee className="w-5 h-5 text-amber-600" />
-</div>
-<div className="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col md:flex-row md:gap-4 md:items-center">
-<span className="text-sm font-bold text-gray-500 md:w-28 shrink-0">15h30 - 15h50</span>
-<h4 className="text-sm font-bold text-gray-700">INTERVALO (20 min)</h4>
-</div>
-</div>
-
-{/* 15:50 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">15h50 - 16h10</span>
-<h4 className="text-base font-bold text-gray-900">Registro e controle de bens doados</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Fabrício e Paulo</span>
-</div>
-</div>
-
-{/* 16:10 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">16h10 - 16h50</span>
-<h4 className="text-base font-bold text-gray-900">Gestão patrimonial</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Júlio, Vagner e Magno</span>
-</div>
-</div>
-
-{/* Encerramento */}
-<div className="relative">
-<div className="absolute -left-7.5 md:-left-8.5 bg-white p-0.5">
-<CheckCircle2 className="w-4 h-4 text-green-500" />
-</div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-green-600 md:w-28 shrink-0">16h50 - 17h00</span>
-<h4 className="text-base font-bold text-gray-900">Encerramento</h4>
-</div>
-</div>
-
-{/* 17:30 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">17h30 - 18h30</span>
-<h4 className="text-base font-bold text-gray-900">Reunião Dra. Camila Pintarelli - Palco 01</h4>
-</div>
-<div className="text-sm text-gray-600 md:ml-32">
-<p>Painel 13 - Tema: 25 anos do FNSP, Segurança e Investimento.</p>
-</div>
-</div>
-
-
-</div>
-</div>
-)}
-</div>
-</div>
-
-{/* ================= CARD DIA 05 ================= */}
-<div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-<div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-<Clock className="w-4 h-4 text-blue-500" />
-<h2 className="text-sm font-semibold text-slate-700">05 de março</h2>
-</div>
-
-<div className="px-6 py-5">
-<div
-className="flex justify-between items-center cursor-pointer group"
-onClick={() => setIsOpenDay5(!isOpenDay5)}
->
-<h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-Programação Setor de Logística
-</h3>
-<div className="flex items-center gap-3 text-sm text-gray-500">
-<span className="hidden md:inline">09h00 – 18h00 | ILAB</span>
-{isOpenDay5 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-</div>
-</div>
-<p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 18h00 | ILAB</p>
-
-
-{isOpenDay5 && (
-<div className="mt-5 pt-6 border-t border-gray-100 relative">
-<div className="absolute left-2.5 md:left-3 top-8 bottom-0 w-0.5 bg-gray-100"></div>
-
-<div className="relative pl-8 md:pl-10 space-y-8 pb-4">
-
-{/* 09:00 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">09h00 - 09h30</span>
-<h4 className="text-base font-bold text-gray-900">Abertura</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Tc Dantas e Tc Guimarães</span>
-</div>
-</div>
-
-{/* 09:30 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">09h30 - 10h10</span>
-<h4 className="text-base font-bold text-gray-900">SISGE, uma ferramenta para a gestão processual</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Leandro Theotonio e Brunno</span>
-</div>
-</div>
-
-{/* 10:10 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">10h10 - 12h00</span>
-<h4 className="text-base font-bold text-gray-900">Processo de pagamento de diárias e emissão de passagens aéreas (Recursos FNSP)</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Marckeson Noronha e Alessandro Ribeiro</span>
-</div>
-</div>
-
-{/* Intervalo Almoço */}
-<div className="relative">
-<div className="absolute -left-8 md:-left-9 top-0 bg-white p-1">
-<Utensils className="w-5 h-5 text-amber-600" />
-</div>
-<div className="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col md:flex-row md:gap-4 md:items-center">
-<span className="text-sm font-bold text-gray-500 md:w-28 shrink-0">12h00 - 14h00</span>
-<h4 className="text-sm font-bold text-gray-700">Intervalo Almoço</h4>
-</div>
-</div>
-
-{/* 14:00 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">14h00 - 14h30</span>
-<h4 className="text-base font-bold text-gray-900">Abertura da Tarde</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Tc Dantas e Tc Guimarães</span>
-</div>
-</div>
-
-{/* 14:30 */}
-<div className="relative">
-<div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">14h30 - 15h10</span>
-<h4 className="text-base font-bold text-gray-900">SISGE, uma ferramenta para a gestão processual</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Leandro Theotonio e Brunno</span>
-</div>
-</div>
-
-{/* Encerramento */}
-<div className="relative">
-<div className="absolute -left-7.5 md:-left-8.5 bg-white p-0.5">
-<CheckCircle2 className="w-4 h-4 text-green-500" />
-</div>
-<div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-<span className="text-sm font-bold text-green-600 md:w-28 shrink-0">15h10 - 18h00</span>
-<h4 className="text-base font-bold text-gray-900">Processo de pagamento de diárias e emissão de passagens aéreas (Recursos FNSP)</h4>
-</div>
-<div className="flex items-center gap-1.5 text-sm text-gray-500 md:ml-32">
-<Users className="w-4 h-4" />
-<span>Marckeson Noronha e Alessandro Ribeiro</span>
-</div>
-</div>
-
-</div>
-</div>
-)}
-</div>
-</div>
-
-            {/* ================= CARD DIA 06 ================= */}
-            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mt-4">
-                <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-blue-500" />
-                    <h2 className="text-sm font-semibold text-slate-700">06 de março</h2>
+            <div className="divide-y divide-gray-100">
+                {/* Section 1 — Static: Plenária */}
+                <div className="px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <span className="font-semibold text-slate-800">Plenária</span>
+                    <span className="text-sm text-slate-500">9h – 12h &nbsp;|&nbsp; CICB</span>
                 </div>
-                <div className="px-6 py-5">
-                    <div
-                        className="flex justify-between items-center cursor-pointer group"
-                        onClick={() => setIsOpenDay6(!isOpenDay6)}
-                    >
-                        <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                            Retorno
-                        </h3>
-                        {isOpenDay6 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    </div>
 
-                    {isOpenDay6 && (
-                        <div className="mt-5 pt-6 border-t border-gray-100">
-                            <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-start gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                                <p className="text-sm text-green-800">
-                                    Retorno dos participantes.
-                                </p>
-                            </div>
+                {/* Section 2 — Accordion: Reunião Técnica */}
+                <div>
+                    <button
+                        type="button"
+                        onClick={() => setOpen((v) => !v)}
+                        className="w-full px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-left hover:bg-slate-50 transition-colors"
+                        aria-expanded={open}
+                    >
+                        <span className="font-semibold text-slate-800">Reunião Técnica</span>
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                            <span className="text-sm text-slate-500">14h – 18h &nbsp;|&nbsp; Sala da Rede Interfederativa de Convênios</span>
+                            {open ? (
+                                <ChevronUp className="w-4 h-4 text-slate-400" />
+                            ) : (
+                                <ChevronDown className="w-4 h-4 text-slate-400" />
+                            )}
+                        </div>
+                    </button>
+
+                    {/* Expanded Timeline */}
+                    {open && (
+                        <div className="px-5 pb-6 pt-2">
+                            <ol className="relative">
+                                {timeline.map((item, idx) => {
+                                    const isLast = idx === timeline.length - 1;
+                                    return (
+                                        <li key={idx} className="flex gap-4 group">
+                                            {/* Vertical line + dot */}
+                                            <div className="flex flex-col items-center">
+                                                <div
+                                                    className={`w-3 h-3 rounded-full flex-shrink-0 mt-1 z-10 ${item.isBreak
+                                                            ? "bg-gray-300"
+                                                            : item.time === "18h00"
+                                                                ? "bg-slate-400"
+                                                                : "bg-blue-500"
+                                                        }`}
+                                                />
+                                                {!isLast && (
+                                                    <div className="w-px flex-1 bg-gray-200 mt-1" />
+                                                )}
+                                            </div>
+
+                                            {/* Content */}
+                                            <div className={`pb-6 flex-1 min-w-0 ${isLast ? "pb-0" : ""}`}>
+                                                {/* Time badge */}
+                                                <span className="inline-block text-xs font-mono font-semibold text-blue-600 bg-blue-50 rounded px-2 py-0.5 mb-1">
+                                                    {item.time}
+                                                </span>
+
+                                                {item.isBreak ? (
+                                                    /* Break row */
+                                                    <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2">
+                                                        <Coffee className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                                                        <span className="text-sm font-medium text-slate-600">
+                                                            {item.title}
+                                                        </span>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <p className="font-semibold text-slate-800 leading-snug">
+                                                            {item.title}
+                                                        </p>
+
+                                                        {item.speaker && (
+                                                            <div className="flex items-center gap-1.5 mt-1 mb-2">
+                                                                <User className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                                                                <span className="text-xs text-slate-500 italic">
+                                                                    {item.speaker}
+                                                                </span>
+                                                            </div>
+                                                        )}
+
+                                                        {item.bullets && item.bullets.length > 0 && (
+                                                            <ul className="mt-1 space-y-1">
+                                                                {item.bullets.map((b, bi) => (
+                                                                    <li
+                                                                        key={bi}
+                                                                        className="flex gap-2 text-sm text-slate-600"
+                                                                    >
+                                                                        <span className="text-blue-400 mt-0.5 flex-shrink-0">›</span>
+                                                                        <span>{b}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
+                                        </li>
+                                    );
+                                })}
+                            </ol>
                         </div>
                     )}
                 </div>
             </div>
-
-</div>
-);
+        </div>
+    );
 }
