@@ -44,7 +44,7 @@ export function ScheduleOrcamento() {
                                         <h4 className="text-base font-bold text-gray-900">Visita ao Instituto Nacional de Criminalística - INC</h4>
                                     </div>
                                     <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-2 md:ml-32">
-                                        <Plane className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
+                                        <MapPin className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
                                         <p className="text-xs text-gray-600 leading-relaxed">
                                             <span className="font-bold text-blue-700">Translado:</span> Saída às 08h da Sede do Ministério da Justiça e Segurança Pública.
                                         </p>
