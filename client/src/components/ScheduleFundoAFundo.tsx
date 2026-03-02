@@ -57,16 +57,13 @@ export function ScheduleFundoAFundo() {
                             </div>
                                     {/* Item 2 */}
                                 <div className="relative">
-                                    <div className="absolute -left-8 top-0.5 bg-white p-0.5">
-                                        <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                                    </div>
+                                    <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
                                     <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
                                         <span className="text-sm font-bold text-emerald-600 md:w-28 shrink-0">17h30 – 18h30</span>
                                         <h4 className="text-base font-bold text-gray-900">Reunião Dra. Camila Pintarelli - Palco 01</h4>
                                     </div>
                                     <ul className="text-sm text-gray-600 list-disc list-inside space-y-1 md:ml-32">
                                         <li>Painel 13 - Tema: 25 anos do FNSP, Segurança e Investimento.</li>
-                                       
                                     </ul>
                                 </div>
                         </div>
