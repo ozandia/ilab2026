@@ -128,8 +128,7 @@ content: (
 <div className="space-y-4">
                      <Day03Card />
 <ScheduleLogistica />
-                      <Day06Card />
-</div>
+                 </div>
 )
 }
 ];
