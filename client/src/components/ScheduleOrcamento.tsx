@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Clock, ChevronDown, ChevronUp, CheckCircle2, User, Users, Coffee, Info } from 'lucide-react';
 
 export function ScheduleOrcamento() {
+     const [isOpenDay3, setIsOpenDay3] = useState(false);
     const [isOpenDays45, setIsOpenDays45] = useState(false);
     const [isOpenDay6, setIsOpenDay6] = useState(false);
 
