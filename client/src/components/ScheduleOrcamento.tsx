@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Clock, ChevronDown, ChevronUp, CheckCircle2, User, Users, Coffee, Info } from 'lucide-react';
 
 export function ScheduleOrcamento() {
-     const [isOpenDay3, setIsOpenDay3] = useState(false);
     const [isOpenDays45, setIsOpenDays45] = useState(false);
     const [isOpenDay6, setIsOpenDay6] = useState(false);
 
@@ -33,7 +32,7 @@ export function ScheduleOrcamento() {
 
                     {/* Aviso Expandido */}
                     {isOpenDays45 && (
-                        <div className="mt-5 pt-6 border-t border-gray-100">
+                        <div className="mt-5 pt-6 border-t border-gray-100 space-y-6">
                             <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex items-start gap-3">
                                 <span className="shrink-0 mt-0.5">
                                     <Info className="w-5 h-5 text-blue-500" />
@@ -42,18 +41,21 @@ export function ScheduleOrcamento() {
                                     Agenda a organizar, de acordo com a data de chegada, a quantidade de pontos focais e a disponibilidade de lugares nas salas.
                                 </p>
                             </div>
-                              {/* Item 2 */}
-                                <div className="relative">
+
+                            {/* Nova Atividade: Reunião Dra. Camila */}
+                            <div className="relative pt-2">
+                                <div className="absolute left-2.5 md:left-3 top-4 bottom-0 w-0.5 bg-gray-100"></div>
+                                <div className="relative pl-8 md:pl-10">
                                     <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
-                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
-                                        <span className="text-sm font-bold text-emerald-600 md:w-28 shrink-0">17h30 – 18h30</span>
+                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
+                                        <span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">17h30 - 18h30 (04/03)</span>
                                         <h4 className="text-base font-bold text-gray-900">Reunião Dra. Camila Pintarelli - Palco 01</h4>
                                     </div>
-                                    <ul className="text-sm text-gray-600 list-disc list-inside space-y-1 md:ml-32">
-                                        <li>Painel 13 - Tema: 25 anos do FNSP, Segurança e Investimento.</li>
-                                    </ul>
+                                    <div className="text-sm text-gray-600 md:ml-32">
+                                        <p>Painel 13 - Tema: 25 anos do FNSP, Segurança e Investimento.</p>
+                                    </div>
                                 </div>
-
+                            </div>
                         </div>
                     )}
                 </div>
