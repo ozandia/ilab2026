@@ -24,11 +24,11 @@ export function ScheduleLogistica() {
                             Programação Setor de Logística
                         </h3>
                         <div className="flex items-center gap-3 text-sm text-gray-500">
-                            <span className="hidden md:inline">09h00 – 17h00</span>
+                            <span className="hidden md:inline">09h00 – 18h30 | Salão Modular do MJSP</span>
                             {isOpenDay4 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                         </div>
                     </div>
-                    <p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 17h00</p>
+                    <p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 18h30 | Salão Modular do MJSP</p>
 
                     {isOpenDay4 && (
                         <div className="mt-5 pt-6 border-t border-gray-100 relative">
@@ -180,6 +180,18 @@ export function ScheduleLogistica() {
                                     </div>
                                 </div>
 
+                                {/* 17:30 */}
+                                <div className="relative">
+                                    <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
+                                    <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
+                                        <span className="text-sm font-bold text-blue-600 md:w-28 shrink-0">17h30 - 18h30</span>
+                                        <h4 className="text-base font-bold text-gray-900">Reunião Dra. Camila Pintarelli - Palco 01</h4>
+                                    </div>
+                                    <div className="text-sm text-gray-600 md:ml-32">
+                                        <p>Painel 13 - Tema: 25 anos do FNSP, Segurança e Investimento.</p>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>
@@ -203,11 +215,12 @@ export function ScheduleLogistica() {
                             Programação Setor de Logística
                         </h3>
                         <div className="flex items-center gap-3 text-sm text-gray-500">
-                            <span className="hidden md:inline">09h00 – 18h00</span>
+                            <span className="hidden md:inline">09h00 – 18h00 | ILAB</span>
                             {isOpenDay5 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                         </div>
                     </div>
-                    <p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 18h00</p>
+                    <p className="md:hidden text-xs text-gray-500 mt-1">09h00 – 18h00 | ILAB</p>
+
 
                     {isOpenDay5 && (
                         <div className="mt-5 pt-6 border-t border-gray-100 relative">
