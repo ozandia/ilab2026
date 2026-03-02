@@ -116,7 +116,7 @@ content: (
 <div className="space-y-4">
                           <Day03Card />
 <ScheduleOrcamento />
-                        <Day06Card />
+     
 </div>
 )
 },
