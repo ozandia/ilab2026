@@ -100,7 +100,7 @@ export function ScheduleCard() {
                     >
                         <span className="font-semibold text-slate-800">Reunião Técnica</span>
                         <div className="flex items-center gap-3 flex-shrink-0">
-                            <span className="text-sm text-slate-500">14h – 18h &nbsp;|&nbsp; Sala da Rede Interfederativa de Convênios</span>
+                            <span className="text-sm text-slate-500">14h – 18h30 &nbsp;|&nbsp; Sala da Rede Interfederativa de Convênios</span>
                             {open ? (
                                 <ChevronUp className="w-4 h-4 text-slate-400" />
                             ) : (
