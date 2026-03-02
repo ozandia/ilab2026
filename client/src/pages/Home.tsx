@@ -541,7 +541,7 @@ export default function Home() {
                     </div>
                     <div className="space-y-4">
                       <a
-                        href="https://wa.me/5561981651716"
+                        href="https://wa.me/5585987655958"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 py-2 px-4 bg-[#25D366]/10 border border-[#25D366]/20 rounded-lg group hover:bg-[#25D366]/20 transition-all w-fit"
@@ -553,7 +553,7 @@ export default function Home() {
                           </svg>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[#25D366] font-bold text-lg leading-tight">(61) 98165-1716</span>
+                          <span className="text-[#25D366] font-bold text-lg leading-tight">(85) 98765-5958</span>
                           <span className="text-white/50 text-[10px] uppercase tracking-wider font-bold">WhatsApp</span>
                         </div>
                       </a>
