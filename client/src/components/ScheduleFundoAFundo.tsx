@@ -28,7 +28,7 @@ export function ScheduleFundoAFundo() {
                             Reunião da Rede Interfederativa
                         </h3>
                         <div className="flex items-center gap-3 text-sm text-gray-500">
-                            <span className="hidden md:inline">14h – 17h30 | Sala 4, no ILAB</span>
+                            <span className="hidden md:inline">14h – 18h30 | Sala 4, no ILAB</span>
                             {isOpenDay4 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                         </div>
                     </div>
