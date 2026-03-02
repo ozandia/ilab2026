@@ -108,7 +108,7 @@ export function ScheduleOrcamento() {
                                 <div className="relative">
                                     <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-gray-300 rounded-full ring-4 ring-white"></div>
                                     <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-1">
-                                        <span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">09h00 - 17h30</span>
+                                        <span className="text-sm font-bold text-gray-700 md:w-28 shrink-0">09h00 - 17h00</span>
                                         <h4 className="text-base font-bold text-gray-900">Participação no ILAB e Oficinas Temáticas</h4>
                                     </div>
                                     <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 flex items-start gap-2 md:ml-32">
