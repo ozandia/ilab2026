@@ -8,25 +8,46 @@ import { ScheduleOrcamento } from "@/components/ScheduleOrcamento";
 
 // Reusable day card components
 function Day03Card() {
-return (
-<div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
-<div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-<Clock className="w-4 h-4 text-blue-500" />
-<h2 className="text-sm font-semibold text-slate-700">03 de março - Abertura</h2>
-</div>
-<div className="px-6 py-5">
-<div className="flex justify-between items-center group">
-<h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-Abertura
-</h3>
-<div className="flex items-center gap-3 text-sm text-gray-500">
-<span className="hidden md:inline">19h | CICB</span>
-</div>
-</div>
-<p className="md:hidden text-xs text-gray-500 mt-1">19h | CICB</p>
-</div>
-</div>
-);
+    return (
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4">
+            <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                <Clock className="w-4 h-4 text-blue-500" />
+                <h2 className="text-sm font-semibold text-slate-700">03 de março</h2>
+            </div>
+            <div className="px-6 py-5 space-y-5">
+                {/* Soft Opening */}
+                <div>
+                    <div className="flex justify-between items-center group">
+                        <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            Soft Opening
+                        </h3>
+                        <div className="flex items-center gap-3 text-sm text-blue-600 font-semibold">
+                            <span className="hidden md:inline">14h - 18h | iLab-Segurança (CICB)</span>
+                        </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1 leading-relaxed italic">
+                        Visitação antecipada aos estandes, limitada aos Grandes Conselhos, Câmaras Técnicas, Rede Interfederativa e GTIs.
+                    </p>
+                    <p className="md:hidden text-xs text-gray-500 mt-1">14h - 18h | iLab-Segurança (CICB)</p>
+                </div>
+
+                <div className="border-t border-gray-100 italic"></div>
+
+                {/* Abertura */}
+                <div>
+                    <div className="flex justify-between items-center group">
+                        <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            Abertura
+                        </h3>
+                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                            <span className="hidden md:inline">19h | CICB</span>
+                        </div>
+                    </div>
+                    <p className="md:hidden text-xs text-gray-500 mt-1">19h | CICB</p>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function Day06Card() {
