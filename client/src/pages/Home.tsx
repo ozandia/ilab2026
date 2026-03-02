@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -57,7 +57,7 @@ export default function Home() {
             <a href="#passagens" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Diárias</a>
             <a href="#contas" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Prestação</a>
             <a href="#roteiro" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Roteiro</a>
-            <a href="#trajes" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Trajes</a>
+            <a href="#regras" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Regras</a>
             <a href="#contato" className="text-white/80 hover:text-accent font-medium transition-all duration-300">Contatos</a>
           </nav>
 
@@ -81,7 +81,7 @@ export default function Home() {
               { href: "#passagens", label: "Diárias" },
               { href: "#contas", label: "Prestação de Contas" },
               { href: "#roteiro", label: "Roteiro" },
-              { href: "#trajes", label: "Trajes" },
+              { href: "#regras", label: "Regras" },
               { href: "#contato", label: "Contatos" },
             ].map(({ href, label }) => (
               <a
@@ -127,28 +127,47 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4">
-                <div className="flex items-center gap-2 text-white">
-                  <MapPin className="w-5 h-5 text-accent" aria-hidden="true" />
-                  <span className="font-semibold text-base sm:text-lg">CICB - Brasília/DF</span>
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-white">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-accent" aria-hidden="true" />
+                    <span className="font-semibold text-base sm:text-lg">CICB - Brasília/DF</span>
+                  </div>
+                  <div className="hidden sm:block w-px h-4 bg-white/20"></div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-accent" aria-hidden="true" />
+                    <span className="font-semibold text-base sm:text-lg">Ministério da Justiça e Segurança Pública (Salas Modulares)</span>
+                  </div>
+                </div>
+
+
+                <div className="flex flex-wrap gap-4 pt-2">
+                  <Button asChild className="h-11 sm:h-14 px-6 sm:px-10 text-base sm:text-lg shadow-xl bg-accent text-primary font-bold hover:bg-accent/90 rounded-md transition-all">
+                    <a
+                      href="https://www.google.com/maps/place/Centro+Internacional+de+Conven%C3%A7%C3%B5es+do+Brasil/@-15.812877,-47.832388,12z/data=!4m8!3m7!1s0x935a235b9cbb04f5:0x891cb2fcc1ef260!8m2!3d-15.8156846!4d-47.8447472!9m1!1b1!16s%2Fg%2F1q5gppnwh?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Ver localização do CICB no Google Maps (abre em nova janela)"
+                    >
+                      <MapPinIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                      Localização CICB
+                    </a>
+                  </Button>
+
+                  <Button asChild className="h-11 sm:h-14 px-6 sm:px-10 text-base sm:text-lg shadow-xl bg-accent/20 text-white font-bold hover:bg-accent/30 border border-accent/30 rounded-md transition-all">
+                    <a
+                      href="https://www.google.com/maps/search/Minist%C3%A9rio+da+Justi%C3%A7a+e+Seguran%C3%A7a+P%C3%BAblica+Pra%C3%A7a+dos+Tr%C3%AAs+Poderes+70050-000+Bras%C3%ADlia"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Ver localização do Ministério da Justiça no Google Maps (abre em nova janela)"
+                    >
+                      <MapPinIcon className="w-5 h-5 mr-2 text-accent" aria-hidden="true" />
+                      Localização Ministério
+                    </a>
+                  </Button>
                 </div>
               </div>
-
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button asChild className="h-11 sm:h-14 px-6 sm:px-10 text-base sm:text-lg shadow-xl bg-accent text-primary font-bold hover:bg-accent/90 rounded-md transition-all">
-                  <a
-                    href="https://www.google.com/maps/place/Centro+Internacional+de+Conven%C3%A7%C3%B5es+do+Brasil/@-15.812877,-47.832388,12z/data=!4m8!3m7!1s0x935a235b9cbb04f5:0x891cb2fcc1ef260!8m2!3d-15.8156846!4d-47.8447472!9m1!1b1!16s%2Fg%2F1q5gppnwh?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Ver localização do CICB no Google Maps (abre em nova janela)"
-                  >
-                    <MapPinIcon className="w-5 h-5 mr-2" aria-hidden="true" />
-                    Localização CICB
-                  </a>
-                </Button>
-              </div>
             </div>
-          </div>
         </section>
 
         {/* Programação Section */}
@@ -183,12 +202,10 @@ export default function Home() {
                   <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Valor da Diária</p>
                   <p className="text-3xl font-bold text-primary">R$ 425,00</p>
                 </div>
-                <div className="p-6 bg-[#0E4DA4] rounded-xl border border-white/10 shadow-lg">
-                  <p className="text-xs text-white/70 font-bold uppercase tracking-wider mb-2">Adicional Embarque</p>
-                  <div className="flex items-baseline gap-2">
-                    <p className="text-3xl font-bold text-white">R$ 95,00</p>
-                    <p className="text-[10px] text-white/50 uppercase font-medium">Taxa única / trecho</p>
-                  </div>
+                <div className="p-6 bg-accent/10 rounded-xl border border-accent/20">
+                  <p className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Adicional Embarque</p>
+                  <p className="text-3xl font-bold text-primary">R$ 95,00</p>
+                  <p className="text-xs text-primary/60 mt-1">Taxa única por trecho</p>
                 </div>
               </div>
             </CardContent>
@@ -212,23 +229,23 @@ export default function Home() {
                 A entrega da documentação é <span className="font-bold text-black underline decoration-accent/30 decoration-4">imprescindível</span> para a regularização da sua viagem no sistema.
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
-                <div className="flex flex-row items-center gap-[15px] px-[20px] py-[15px] bg-[#F4F8FF] border border-[#E6EFFF] rounded-xl shadow-sm hover:scale-[1.02] transition-all group">
-                  <div className="flex-shrink-0 w-[45px] h-[45px] rounded-full bg-[#0E4DA4] text-white flex items-center justify-center font-bold text-[20px]">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto">
+                <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-black text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-black transition-all" aria-hidden="true">
                     1
                   </div>
-                  <div className="flex flex-col min-w-0 flex-1">
-                    <span className="text-[18px] font-bold leading-[1.1] text-[#0E4DA4]">Relatório de Viagem</span>
-                    <span className="text-[12px] font-normal italic leading-[1.2] text-[#333333] mt-[3px]">Documento base detalhado</span>
+                  <div>
+                    <span className="text-base sm:text-xl font-bold text-gray-800 block">Relatório de Viagem</span>
+                    <span className="text-sm text-gray-500">Documento base detalhado</span>
                   </div>
                 </div>
-                <div className="flex flex-row items-center gap-[15px] px-[20px] py-[15px] bg-[#F4F8FF] border border-[#E6EFFF] rounded-xl shadow-sm hover:scale-[1.02] transition-all group">
-                  <div className="flex-shrink-0 w-[45px] h-[45px] rounded-full bg-[#0E4DA4] text-white flex items-center justify-center font-bold text-[20px]">
+                <div className="flex items-center gap-4 p-5 sm:p-8 bg-white rounded-2xl shadow-xl shadow-primary/5 border border-primary/5 group hover:border-accent/30 transition-all">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-black text-xl sm:text-2xl font-black group-hover:bg-accent group-hover:text-black transition-all" aria-hidden="true">
                     2
                   </div>
-                  <div className="flex flex-col min-w-0 flex-1">
-                    <span className="text-[18px] font-bold leading-[1.1] text-[#0E4DA4]">Canhotos de Embarque</span>
-                    <span className="text-[12px] font-normal italic leading-[1.2] text-[#333333] mt-[3px]">Comprovantes originais</span>
+                  <div>
+                    <span className="text-base sm:text-xl font-bold text-gray-800 block">Canhotos de Embarque</span>
+                    <span className="text-sm text-gray-500">Comprovantes originais</span>
                   </div>
                 </div>
               </div>
@@ -247,7 +264,7 @@ export default function Home() {
         </section>
 
         {/* Traje Section */}
-        <section id="trajes" className="container pt-24">
+        <section id="regras" className="container pt-24">
           <div className="flex items-center gap-4 mb-12">
             <div className="w-2 h-10 bg-accent rounded-full"></div>
             <div>
@@ -444,12 +461,12 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 sm:gap-8 lg:gap-4">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                   {/* Bloco 1 */}
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
+                    <div className="flex items-center gap-3 text-accent font-bold">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      Rede Interfederativa de Convênios
+                      CONVÊNIOS
                     </div>
                     <div className="space-y-4">
                       <a
@@ -489,14 +506,11 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Divisor 1 - Somente Desktop */}
-                  <div className="hidden lg:block w-1.5 h-10 bg-white rounded-full mt-2 shrink-0" aria-hidden="true"></div>
-
                   {/* Bloco 2 */}
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
+                    <div className="flex items-center gap-3 text-accent font-bold">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      Rede Interfederativa de Transferências Fundo a Fundo
+                      FUNDO A FUNDO
                     </div>
                     <div className="space-y-4">
                       <a
@@ -519,13 +533,10 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Divisor 2 - Somente Desktop */}
-                  <div className="hidden lg:block w-1.5 h-10 bg-white rounded-full mt-2 shrink-0" aria-hidden="true"></div>
-
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
+                    <div className="flex items-center gap-3 text-accent font-bold">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      Rede Interfederativa de Logística
+                      LOGÍSTICA
                     </div>
                     <div className="space-y-4">
                       <a
@@ -541,21 +552,18 @@ export default function Home() {
                           </svg>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[#25D366] font-bold text-lg leading-tight">(85) 98765-5958</span>
+                          <span className="text-[#25D366] font-bold text-lg leading-tight">(61) 98165-1716</span>
                           <span className="text-white/50 text-[10px] uppercase tracking-wider font-bold">WhatsApp</span>
                         </div>
                       </a>
                     </div>
                   </div>
 
-                  {/* Divisor 3 - Somente Desktop */}
-                  <div className="hidden lg:block w-1.5 h-10 bg-white/20 rounded-full mt-2 shrink-0" aria-hidden="true"></div>
-
                   {/* Bloco 4 */}
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-accent font-bold text-[11px]">
+                    <div className="flex items-center gap-3 text-accent font-bold">
                       <Phone className="w-5 h-5" aria-hidden="true" />
-                      Câmaras Técnicas de Orçamento
+                      ORÇAMENTO
                     </div>
                     <div className="space-y-3">
                       {/* Telefone Fixo */}
@@ -623,7 +631,11 @@ export default function Home() {
             <p className="text-xs text-gray-400 font-medium">
               © 2026 Todos os direitos reservados.
             </p>
-
+            <div className="flex gap-6 text-xs text-gray-500 font-medium">
+              <span className="hover:text-primary cursor-default">Privacidade</span>
+              <span className="hover:text-primary cursor-default">Termos de Uso</span>
+              <span className="hover:text-primary cursor-default">Acessibilidade</span>
+            </div>
           </div>
         </div>
       </footer>
