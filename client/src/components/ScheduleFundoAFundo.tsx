@@ -54,8 +54,7 @@ export function ScheduleFundoAFundo() {
                                         <li>Pactuação 2026</li>
                                     </ul>
                                 </div>
-                            </div>
-                                    {/* Item 2 */}
+                                 {/* Item 2 */}
                                 <div className="relative">
                                     <div className="absolute -left-7 md:-left-8 top-1.5 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
                                     <div className="flex flex-col md:flex-row md:gap-4 md:items-baseline mb-2">
@@ -66,6 +65,8 @@ export function ScheduleFundoAFundo() {
                                         <li>Painel 13 - Tema: 25 anos do FNSP, Segurança e Investimento.</li>
                                     </ul>
                                 </div>
+                            </div>
+                                   
                         </div>
                     )}
                 </div>
