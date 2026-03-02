@@ -4,6 +4,7 @@ import { Clock, ChevronDown, ChevronUp, CheckCircle2, User, Users, Coffee, Utens
 export function ScheduleLogistica() {
     const [isOpenDay4, setIsOpenDay4] = useState(false);
     const [isOpenDay5, setIsOpenDay5] = useState(false);
+    const [isOpenDay6, setIsOpenDay6] = useState(false);
 
     return (
         <div className="w-full space-y-4 font-sans text-gray-800 pb-8">
@@ -319,6 +320,36 @@ export function ScheduleLogistica() {
                                     </div>
                                 </div>
 
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* ================= CARD DIA 06 ================= */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mt-4">
+                <div className="bg-slate-50/50 px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-500" />
+                    <h2 className="text-sm font-semibold text-slate-700">06 de março</h2>
+                </div>
+                <div className="px-6 py-5">
+                    <div
+                        className="flex justify-between items-center cursor-pointer group"
+                        onClick={() => setIsOpenDay6(!isOpenDay6)}
+                    >
+                        <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            Retorno
+                        </h3>
+                        {isOpenDay6 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </div>
+
+                    {isOpenDay6 && (
+                        <div className="mt-5 pt-6 border-t border-gray-100">
+                            <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                                <p className="text-sm text-green-800">
+                                    Retorno dos participantes.
+                                </p>
                             </div>
                         </div>
                     )}
