@@ -15,7 +15,7 @@ async function startServer() {
   });
   const port = process.env.PORT || 3e3;
   server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+    console.log(`Servidor em execu\xE7\xE3o em http://localhost:${port}/`);
   });
 }
 startServer().catch(console.error);
