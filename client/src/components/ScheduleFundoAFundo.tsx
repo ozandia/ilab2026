@@ -137,7 +137,7 @@ export function ScheduleFundoAFundo() {
                         onClick={() => setIsOpenDay6(!isOpenDay6)}
                     >
                         <h3 className="text-sm md:text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                            Lançamento dos Módulos de Plano e Gestão
+                            Lançamento dos Módulos do Plano de Aplicação e Gestão
                         </h3>
                         <div className="flex items-center gap-3 text-sm text-gray-500">
                             <span className="hidden md:inline">09h00 – 11h30 | Auditório, no ILAB</span>
