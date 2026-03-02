@@ -541,7 +541,7 @@ export default function Home() {
                           </svg>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[#25D366] font-bold text-lg leading-tight">(61) 98165-1716</span>
+                          <span className="text-[#25D366] font-bold text-lg leading-tight">(85) 98765-5958</span>
                           <span className="text-white/50 text-[10px] uppercase tracking-wider font-bold">WhatsApp</span>
                         </div>
                       </a>
